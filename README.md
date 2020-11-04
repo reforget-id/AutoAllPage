@@ -24,7 +24,7 @@ Script ini dapat bekerja pada website :
 * motorplus-online.com 
 * gridoto.com
 
-### Knows Issues
+### Known Issues
 
 * URL yang menggunakan AMP belum bisa diredirect.
 * Beberapa situs dengan pagination yang tidak memiliki `page=all` :
