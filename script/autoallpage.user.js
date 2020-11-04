@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       1.1.1
+// @version       1.2.0
 // @author        reforget-id
 // @namespace     autoallpage
 // @icon          https://img.icons8.com/cotton/2x/overview-pages-1.png
@@ -39,37 +39,6 @@ function consts() {
 	return data
 }
 
-/*
-function getAnchor(element) {
-	while (element && element.nodeName != "A") {
-		element = element.parentNode;
-	}
-	return element;
-}
-
-document.addEventListener("click", function(e){
-	let anchor = getAnchor(e.target);
-
-    if (!anchor || anchor.target || anchor.protocol == "javascript:" || e.isTrusted === false || !anchor.offsetParent || (e.isTrusted == null && !e.detail)) {
-		return;
-	}
-
-	urlReplace(anchor)
-	
-});
-
-
-async function urlReplace(a) {
-	detikReplacer(a)
-	kompasReplacer(a)
-	tribunnewsReplacer(a)
-	merdekaReplacer(a)
-	suaraReplacer(a)
-	sindonewsReplacer(a)
-	inewsReplacer(a)
-	gridReplacer(a)
-}
-*/
 
 async function urlRedirect() {
 	const url = window.location.href
@@ -94,17 +63,6 @@ function ampRemover(a, ampRegex, replacer) {
 	}
 }
 
-function replaceHelper(a, regex, replacer) {
-	let url = a.getAttribute("href")
-	let matcher = url.match(regex)
-	if (matcher) {
-		let newUrl = url.replace(regex, replacer)
-		console.log('EXECUTE REPLACE')
-		a.setAttribute('href', newUrl)
-		return
-	}
-}
-
 function redirectHelper(url, regex, replacer) {
 	let matcher = url.match(regex)
 	if (matcher) {
@@ -116,27 +74,10 @@ function redirectHelper(url, regex, replacer) {
 }
 
 
-function detikReplacer(a) { 
-	new Promise (() => { 
-		replaceHelper(a, consts().detikRegex, '?single=1')
-		console.log('detik replace')
-	})
-}
-
 function detikRedirect(url) { 
 	new Promise (() => { 
 		redirectHelper(url, consts().detikRegex, '?single=1')
 		console.log('detik redirect')
-	})
-}
-
-
-function kompasReplacer(a) { 
-	new Promise (() => {
-		let ampRegex = /(^.+(amp(\/s\/\w+|)))(?<!\.kompas.com\/(\w*(\/|))read\/\d+\/\d+\/\d+\/\d+\/.+$)/
-		//ampRemover(a, ampRegex, 'https://www')
-		replaceHelper(a, consts().kompasRegex, '?page=all')
-		console.log('kompas replace')
 	})
 }
 
@@ -149,28 +90,11 @@ function kompasRedirect(url) {
 	})
 }
 
-
-function tribunnewsReplacer(a) { 
-	new Promise (() => {
-		let ampRegex = /(^.+(amp\/s\/))(?<!\.tribunnews.com\/(\w*(\/|))\d+\/\d+\/\d+\/.+)/
-		replaceHelper(a, consts().tribunRegex, '?page=all')
-		console.log('tribun replace')
-	})
-}
-
 function tribunnewsRedirect(url) { 
 	new Promise (() => {
 		let ampRegex = /(^.+(amp\/s\/))(?<!\.tribunnews.com\/(\w*(\/|))\d+\/\d+\/\d+\/.+)/
 		redirectHelper(url, consts().tribunRegex, '?page=all')
 		console.log('tribun redirect')
-	})
-}
-
-
-function merdekaReplacer(a) {
-	new Promise (() => {
-		replaceHelper(a, consts().merdekaRegex, '?page=all')
-		console.log('merdeka replace')
 	})
 }
 
@@ -181,26 +105,10 @@ function merdekaRedirect(url) {
 	})
 }
 
-
-function suaraReplacer(a) {
-	new Promise (() => {
-		replaceHelper(a, consts().suaraRegex, '?page=all')
-		console.log('suara replace')
-	})
-}
-
 function suaraRedirect(url) {
 	new Promise (() => {
 		redirectHelper(url, consts().suaraRegex, '?page=all')
 		console.log('suara redirect')
-	})
-}
-
-
-function sindonewsReplacer(a) {
-	new Promise (() => {
-		replaceHelper(a, consts().sindoRegex, '?showpage=all')
-		console.log('sindo replace')
 	})
 }
 
@@ -211,26 +119,10 @@ function sindonewsRedirect(url) {
 	})
 }
 
-
-function inewsReplacer(a) {
-	new Promise (() => {
-		replaceHelper(a, consts().inewsRegex, '/all')
-		console.log('inews replace')
-	})
-}
-
 function inewsRedirect(url) {
 	new Promise (() => {
 		redirectHelper(url, consts().inewsRegex, '/all')
 		console.log('inews redirect')
-	})
-}
-
-
-function gridReplacer(a) {
-	new Promise (() => {
-		replaceHelper(a, consts().gridRegex, '?page=all')
-		console.log('grid replace')
 	})
 }
 
