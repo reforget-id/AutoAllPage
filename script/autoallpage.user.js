@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       1.2.1
+// @version       1.2.2
 // @author        reforget-id
 // @namespace     autoallpage
 // @icon          https://img.icons8.com/cotton/2x/overview-pages-1.png
@@ -83,7 +83,7 @@ function detikRedirect(url) {
 
 function kompasRedirect(url) { 
 	new Promise (() => {
-		let ampRegex = /(^.+(amp(\/s\/\w+|)))(?<!\.kompas.com\/(\w*(\/|))read\/\d+\/\d+\/\d+\/\d+\/.+$)/
+		//let ampRegex = /(^.+(amp(\/s\/\w+|)))(?<!\.kompas.com\/(\w*(\/|))read\/\d+\/\d+\/\d+\/\d+\/.+$)/
 		//ampRemover(a, ampRegex, 'https://www')
 		redirectHelper(url, consts().kompasRegex, '?page=all')
 		console.log('kompas redirect')
@@ -92,7 +92,7 @@ function kompasRedirect(url) {
 
 function tribunnewsRedirect(url) { 
 	new Promise (() => {
-		let ampRegex = /(^.+(amp\/s\/))(?<!\.tribunnews.com\/(\w*(\/|))\d+\/\d+\/\d+\/.+)/
+		//let ampRegex = /(^.+(amp\/s\/))(?<!\.tribunnews.com\/(\w*(\/|))\d+\/\d+\/\d+\/.+)/
 		redirectHelper(url, consts().tribunRegex, '?page=all')
 		console.log('tribun redirect')
 	})
