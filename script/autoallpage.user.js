@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       1.2.0
+// @version       1.2.1
 // @author        reforget-id
 // @namespace     autoallpage
 // @icon          https://img.icons8.com/cotton/2x/overview-pages-1.png
@@ -32,7 +32,7 @@ function consts() {
 		merdekaRegex : /(?<=^.+\.merdeka\.com\/\w+\/.+\.html)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
 		suaraRegex : /(?<=^.+\.(suara|matamata)\.com\/\w+\/\d+\/\d+\/\d+\/\d+\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
 		sindoRegex : /(?<=^.+\.sindonews\.com\/read\/\d+\/\d+\/.+)((?<!\?.*|\/)|\?.*(?<!\?showpage=all)|\/\d*)$/,
-		inewsRegex : /(?<=^.+\.inews\.id\/\w+\/\w+\/.+)((?<!\?.*|\/(all|\d*))|\/\d*|\?.*)$/,
+		inewsRegex : /(?<=^.+\.inews\.id\/(berita|(\w+\/\w+))\/.+)((?<!\?.*|\/(all|\d*))|\/\d*|\?.*)$/,
 		gridRegex : /(?<=^.+\.(grid\.id|(motorplus-online|gridoto|bolasport)\.com)\/read\/\w+\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/
 	}
 	
