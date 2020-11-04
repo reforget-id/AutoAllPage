@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       1.1.0
+// @version       1.1.1
 // @author        reforget-id
 // @namespace     autoallpage
 // @icon          https://img.icons8.com/cotton/2x/overview-pages-1.png
@@ -8,8 +8,19 @@
 // @description   Otomatis menampilkan semua halaman artikel berita dalam 1 page
 // @downloadURL   https://raw.githubusercontent.com/reforget-id/AutoAllPage/main/script/autoallpage.user.js
 // @updateURL     https://raw.githubusercontent.com/reforget-id/AutoAllPage/main/script/autoallpage.user.js 
+// @include       http*://*.detik.com/*
+// @include       http*://*.kompas.com/*
+// @include       http*://*.tribunnews.com/*
+// @include       http*://*.merdeka.com/*
+// @include       http*://*.suara.com/*
+// @include       http*://*.matamata.com/*
+// @include       http*://*.sindonews.com/*
+// @include       http*://*.inews.id/*
+// @include       http*://*.grid.id/*
+// @include       http*://*.bolasport.com/*
+// @include       http*://*.motorplus-online.com/*
+// @include       http*://*.gridoto.com/*
 // @run-at        document-start
-// @include       http*://*
 // ==/UserScript==
 
 
@@ -28,7 +39,7 @@ function consts() {
 	return data
 }
 
-
+/*
 function getAnchor(element) {
 	while (element && element.nodeName != "A") {
 		element = element.parentNode;
@@ -58,6 +69,7 @@ async function urlReplace(a) {
 	inewsReplacer(a)
 	gridReplacer(a)
 }
+*/
 
 async function urlRedirect() {
 	const url = window.location.href
