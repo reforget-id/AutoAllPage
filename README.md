@@ -8,6 +8,8 @@ Banyak situs berita online yang menampilkan artikelnya dalam bentuk pagination p
 Cara kerjanya sederhana, hanya melakukan redirect pada url yang sesuai dengan pattern regex. 
 Misalnya pada url : `https://detik.com/news/berita?page=1` akan di redirect ke halaman `https://detik.com/news/berita?page=all`.
 
+### Supported Sites
+
 Script ini dapat bekerja pada website :
 * detik.com 
 * kompas.com 
@@ -54,4 +56,4 @@ Browser lainnya lihat : [Caniuse](https://caniuse.com/mdn-javascript_builtins_re
 
 ### Contributing
 
-Silahkan membuat issue disini untuk melaporkan adanya error pada script atau merequest website yang belum didukung script.
+Silahkan membuat issue disini untuk melaporkan adanya bug pada script atau merequest website yang belum didukung script.
