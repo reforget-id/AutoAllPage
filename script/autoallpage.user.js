@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       1.2.2
+// @version       1.3.0
 // @author        reforget-id
 // @namespace     autoallpage
-// @icon          https://img.icons8.com/cotton/2x/overview-pages-1.png
+// @icon          https://www.iconsdb.com/icons/download/orange/pages-1-256.png
 // @homepage      https://github.com/reforget-id/AutoAllPage
 // @description   Otomatis menampilkan semua halaman artikel berita dalam 1 page
 // @downloadURL   https://raw.githubusercontent.com/reforget-id/AutoAllPage/main/script/autoallpage.user.js
@@ -20,20 +20,22 @@
 // @include       http*://*.bolasport.com/*
 // @include       http*://*.motorplus-online.com/*
 // @include       http*://*.gridoto.com/*
+// @include       http*://*.pikiran-rakyat.com/*
 // @run-at        document-start
 // ==/UserScript==
 
 
 function consts() {
 	const data = {
-		detikRegex : /(?<=^.+\.detik\.com\/.+\/.+\/.+)((?<!\?.*|\/\d*)|\?.*(?<!\?single=\d)|\/\d*)$/,
-		kompasRegex : /(?<=^.+\.kompas.com\/(\w*(\/|))read\/\d+\/\d+\/\d+\/\d+\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all.*)|\/)$/,
-		tribunRegex : /(?<=^.+.tribunnews.com\/(\w*(\/|))\d+\/\d+\/\d+\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-		merdekaRegex : /(?<=^.+\.merdeka\.com\/\w+\/.+\.html)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-		suaraRegex : /(?<=^.+\.(suara|matamata)\.com\/\w+\/\d+\/\d+\/\d+\/\d+\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
+		detikRegex : /(?<=^.+\.detik\.com\/[a-z-]+\/d-\d+\/.+)((?<!\?.*|\/\d*)|\?.*(?<!\?single=1)|\/\d*)$/,
+		kompasRegex : /(?<=^.+\.kompas.com\/([a-z-]+\/|)read\/\d{4}\/\d{2}\/\d{2}\/\d+\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all(#page\d+|))|\/)$/,
+		tribunRegex : /(?<=^.+.tribunnews.com\/([a-z-]+\/|)\d{4}\/\d{2}\/\d{2}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
+		merdekaRegex : /(?<=^.+\.merdeka\.com\/[a-z-]+\/.+\.html)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
+		suaraRegex : /(?<=^.+\.(suara|matamata)\.com\/[a-z-]+\/\d{4}\/\d{2}\/\d{2}\/\d+\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
 		sindoRegex : /(?<=^.+\.sindonews\.com\/read\/\d+\/\d+\/.+)((?<!\?.*|\/)|\?.*(?<!\?showpage=all)|\/\d*)$/,
-		inewsRegex : /(?<=^.+\.inews\.id\/(berita|(\w+\/\w+))\/.+)((?<!\?.*|\/(all|\d*))|\/\d*|\?.*)$/,
-		gridRegex : /(?<=^.+\.(grid\.id|(motorplus-online|gridoto|bolasport)\.com)\/read\/\w+\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/
+		inewsRegex : /(?<=^.+\.inews\.id\/(berita|[a-z-]+\/[a-z-]+)\/.+)((?<!\?.*|\/(all.*|\d*))|(\/all.+)|\/\d*|\?.*)$/,
+        gridRegex : /(?<=^.+\.(grid\.id|(motorplus-online|gridoto|bolasport)\.com)\/read\/\d+\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
+        prRegex : /(?<=^.+\.pikiran-rakyat\.com\/[a-z-]+\/pr-\d+\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/
 	}
 	
 	return data
@@ -50,17 +52,8 @@ async function urlRedirect() {
 	suaraRedirect(url)
 	sindonewsRedirect(url)
 	inewsRedirect(url)
-	gridRedirect(url)
-}
-
-
-function ampRemover(a, ampRegex, replacer) {
-	let url = a.getAttribute("href")
-	let matcher = url.match(ampRegex)
-	if (matcher) {
-		let newUrl = url.replace(regex, replacer)
-		a.setAttribute('href', newUrl)
-	}
+    gridRedirect(url)
+    pikiranRakyatRedirect(url)
 }
 
 function redirectHelper(url, regex, replacer) {
@@ -72,6 +65,17 @@ function redirectHelper(url, regex, replacer) {
 		return
 	}
 }
+
+/*
+function ampRemover(a, ampRegex, replacer) {
+	let url = a.getAttribute("href")
+	let matcher = url.match(ampRegex)
+	if (matcher) {
+		let newUrl = url.replace(regex, replacer)
+		a.setAttribute('href', newUrl)
+	}
+}
+*/
 
 
 function detikRedirect(url) { 
@@ -130,6 +134,13 @@ function gridRedirect(url) {
 	new Promise (() => {
 		redirectHelper(url, consts().gridRegex, '?page=all')
 		console.log('grid redirect')
+	})
+}
+
+function pikiranRakyatRedirect(url) {
+	new Promise (() => {
+		redirectHelper(url, consts().prRegex, '?page=all')
+		console.log('pikiran rakyat redirect')
 	})
 }
 
