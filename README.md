@@ -24,6 +24,7 @@ Script ini dapat bekerja pada website :
 * motorplus-online.com 
 * gridoto.com
 * pikiran-rakyat.com
+* kontan.co.id
 
 ### Installation
 
