@@ -3,12 +3,6 @@
 
 Banyak situs berita online yang menampilkan artikelnya dalam bentuk pagination pada websitenya (satu artikel dibagi ke dalam beberapa halaman), sehingga pembaca akan terus menerus menekan tombol halaman selanjutnya, yang mana ini akan merepotkan pembaca.
 
-### Installation
-
-Greasyfork : [Auto All Page](https://greasyfork.org/id/scripts/415479-auto-all-page) <br>
-Github     : [Auto All Page](https://raw.githubusercontent.com/reforget-id/AutoAllPage/main/script/autoallpage.user.js)
-
-
 ### How It Works
 
 Cara kerjanya sederhana, hanya melakukan redirect pada url yang sesuai dengan pattern regex. 
@@ -27,11 +21,29 @@ Script ini dapat bekerja pada website :
 * bolasport.com 
 * motorplus-online.com 
 * gridoto.com
+* pikiran-rakyat.com
+
+### Installation
+
+Greasyfork : [Auto All Page](https://greasyfork.org/id/scripts/415479-auto-all-page) <br>
+Github     : [Auto All Page](https://raw.githubusercontent.com/reforget-id/AutoAllPage/main/script/autoallpage.user.js)
+
+
+### Browser Support
+
+Script ini menggunakan regex lookbehind yang mana tidak semua browser mendukungnya.
+
+* Chromium : 62 or later
+* Firefox : 78 or later
+* Safari : not supported
+* Firefox for Android : not supported
+
+Browser lainnya lihat : [Caniuse](https://caniuse.com/mdn-javascript_builtins_regexp_lookbehind_assertion) atau [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp)
 
 ### Known Issues
 
 * URL yang menggunakan AMP belum bisa diredirect.
-* Beberapa situs dengan pagination yang tidak memiliki `page=all` :
+* Beberapa situs dengan pagination yang tidak menyediakan `page=all` :
   * okezone.com
   * tempo.co
   * republika.co.id
