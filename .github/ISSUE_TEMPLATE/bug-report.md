@@ -11,6 +11,8 @@ assignees: ''
 https://github.com/reforget-id/AutoAllPage/blob/main/README.md 
 untuk mengetahui bug yang sudah diketahui -->
 
+** URL terjadinya bug :**
+
 **Jelaskan bug :**
 <!-- Tuliskan sejelas-jelasnya bug yang terjadi -->
 
