@@ -1,13 +1,11 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       1.4.0
+// @version       1.5.0
 // @author        reforget-id
 // @namespace     autoallpage
 // @icon          https://www.iconsdb.com/icons/download/orange/pages-1-256.png
 // @homepage      https://github.com/reforget-id/AutoAllPage
 // @description   Otomatis menampilkan semua halaman artikel berita dalam 1 page
-// @downloadURL   https://raw.githubusercontent.com/reforget-id/AutoAllPage/main/script/autoallpage.user.js
-// @updateURL     https://raw.githubusercontent.com/reforget-id/AutoAllPage/main/script/autoallpage.user.js 
 // @include       http*://*.detik.com/*
 // @include       http*://*.kompas.com/*
 // @include       http*://*.tribunnews.com/*
@@ -22,6 +20,8 @@
 // @include       http*://*.gridoto.com/*
 // @include       http*://*.pikiran-rakyat.com/*
 // @include       http*://*.kontan.co.id/*
+// @include       http*://akurat.co/*
+// @include       http*://m.akurat.co/*
 // @run-at        document-start
 // ==/UserScript==
 
@@ -37,7 +37,9 @@ function consts() {
         inewsRegex : /(?<=^.+\.inews\.id\/(berita|[a-z-]+\/[a-z-]+)\/.+)((?<!\?.*|\/(all.*|\d*))|(\/all.+)|\/\d*|\?.*)$/,
         gridRegex : /(?<=^.+\.(grid\.id|(motorplus-online|gridoto|bolasport)\.com)\/read\/\d+\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
         prRegex : /(?<=^.+\.pikiran-rakyat\.com\/[a-z-]+\/pr-\d+\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-        kontanRegex : /(?<=^.+\.kontan\.co\.id\/news\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/
+        kontanRegex : /(?<=^.+\.kontan\.co\.id\/news\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
+	akuratRegex : /(?<=^.+akurat\.co\/[a-z-]+\/id-\d{7}-.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
+	mAkuratRegex : /(?<=^.+m\.akurat\.co\/id-\d{7}-.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/
     }
 
     return data
@@ -57,6 +59,9 @@ async function urlRedirect() {
     gridRedirect(url)
     pikiranRakyatRedirect(url)
     kontanRedirect(url)
+	akuratRedirect(url)
+	mAkuratRedirect(url)
+	
 }
 
 function redirectHelper(url, regex, replacer) {
@@ -151,6 +156,20 @@ function kontanRedirect(url) {
     new Promise(() => {
         redirectHelper(url, consts().kontanRegex, '?page=all')
         console.log('kontan redirect')
+    })
+}
+
+function akuratRedirect(url) {
+    new Promise(() => {
+        redirectHelper(url, consts().akuratRegex, '?page=all')
+        console.log('akurat redirect')
+    })
+}
+
+function mAkuratRedirect(url) {
+    new Promise(() => {
+        redirectHelper(url, consts().mAkuratRegex, '?page=all')
+        console.log('m.akurat redirect')
     })
 }
 
