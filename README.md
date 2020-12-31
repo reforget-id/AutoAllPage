@@ -25,6 +25,7 @@ Script ini dapat bekerja pada website :
 * gridoto.com
 * pikiran-rakyat.com
 * kontan.co.id
+* akurat.co
 
 ### Installation
 
@@ -54,6 +55,7 @@ Browser lainnya lihat : [Caniuse](https://caniuse.com/mdn-javascript_builtins_re
   * jpnn.com
   * creativedisc.com
   * bolatimes.com
+  * cnbcindonesia.com
 
 ### Contributing
 
