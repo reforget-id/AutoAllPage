@@ -26,6 +26,8 @@ Script ini dapat bekerja pada website :
 * pikiran-rakyat.com
 * kontan.co.id
 * akurat.co
+* m.akurat.co
+* kompasiana.com
 
 ### Installation
 
