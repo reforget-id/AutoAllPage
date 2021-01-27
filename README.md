@@ -55,12 +55,9 @@ Browser lainnya lihat : [Caniuse](https://caniuse.com/mdn-javascript_builtins_re
 * Beberapa situs dengan pagination yang tidak menyediakan `page=all` :
   * okezone.com
   * tempo.co
-  * republika.co.id
   * genpi.co
-  * jpnn.com
   * creativedisc.com
   * bolatimes.com
-  * cnbcindonesia.com
 
 ### Contributing
 
