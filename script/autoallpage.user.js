@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       1.6.0
+// @version       1.7.0
 // @author        reforget-id
 // @namespace     autoallpage
 // @icon          https://www.iconsdb.com/icons/download/orange/pages-1-256.png
@@ -14,25 +14,33 @@
 // @include       http*://*.merdeka.com/*
 // @include       http*://*.suara.com/*
 // @include       http*://*.matamata.com/*
-// @include       http*://*.sindonews.com/*
+// @include       http*://*.sindonews.com/read/*
 // @include       http*://*.inews.id/*
-// @include       http*://*.grid.id/*
-// @include       http*://*.bolasport.com/*
-// @include       http*://*.motorplus-online.com/*
-// @include       http*://*.gridoto.com/*
+// @include       http*://*.grid.id/read/*
+// @include       http*://*.bolasport.com/read/*
+// @include       http*://*.motorplus-online.com/read/*
+// @include       http*://*.gridoto.com/read/*
 // @include       http*://*.pikiran-rakyat.com/*
-// @include       http*://*.kontan.co.id/*
+// @include       http*://*.kontan.co.id/news/*
 // @include       http*://akurat.co/*
 // @include       http*://m.akurat.co/*
 // @include       http*://*.kompasiana.com/*
+// @include       http*://*.cnbcindonesia.com/*
+// @include       http*://*.republika.co.id/*
+// @include       http*://*.jpnn.com/news/*
+// @grant         GM_xmlhttpRequest
 // @run-at        document-start
 // ==/UserScript==
 
+'use strict';
 
 (() => {
 
+    let mainPage
     const url = window.location.href
-    const regex = {
+    const log = '[AutoAllPage]'
+
+    const redirectRegex = {
         detik: /(?<=^.+\.detik\.com\/[a-z-]+\/d-\d+\/.+)((?<!\?.*|\/\d*)|\?.*(?<!\?single=1)|\/\d*)$/,
         kompas: /(?<=^.+\.kompas.com\/([a-z-]+\/|)read\/\d{4}\/\d{2}\/\d{2}\/\d+\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all(#page\d+|))|\/)$/,
         tribun: /(?<=^.+.tribunnews.com\/([a-z-]+\/|)\d{4}\/\d{2}\/\d{2}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
@@ -45,11 +53,20 @@
         kontan: /(?<=^.+\.kontan\.co\.id\/news\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
         akurat: /(?<=^.+akurat\.co\/[a-z-]+\/id-\d{7}-.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
         mAkurat: /(?<=^.+m\.akurat\.co\/id-\d{7}-.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-        kompasiana: /(?<=^.+\.kompasiana\.com\/.+\/[a-z0-9]{24}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all(#sectionall|))|\/)$/
+        kompasiana: /(?<=^.+\.kompasiana\.com\/.+\/[a-z0-9]{24}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all(#sectionall|))|\/)$/,
+        cnbc: /(?<=^.+\.cnbcindonesia\.com\/[a-z-]+\/\d{14}-\d{1,}-\d{6}\/.+)(\/([2-9]|\d{2})(\?.+|))$/,
+        republika: /(?<=^.+\.republika\.co\.id\/berita\/[a-z0-9]+\/.+)(-part\d+.*)$/,
+        jpnn: /(?<=^.+\.jpnn\.com\/news\/.+)(\?.+=.+)$/
     }
 
-    for (i in regex) {
-        let urlMatcher = url.match(regex[i])
+    const xhrRegex = {
+        cnbc: /(^.+\.cnbcindonesia\.com\/[a-z-]+\/\d{14}-\d{1,}-\d{6}\/.+)/,
+        republika: /(^.+\.republika\.co\.id\/berita\/[a-z0-9]+\/.+)/,
+        jpnn: /(^.+\.jpnn\.com\/news\/.+)/
+    }
+
+    for (let i in redirectRegex) {
+        let urlMatcher = url.match(redirectRegex[i])
         if (urlMatcher) {
             redirector(i)
             break
@@ -65,14 +82,134 @@
             replacer = '?showpage=all'
         } else if (patternName == 'inews') {
             replacer = '/all'
+        } else if (
+            patternName == 'cnbc' ||
+            patternName == 'republika' ||
+            patternName == 'jpnn') {
+            replacer = ''
         } else {
             replacer = '?page=all'
         }
 
-        newUrl = url.replace(regex[patternName], replacer)
+        newUrl = url.replace(redirectRegex[patternName], replacer)
         console.log(`EXECUTE [${patternName}] REDIRECT`)
         window.location.href = newUrl
         return
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        console.log(log, 'DOM fully loaded and parsed')
+
+        for (let i in xhrRegex) {
+            let urlMatcher = url.match(xhrRegex[i])
+            if (urlMatcher) {
+                prepareXhr(i)
+                break
+            }
+        }
+    })
+
+    function prepareXhr(patternName) {
+        if (patternName == 'cnbc') {
+            cnbcXhr()
+        } else if (patternName == 'republika') {
+            republikaXhr()
+        } else if (patternName == 'jpnn') {
+            jpnnXhr()
+        }
+
+    }
+
+    function findPagination(className) {
+        const paging = document.getElementsByClassName(className)[0]
+        if (!paging) console.log(log, 'Pagination is not found')
+        return paging
+    }
+
+    function createXhr(url, i, find) {
+        console.log(log, `Creating XHR request for page ${i+1}`)
+        return new Promise((resolve, reject) => {
+            GM_xmlhttpRequest({
+                method: 'GET',
+                url: url,
+                overrideMimeType: 'text/html; charset=UTF-8',
+                responseType: 'document',
+                binary: false,
+                timeout: 0,
+                withCredentials: true,
+                onerror: () => {
+                    reject(console.log(log, 'Failed to create XHR request'))
+                },
+                onload: async (res) => {
+                    let text
+                    const hostname = window.location.hostname
+
+                    if (hostname.includes('jpnn.com')) {
+                        text = res.response.querySelector(find)
+                    } else {
+                        text = res.response.getElementsByClassName(find)[0]
+                    }
+
+                    if (text) {
+                        console.log(log, `Success get text of page ${i+1} from XHR`)
+                        mainPage.appendChild(text)
+                        //mainPage.after(text)
+                        resolve(console.log(log, `Append page ${i+1} to main page`))
+                    } else {
+                        reject(console.log(log, 'Failed to get text XHR'))
+                    }
+                }
+            })
+        })
+    }
+
+    async function cnbcXhr() {
+        const pagination = findPagination('paging-circle')
+        if (!pagination) return
+
+        const pagingParent = pagination.parentNode
+        pagingParent.style.display = 'none'
+        pagingParent.previousElementSibling.style.display = 'none'
+        mainPage = document.getElementsByClassName('detail_text')[0].parentNode
+
+        for (let i = 1; i < pagination.childElementCount; i++) {
+            let href = pagination.children[i].getAttribute('href')
+            await createXhr(href, i, 'detail_text')
+        }
+    }
+
+    async function republikaXhr() {
+        const pagination = findPagination('pagination')
+        if (!pagination) return
+
+        const pageChildren = pagination.getElementsByTagName('a')
+        mainPage = document.getElementsByClassName('teaser_detail')[0]
+        pagination.style.display = 'none'
+
+        for (let i = 1; i < pageChildren.length - 1; i++) {
+            let href = pageChildren[i].getAttribute('href')
+            await createXhr(href, i, 'artikel')
+        }
+
+        const bacaJuga = document.getElementsByClassName('baca-juga')
+        for (let i = 0; i < bacaJuga.length; i++) {
+            bacaJuga[i].remove()
+            i--
+        }
+    }
+
+    async function jpnnXhr() {
+        const pagination = findPagination('pagination')
+        if (!pagination) return
+
+        const pageChildren = pagination.getElementsByTagName('a')
+        mainPage = document.querySelector('[itemprop=articleBody]')
+        pagination.style.display = 'none'
+
+        for (let i = 1; i < pageChildren.length - 1; i++) {
+            let href = pageChildren[i].getAttribute('href')
+            await createXhr(href, i, '[itemprop=articleBody]')
+        }
     }
 
 })()

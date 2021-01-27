@@ -28,6 +28,9 @@ Script ini dapat bekerja pada website :
 * akurat.co
 * m.akurat.co
 * kompasiana.com
+* cnbcindonesia.com
+* republika.co.id
+* jpnn.com
 
 ### Installation
 
