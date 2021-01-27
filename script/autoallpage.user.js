@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       1.7.0
+// @version       1.7.1
 // @author        reforget-id
 // @namespace     autoallpage
 // @icon          https://www.iconsdb.com/icons/download/orange/pages-1-256.png
@@ -54,13 +54,13 @@
         akurat: /(?<=^.+akurat\.co\/[a-z-]+\/id-\d{7}-.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
         mAkurat: /(?<=^.+m\.akurat\.co\/id-\d{7}-.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
         kompasiana: /(?<=^.+\.kompasiana\.com\/.+\/[a-z0-9]{24}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all(#sectionall|))|\/)$/,
-        cnbc: /(?<=^.+\.cnbcindonesia\.com\/[a-z-]+\/\d{14}-\d{1,}-\d{6}\/.+)(\/([2-9]|\d{2})(\?.+|))$/,
+        cnbc: /(?<=^.+\.cnbcindonesia\.com\/[a-z-]+\/\d{14}-\d{1,}-\d{4,}\/.+)(\/([2-9]|\d{2})(\?.+|))$/,
         republika: /(?<=^.+\.republika\.co\.id\/berita\/[a-z0-9]+\/.+)(-part\d+.*)$/,
         jpnn: /(?<=^.+\.jpnn\.com\/news\/.+)(\?.+=.+)$/
     }
 
     const xhrRegex = {
-        cnbc: /(^.+\.cnbcindonesia\.com\/[a-z-]+\/\d{14}-\d{1,}-\d{6}\/.+)/,
+        cnbc: /(^.+\.cnbcindonesia\.com\/[a-z-]+\/\d{14}-\d{1,}-\d{4,}\/.+)/,
         republika: /(^.+\.republika\.co\.id\/berita\/[a-z0-9]+\/.+)/,
         jpnn: /(^.+\.jpnn\.com\/news\/.+)/
     }
