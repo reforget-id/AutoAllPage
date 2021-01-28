@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       1.7.2
+// @version       1.7.3
 // @author        reforget-id
 // @namespace     autoallpage
 // @icon          https://www.iconsdb.com/icons/download/orange/pages-1-256.png
@@ -27,7 +27,8 @@
 // @include       http*://*.kompasiana.com/*
 // @include       http*://*.cnbcindonesia.com/*
 // @include       http*://*.republika.co.id/*
-// @include       http*://*.jpnn.com/news/*
+// @include       http*://creativedisc.com/*
+// @include       http*://*.okezone.com/read/*
 // @grant         GM_xmlhttpRequest
 // @run-at        document-start
 // ==/UserScript==
@@ -35,6 +36,7 @@
 'use strict';
 
 (() => {
+    // http*://*.jpnn.com/news/*
 
     let mainPage
     const url = window.location.href
@@ -56,13 +58,17 @@
         kompasiana: /(?<=^.+\.kompasiana\.com\/.+\/[a-z0-9]{24}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all(#sectionall|))|\/)$/,
         cnbc: /(?<=^.+\.cnbcindonesia\.com\/[a-z-]+\/\d{14}-\d{1,2}-\d{4,6}\/.+)(\/([2-9]|\d{2})(\?.+|))$/,
         republika: /(?<=^.+\.republika\.co\.id\/berita\/[a-z0-9]+\/.+)(-part\d+.*)$/,
-        jpnn: /(?<=^.+\.jpnn\.com\/news\/.+)(\?.+=.+)$/
+        jpnn: /(?<=^.+\.jpnn\.com\/news\/.+)(\?.+=.+)$/,
+        cd: /(?<=^.+creativedisc\.com\/\d{4}\/\d{2}\/.+)(\/\d+\/.*)$/,
+        okezone: /(?<=^.+\.okezone\.com\/read\/\d{4}\/\d{2}\/\d{2}\/\d{1,3}\/\d{7}\/.+)(\?page=([2-9]|\d{2}).*)$/
     }
 
     const xhrRegex = {
         cnbc: /(^.+\.cnbcindonesia\.com\/[a-z-]+\/\d{14}-\d{1,2}-\d{4,6}\/.+)/,
         republika: /(^.+\.republika\.co\.id\/berita\/[a-z0-9]+\/.+)/,
-        jpnn: /(^.+\.jpnn\.com\/news\/.+)/
+        jpnn: /(^.+\.jpnn\.com\/news\/.+)/,
+        cd: /(^.+creativedisc\.com\/\d{4}\/\d{2}\/.+)/,
+        okezone: /(^.+\.okezone\.com\/read\/\d{4}\/\d{2}\/\d{2}\/\d{1,3}\/\d{7}\/.+)/
     }
 
     for (let i in redirectRegex) {
@@ -85,7 +91,9 @@
         } else if (
             patternName == 'cnbc' ||
             patternName == 'republika' ||
-            patternName == 'jpnn') {
+            patternName == 'jpnn' ||
+            patternName == 'cd' ||
+            patternName == 'okezone') {
             replacer = ''
         } else {
             replacer = '?page=all'
@@ -110,14 +118,31 @@
     })
 
     function prepareXhr(patternName) {
+        switch(patternName) {
+            case 'cnbc' :
+                cnbcXhr()
+                break
+            case 'republika' :
+                republikaXhr()
+                break
+            case 'jpnn' :
+                jpnnXhr()
+                break
+            case 'cd' :
+                cdXhr()
+                break
+            case 'okezone' :
+                okezoneXhr()
+        }
+
+        /*
         if (patternName == 'cnbc') {
             cnbcXhr()
         } else if (patternName == 'republika') {
             republikaXhr()
         } else if (patternName == 'jpnn') {
             jpnnXhr()
-        }
-
+        }*/
     }
 
     function findPagination(className) {
@@ -144,7 +169,7 @@
                     let text
                     const hostname = window.location.hostname
 
-                    if (hostname.includes('jpnn.com')) {
+                    if (hostname.includes('jpnn.com') || hostname.includes('creativedisc.com')) {
                         text = res.response.querySelector(find)
                     } else {
                         text = res.response.getElementsByClassName(find)[0]
@@ -152,8 +177,11 @@
 
                     if (text) {
                         console.log(log, `Success get text of page ${i+1} from XHR`)
-                        mainPage.appendChild(text)
-                        //mainPage.after(text)
+                        if (hostname.includes('okezone.com')) {
+                            mainPage.after(text)
+                        } else {
+                            mainPage.appendChild(text)
+                        }
                         resolve(console.log(log, `Append page ${i+1} to main page`))
                     } else {
                         reject(console.log(log, 'Failed to get text XHR'))
@@ -209,6 +237,42 @@
         for (let i = 1; i < pageChildren.length - 1; i++) {
             let href = pageChildren[i].getAttribute('href')
             await createXhr(href, i, '[itemprop=articleBody]')
+        }
+    }
+
+    async function cdXhr() {
+        const pagination = findPagination('post-nav-links')
+        if (!pagination) return
+
+        const pageChildren = pagination.getElementsByTagName('a')
+        mainPage = document.querySelector('[itemprop=articleBody]').parentNode
+        pagination.style.display = 'none'
+
+        for (let i = 0; i < pageChildren.length; i++) {
+            let href = pageChildren[i].getAttribute('href')
+            await createXhr(href, i+1, '[itemprop=articleBody]')
+        }
+    }
+
+    async function okezoneXhr() {
+        const pagination = document.getElementsByClassName('paging')
+        if (!pagination.length) {
+            console.log(log, 'Pagination is not found')
+            return
+        }
+
+        const pageChildren = pagination[0].getElementsByTagName('a')[0]
+        const href = pageChildren.getAttribute('href')
+        mainPage = document.getElementsByClassName('read')[0]
+
+        if (href === '#') return
+        
+        await createXhr(href, 1, 'read')
+
+        const detailTag = document.getElementsByClassName('detail-tag')
+        for (let i = 0; i < pagination.length; i++) {
+            pagination[i].style.display = 'none'
+            detailTag[i].style.display = 'none'
         }
     }
 
