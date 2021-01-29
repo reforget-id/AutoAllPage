@@ -28,9 +28,18 @@ Script ini dapat bekerja pada website :
 * akurat.co
 * m.akurat.co
 * kompasiana.com
+
+Experimental :
 * cnbcindonesia.com
 * republika.co.id
+* okezone.com
+* creativedisc.com
+
+Todo :
 * jpnn.com
+* genpi.co
+* bolatimes.com
+
 
 ### Installation
 
@@ -52,12 +61,6 @@ Browser lainnya lihat : [Caniuse](https://caniuse.com/mdn-javascript_builtins_re
 ### Known Issues
 
 * URL yang menggunakan AMP belum bisa diredirect.
-* Beberapa situs dengan pagination yang tidak menyediakan `page=all` :
-  * okezone.com
-  * tempo.co
-  * genpi.co
-  * creativedisc.com
-  * bolatimes.com
 
 ### Contributing
 
