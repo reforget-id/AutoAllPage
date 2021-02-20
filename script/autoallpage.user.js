@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       1.7.3
+// @version       1.7.4
 // @author        reforget-id
 // @namespace     autoallpage
 // @icon          https://www.iconsdb.com/icons/download/orange/pages-1-256.png
@@ -29,6 +29,7 @@
 // @include       http*://*.republika.co.id/*
 // @include       http*://creativedisc.com/*
 // @include       http*://*.okezone.com/read/*
+// @include       http*://*.viva.co.id/*
 // @grant         GM_xmlhttpRequest
 // @run-at        document-start
 // ==/UserScript==
@@ -56,6 +57,7 @@
         akurat: /(?<=^.+akurat\.co\/[a-z-]+\/id-\d{7}-.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
         mAkurat: /(?<=^.+m\.akurat\.co\/id-\d{7}-.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
         kompasiana: /(?<=^.+\.kompasiana\.com\/.+\/[a-z0-9]{24}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all(#sectionall|))|\/)$/,
+        viva: /(?<=^.+\.viva\.co\.id\/[a-z-]+\/[a-z-]+\/\d{7}-.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
         cnbc: /(?<=^.+\.cnbcindonesia\.com\/[a-z-]+\/\d{14}-\d{1,2}-\d{4,6}\/.+)(\/([2-9]|\d{2})(\?.+|))$/,
         republika: /(?<=^.+\.republika\.co\.id\/berita\/[a-z0-9]+\/.+)(-part\d+.*)$/,
         jpnn: /(?<=^.+\.jpnn\.com\/news\/.+)(\?.+=.+)$/,

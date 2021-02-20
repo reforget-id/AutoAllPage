@@ -6,7 +6,7 @@ Banyak situs berita online yang menampilkan artikelnya dalam bentuk pagination p
 ### How It Works
 
 Cara kerjanya sederhana, hanya melakukan redirect pada url yang sesuai dengan pattern regex. 
-Misalnya pada url : `https://detik.com/news/berita?page=1` akan di redirect ke halaman `https://detik.com/news/berita?page=all`.
+Misalnya pada url : `https://detik.com/news/judul-berita?page=1` akan di redirect ke halaman `https://detik.com/news/judul-berita?page=all`.
 
 ### Supported Sites
 
@@ -28,6 +28,7 @@ Script ini dapat bekerja pada website :
 * akurat.co
 * m.akurat.co
 * kompasiana.com
+* viva.co.id
 
 Experimental :
 * cnbcindonesia.com
