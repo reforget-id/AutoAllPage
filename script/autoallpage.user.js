@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       1.8.0
+// @version       1.8.1
 // @author        reforget-id
 // @namespace     autoallpage
 // @icon          https://www.iconsdb.com/icons/download/orange/pages-1-256.png
@@ -74,7 +74,7 @@
         warkom: /(?<=^.+\.wartaekonomi\.co\.id\/read\d{5,}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/ ,
         herstory: /(?<=^.+herstory\.co\.id\/read\d{4,}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
         sonora: /(?<=^.+\.sonora\.id\/read\/\d{8,}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-        tvone: /(?<=^.+\.(tvonenews|intipseleb|sahijab|jagodangdut|100kpj)\.com\/([a-z-]+(\/[a-z-]+|))\/\d{4,}-.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/
+        tvone: /(?<=^.+\.(tvonenews|intipseleb|sahijab|jagodangdut|100kpj)\.com\/([a-z-]+(\/[a-z-]+|))\/\d{3,}-.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/
     }
 
     const xhrRegex = {
