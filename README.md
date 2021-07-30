@@ -3,6 +3,11 @@
 
 Banyak situs berita online yang menampilkan artikelnya dalam bentuk pagination pada websitenya (satu artikel dibagi ke dalam beberapa halaman), sehingga pembaca akan terus menerus menekan tombol halaman selanjutnya, yang mana ini akan merepotkan pembaca.
 
+### Installation
+
+Greasyfork : [Auto All Page](https://greasyfork.org/id/scripts/415479-auto-all-page) <br>
+Github     : [Auto All Page](https://raw.githubusercontent.com/reforget-id/AutoAllPage/main/script/autoallpage.user.js)
+
 ### How It Works
 
 Cara kerjanya sederhana, hanya melakukan redirect pada url yang sesuai dengan pattern regex. 
@@ -50,13 +55,6 @@ Todo :
 * jpnn.com
 * genpi.co
 * bolatimes.com
-
-
-### Installation
-
-Greasyfork : [Auto All Page](https://greasyfork.org/id/scripts/415479-auto-all-page) <br>
-Github     : [Auto All Page](https://raw.githubusercontent.com/reforget-id/AutoAllPage/main/script/autoallpage.user.js)
-
 
 ### Browser Support
 
