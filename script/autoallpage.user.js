@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       1.7.4
+// @version       1.8.0
 // @author        reforget-id
 // @namespace     autoallpage
 // @icon          https://www.iconsdb.com/icons/download/orange/pages-1-256.png
@@ -23,13 +23,21 @@
 // @include       http*://*.pikiran-rakyat.com/*
 // @include       http*://*.kontan.co.id/news/*
 // @include       http*://akurat.co/*
-// @include       http*://m.akurat.co/*
 // @include       http*://*.kompasiana.com/*
 // @include       http*://*.cnbcindonesia.com/*
 // @include       http*://*.republika.co.id/*
 // @include       http*://creativedisc.com/*
 // @include       http*://*.okezone.com/read/*
 // @include       http*://*.viva.co.id/*
+// @include       http*://*.kompas.tv/*
+// @include       http*://*.wartaekonomi.co.id/*
+// @include       http*://herstory.co.id/*
+// @include       http*://*.sonora.id/*
+// @include       http*://*.tvonenews.com/*
+// @include       http*://*.intipseleb.com/*
+// @include       http*://*.sahijab.com/*
+// @include       http*://*.jagodangdut.com/*
+// @include       http*://*.100kpj.com/*
 // @grant         GM_xmlhttpRequest
 // @run-at        document-start
 // ==/UserScript==
@@ -44,33 +52,37 @@
     const log = '[AutoAllPage]'
 
     const redirectRegex = {
-        detik: /(?<=^.+\.detik\.com\/[a-z-]+\/d-\d+\/.+)((?<!\?.*|\/\d*)|\?.*(?<!\?single=1)|\/\d*)$/,
-        kompas: /(?<=^.+\.kompas.com\/([a-z-]+\/|)read\/\d{4}\/\d{2}\/\d{2}\/\d+\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all(#page\d+|))|\/)$/,
-        tribun: /(?<=^.+.tribunnews.com\/([a-z-]+\/|)\d{4}\/\d{2}\/\d{2}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
+        detik: /(?<=^.+\.detik\.com\/[a-z-]+\/d-\d{7,}\/.+)((?<!\?.*|\/\d*)|\?.*(?<!\?single=1)|\/\d*)$/,
+        kompas: /(?<=^.+\.kompas\.com\/([a-z-]+\/|)read\/\d{4}\/\d{2}\/\d{2}\/\d+\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all(#page\d+|))|\/)$/,
+        tribun: /(?<=^.+.tribunnews\.com\/([a-z-]+\/|)\d{4}\/\d{2}\/\d{2}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
         merdeka: /(?<=^.+\.merdeka\.com\/[a-z-]+\/.+\.html)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-        suara: /(?<=^.+\.(suara|matamata)\.com\/[a-z-]+\/\d{4}\/\d{2}\/\d{2}\/\d+\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-        sindo: /(?<=^.+\.sindonews\.com\/read\/\d+\/\d+\/.+)((?<!\?.*|\/)|\?.*(?<!\?showpage=all)|\/\d*)$/,
+        suara: /(?<=^.+\.(suara|matamata)\.com\/[a-z-]+\/\d{4}\/\d{2}\/\d{2}\/\d{6,}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
+        sindo: /(?<=^.+\.sindonews\.com\/read\/\d{6,}\/\d{2,}\/.+)((?<!\?.*|\/)|\?.*(?<!\?showpage=all)|\/\d*)$/,
         inews: /(?<=^.+\.inews\.id\/(berita|[a-z-]+\/[a-z-]+)\/.+)((?<!\?.*|\/(all.*|\d*))|(\/all.+)|\/\d*|\?.*)$/,
-        grid: /(?<=^.+\.(grid\.id|(motorplus-online|gridoto|bolasport)\.com)\/read\/\d+\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-        pr: /(?<=^.+\.pikiran-rakyat\.com\/[a-z-]+\/pr-\d+\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
+        grid: /(?<=^.+\.(grid\.id|(motorplus-online|gridoto|bolasport)\.com)\/read\/\d{8,}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
+        pr: /(?<=^.+\.pikiran-rakyat\.com\/[a-z-]+\/pr-\d{7,}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
         kontan: /(?<=^.+\.kontan\.co\.id\/news\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-        akurat: /(?<=^.+akurat\.co\/[a-z-]+\/id-\d{7}-.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-        mAkurat: /(?<=^.+m\.akurat\.co\/id-\d{7}-.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
+        akurat: /(?<=^.+akurat\.co\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
         kompasiana: /(?<=^.+\.kompasiana\.com\/.+\/[a-z0-9]{24}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all(#sectionall|))|\/)$/,
-        viva: /(?<=^.+\.viva\.co\.id\/[a-z-]+\/[a-z-]+\/\d{7}-.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-        cnbc: /(?<=^.+\.cnbcindonesia\.com\/[a-z-]+\/\d{14}-\d{1,2}-\d{4,6}\/.+)(\/([2-9]|\d{2})(\?.+|))$/,
+        viva: /(?<=^.+\.viva\.co\.id\/([a-z-]+(\/[a-z-]+|))\/\d{6,}-.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
+        cnbc: /(?<=^.+\.cnbcindonesia\.com\/[a-z-]+\/\d{14}-\d{1,}-\d{4,}\/.+)(\/([2-9]|\d{2})(\?.+|))$/,
         republika: /(?<=^.+\.republika\.co\.id\/berita\/[a-z0-9]+\/.+)(-part\d+.*)$/,
         jpnn: /(?<=^.+\.jpnn\.com\/news\/.+)(\?.+=.+)$/,
         cd: /(?<=^.+creativedisc\.com\/\d{4}\/\d{2}\/.+)(\/\d+\/.*)$/,
-        okezone: /(?<=^.+\.okezone\.com\/read\/\d{4}\/\d{2}\/\d{2}\/\d{1,3}\/\d{7}\/.+)(\?page=([2-9]|\d{2}).*)$/
+        okezone: /(?<=^.+\.okezone\.com\/read\/\d{4}\/\d{2}\/\d{2}\/\d{1,}\/\d{6,}\/.+)(\?page=([2-9]|\d{2}).*)$/,
+        kompastv: /(?<=^.+\.kompas\.tv\/article\/\d{4,}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
+        warkom: /(?<=^.+\.wartaekonomi\.co\.id\/read\d{5,}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/ ,
+        herstory: /(?<=^.+herstory\.co\.id\/read\d{4,}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
+        sonora: /(?<=^.+\.sonora\.id\/read\/\d{8,}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
+        tvone: /(?<=^.+\.(tvonenews|intipseleb|sahijab|jagodangdut|100kpj)\.com\/([a-z-]+(\/[a-z-]+|))\/\d{4,}-.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/
     }
 
     const xhrRegex = {
-        cnbc: /(^.+\.cnbcindonesia\.com\/[a-z-]+\/\d{14}-\d{1,2}-\d{4,6}\/.+)/,
+        cnbc: /(^.+\.cnbcindonesia\.com\/[a-z-]+\/\d{14}-\d{1,}-\d{4,}\/.+)/,
         republika: /(^.+\.republika\.co\.id\/berita\/[a-z0-9]+\/.+)/,
         jpnn: /(^.+\.jpnn\.com\/news\/.+)/,
         cd: /(^.+creativedisc\.com\/\d{4}\/\d{2}\/.+)/,
-        okezone: /(^.+\.okezone\.com\/read\/\d{4}\/\d{2}\/\d{2}\/\d{1,3}\/\d{7}\/.+)/
+        okezone: /(^.+\.okezone\.com\/read\/\d{4}\/\d{2}\/\d{2}\/\d{1,}\/\d{6,}\/.+)/
     }
 
     for (let i in redirectRegex) {

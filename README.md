@@ -26,9 +26,17 @@ Script ini dapat bekerja pada website :
 * pikiran-rakyat.com
 * kontan.co.id
 * akurat.co
-* m.akurat.co
 * kompasiana.com
 * viva.co.id
+* kompas.tv
+* wartaekonomi.co.id
+* herstory.co.id
+* sonora.id
+* tvonenews.com
+* intipseleb.com
+* sahijab.com
+* jagodangdut.com
+* 100kpj.com
 
 Experimental :
 * cnbcindonesia.com
@@ -37,6 +45,8 @@ Experimental :
 * creativedisc.com
 
 Todo :
+* tempo.co
+* cnnindonesia.com
 * jpnn.com
 * genpi.co
 * bolatimes.com
