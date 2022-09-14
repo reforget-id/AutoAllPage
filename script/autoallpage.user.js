@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       1.9.0
+// @version       1.9.1
 // @author        reforget-id
 // @namespace     autoallpage
 // @icon          https://raw.githubusercontent.com/reforget-id/AutoAllPage/main/assets/icon.png
@@ -56,7 +56,7 @@
     const log = '[AutoAllPage]'
 
     const redirectRegex = {
-        detik: /(?<=^.+\.detik\.com\/.+d-\d+\/.+)((?<!\?.*|\/\d*)|\?.*(?<!\?single=1)|\/\d*)$/,
+        detik: /(?<=^.+\.detik\.com\/.+d-\d+\/.+)((?<!\?.*|\/\d*)|\?.*(?<!\?single=1)|\/\d*|#.*)$/,
         kompas: /(?<=^.+\.kompas\.com\/([a-z-]+\/|)read\/\d{4}\/\d{2}\/\d{2}\/\d+\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all(#page\d+|))|\/)$/,
         tribun: /(?<=^.+.tribunnews\.com\/([a-z-]+\/|)\d{4}\/\d{2}\/\d{2}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
         merdeka: /(?<=^.+\.merdeka\.com\/[a-z-]+\/.+\.html)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
