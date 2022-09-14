@@ -11,7 +11,7 @@ Github     : [Auto All Page](https://raw.githubusercontent.com/reforget-id/AutoA
 ### How It Works
 
 Cara kerjanya sederhana, hanya melakukan redirect pada url yang sesuai dengan pattern regex. 
-Misalnya pada url : `https://detik.com/news/judul-berita?page=1` akan di redirect ke halaman `https://detik.com/news/judul-berita?page=all`.
+Misalnya pada url : `https://detik.com/news/judul-berita?page=1` akan diredirect ke halaman `https://detik.com/news/judul-berita?page=all`.
 
 ### Supported Sites
 
@@ -42,6 +42,7 @@ Script ini dapat bekerja pada website :
 * sahijab.com
 * jagodangdut.com
 * 100kpj.com
+* idntimes.com
 
 Experimental :
 * cnbcindonesia.com
@@ -69,7 +70,7 @@ Browser lainnya lihat : [Caniuse](https://caniuse.com/mdn-javascript_builtins_re
 
 ### Known Issues
 
-* URL yang menggunakan AMP belum bisa diredirect.
+* URL yang menggunakan AMP belum bisa diredirect. Beberapa script dan ekstensi yang bisa digunakan untuk mengatasi AMP : [Redirect AMP to HTML](https://www.daniel.priv.no/web-extensions/amp2html.html), [Disable AMP by AdGuard](https://github.com/AdguardTeam/DisableAMP), [RemoveAMP](https://github.com/bentasker/RemoveAMP). 
 
 ### Contributing
 

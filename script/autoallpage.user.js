@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       1.8.1
+// @version       1.9.0
 // @author        reforget-id
 // @namespace     autoallpage
-// @icon          https://www.iconsdb.com/icons/download/orange/pages-1-256.png
+// @icon          https://raw.githubusercontent.com/reforget-id/AutoAllPage/main/assets/icon.png
 // @homepage      https://github.com/reforget-id/AutoAllPage
 // @description   Otomatis menampilkan semua halaman artikel berita dalam 1 page
 // @downloadURL   https://raw.githubusercontent.com/reforget-id/AutoAllPage/main/script/autoallpage.user.js
@@ -24,10 +24,8 @@
 // @include       http*://*.kontan.co.id/news/*
 // @include       http*://akurat.co/*
 // @include       http*://*.kompasiana.com/*
-// @include       http*://*.cnbcindonesia.com/*
 // @include       http*://*.republika.co.id/*
-// @include       http*://creativedisc.com/*
-// @include       http*://*.okezone.com/read/*
+// @include       http*://republika.co.id/*
 // @include       http*://*.viva.co.id/*
 // @include       http*://*.kompas.tv/*
 // @include       http*://*.wartaekonomi.co.id/*
@@ -38,21 +36,27 @@
 // @include       http*://*.sahijab.com/*
 // @include       http*://*.jagodangdut.com/*
 // @include       http*://*.100kpj.com/*
+// @include       http*://*.idntimes.com/*
 // @grant         GM_xmlhttpRequest
 // @run-at        document-start
 // ==/UserScript==
 
+// TODO
+// http*://*.cnbcindonesia.com/*
+// http*://*.jpnn.com/news/*
+// http*://creativedisc.com/*
+// http*://*.okezone.com/read/*
+
 'use strict';
 
 (() => {
-    // http*://*.jpnn.com/news/*
 
     let mainPage
     const url = window.location.href
     const log = '[AutoAllPage]'
 
     const redirectRegex = {
-        detik: /(?<=^.+\.detik\.com\/[a-z-]+\/d-\d{7,}\/.+)((?<!\?.*|\/\d*)|\?.*(?<!\?single=1)|\/\d*)$/,
+        detik: /(?<=^.+\.detik\.com\/.+d-\d+\/.+)((?<!\?.*|\/\d*)|\?.*(?<!\?single=1)|\/\d*)$/,
         kompas: /(?<=^.+\.kompas\.com\/([a-z-]+\/|)read\/\d{4}\/\d{2}\/\d{2}\/\d+\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all(#page\d+|))|\/)$/,
         tribun: /(?<=^.+.tribunnews\.com\/([a-z-]+\/|)\d{4}\/\d{2}\/\d{2}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
         merdeka: /(?<=^.+\.merdeka\.com\/[a-z-]+\/.+\.html)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
@@ -65,24 +69,26 @@
         akurat: /(?<=^.+akurat\.co\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
         kompasiana: /(?<=^.+\.kompasiana\.com\/.+\/[a-z0-9]{24}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all(#sectionall|))|\/)$/,
         viva: /(?<=^.+\.viva\.co\.id\/([a-z-]+(\/[a-z-]+|))\/\d{6,}-.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-        cnbc: /(?<=^.+\.cnbcindonesia\.com\/[a-z-]+\/\d{14}-\d{1,}-\d{4,}\/.+)(\/([2-9]|\d{2})(\?.+|))$/,
-        republika: /(?<=^.+\.republika\.co\.id\/berita\/[a-z0-9]+\/.+)(-part\d+.*)$/,
+        cnbc: /(?<=^.+\.cnbcindonesia\.com\/[a-z-]+\/\d{14}-\d+-\d{4,}\/.+)(\/([2-9]|\d{2})(\?.+|))$/,
+        republika: /(?<=^.*republika\.co\.id\/berita\/[a-z0-9]+\/.+)(-part\d+.*)$/,
         jpnn: /(?<=^.+\.jpnn\.com\/news\/.+)(\?.+=.+)$/,
         cd: /(?<=^.+creativedisc\.com\/\d{4}\/\d{2}\/.+)(\/\d+\/.*)$/,
-        okezone: /(?<=^.+\.okezone\.com\/read\/\d{4}\/\d{2}\/\d{2}\/\d{1,}\/\d{6,}\/.+)(\?page=([2-9]|\d{2}).*)$/,
+        okezone: /(?<=^.+\.okezone\.com\/read\/\d{4}\/\d{2}\/\d{2}\/\d+\/\d{6,}\/.+)(\?page=([2-9]|\d{2}).*)$/,
         kompastv: /(?<=^.+\.kompas\.tv\/article\/\d{4,}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-        warkom: /(?<=^.+\.wartaekonomi\.co\.id\/read\d{5,}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/ ,
+        warkom: /(?<=^.+\.wartaekonomi\.co\.id\/read\d{5,}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
         herstory: /(?<=^.+herstory\.co\.id\/read\d{4,}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
         sonora: /(?<=^.+\.sonora\.id\/read\/\d{8,}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-        tvone: /(?<=^.+\.(tvonenews|intipseleb|sahijab|jagodangdut|100kpj)\.com\/([a-z-]+(\/[a-z-]+|))\/\d{3,}-.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/
+        tvone: /(?<=^.+\.(tvonenews|intipseleb|sahijab|jagodangdut|100kpj)\.com\/([a-z-]+(\/[a-z-]+|))\/\d{3,}-.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
+        idntimes: /(?<=^.+\.idntimes\.com\/.+\/.+\/.+\/.+)(\?page=all)$/,
     }
 
     const xhrRegex = {
-        cnbc: /(^.+\.cnbcindonesia\.com\/[a-z-]+\/\d{14}-\d{1,}-\d{4,}\/.+)/,
-        republika: /(^.+\.republika\.co\.id\/berita\/[a-z0-9]+\/.+)/,
+        cnbc: /(^.+\.cnbcindonesia\.com\/[a-z-]+\/\d{14}-\d+-\d{4,}\/.+)/,
+        republika: /(^.*republika\.co\.id\/berita\/[a-z0-9]+\/.+)/,
         jpnn: /(^.+\.jpnn\.com\/news\/.+)/,
         cd: /(^.+creativedisc\.com\/\d{4}\/\d{2}\/.+)/,
-        okezone: /(^.+\.okezone\.com\/read\/\d{4}\/\d{2}\/\d{2}\/\d{1,}\/\d{6,}\/.+)/
+        okezone: /(^.+\.okezone\.com\/read\/\d{4}\/\d{2}\/\d{2}\/\d+\/\d{6,}\/.+)/,
+        idntimes: /(?<=^.+\.idntimes\.com\/.+\/.+\/.+\/.+)/,
     }
 
     for (let i in redirectRegex) {
@@ -96,18 +102,19 @@
     function redirector(patternName) {
         let replacer, newUrl
 
-        if (patternName == 'detik') {
+        if (patternName === 'detik') {
             replacer = '?single=1'
-        } else if (patternName == 'sindo') {
+        } else if (patternName === 'sindo') {
             replacer = '?showpage=all'
-        } else if (patternName == 'inews') {
+        } else if (patternName === 'inews') {
             replacer = '/all'
         } else if (
-            patternName == 'cnbc' ||
-            patternName == 'republika' ||
-            patternName == 'jpnn' ||
-            patternName == 'cd' ||
-            patternName == 'okezone') {
+            patternName === 'cnbc' ||
+            patternName === 'republika' ||
+            patternName === 'jpnn' ||
+            patternName === 'cd' ||
+            patternName === 'okezone' ||
+            patternName === 'idntimes') {
             replacer = ''
         } else {
             replacer = '?page=all'
@@ -115,8 +122,7 @@
 
         newUrl = url.replace(redirectRegex[patternName], replacer)
         console.log(`EXECUTE [${patternName}] REDIRECT`)
-        window.location.href = newUrl
-        return
+        window.location.replace(newUrl)
     }
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -132,12 +138,14 @@
     })
 
     function prepareXhr(patternName) {
-        switch(patternName) {
-            case 'cnbc' :
-                cnbcXhr()
-                break
+        switch (patternName) {
             case 'republika' :
                 republikaXhr()
+                break
+            case 'idntimes' :
+                idntimes()
+            /*case 'cnbc' :
+                cnbcXhr()
                 break
             case 'jpnn' :
                 jpnnXhr()
@@ -146,17 +154,8 @@
                 cdXhr()
                 break
             case 'okezone' :
-                okezoneXhr()
+                okezoneXhr()*/
         }
-
-        /*
-        if (patternName == 'cnbc') {
-            cnbcXhr()
-        } else if (patternName == 'republika') {
-            republikaXhr()
-        } else if (patternName == 'jpnn') {
-            jpnnXhr()
-        }*/
     }
 
     function findPagination(className) {
@@ -166,7 +165,7 @@
     }
 
     function createXhr(url, i, find) {
-        console.log(log, `Creating XHR request for page ${i+1}`)
+        console.log(log, `Creating XHR request for page ${i + 1}`)
         return new Promise((resolve, reject) => {
             GM_xmlhttpRequest({
                 method: 'GET',
@@ -190,17 +189,17 @@
                     }
 
                     if (text) {
-                        console.log(log, `Success get text of page ${i+1} from XHR`)
+                        console.log(log, `Success get text of page ${i + 1} from XHR`)
                         if (hostname.includes('okezone.com')) {
                             mainPage.after(text)
                         } else {
                             mainPage.appendChild(text)
                         }
-                        resolve(console.log(log, `Append page ${i+1} to main page`))
+                        resolve(console.log(log, `Append page ${i + 1} to main page`))
                     } else {
                         reject(console.log(log, 'Failed to get text XHR'))
                     }
-                }
+                },
             })
         })
     }
@@ -264,7 +263,7 @@
 
         for (let i = 0; i < pageChildren.length; i++) {
             let href = pageChildren[i].getAttribute('href')
-            await createXhr(href, i+1, '[itemprop=articleBody]')
+            await createXhr(href, i + 1, '[itemprop=articleBody]')
         }
     }
 
@@ -280,7 +279,7 @@
         mainPage = document.getElementsByClassName('read')[0]
 
         if (href === '#') return
-        
+
         await createXhr(href, 1, 'read')
 
         const detailTag = document.getElementsByClassName('detail-tag')
@@ -290,4 +289,13 @@
         }
     }
 
+    function idntimes() {
+        const readMoreButton = document.getElementsByClassName('read-more-btn-check')[0]
+        const splitPage = document.getElementsByClassName('split-page')
+
+        readMoreButton.remove()
+        for (let i = 1; i < splitPage.length; i++) {
+            splitPage[i].classList.add('open')
+        }
+    }
 })()
