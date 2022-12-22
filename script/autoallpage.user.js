@@ -1,171 +1,541 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       1.9.1
+// @version       2.0.0
 // @author        reforget-id
 // @namespace     autoallpage
-// @icon          https://raw.githubusercontent.com/reforget-id/AutoAllPage/main/assets/icon.png
+// @description   Otomatis menampilkan semua halaman artikel berita dalam 1 halaman
 // @homepage      https://github.com/reforget-id/AutoAllPage
-// @description   Otomatis menampilkan semua halaman artikel berita dalam 1 page
+// @supportURL    https://github.com/reforget-id/AutoAllPage/issues
+// @icon          https://raw.githubusercontent.com/reforget-id/AutoAllPage/main/assets/icon.png
 // @downloadURL   https://raw.githubusercontent.com/reforget-id/AutoAllPage/main/script/autoallpage.user.js
-// @updateURL     https://raw.githubusercontent.com/reforget-id/AutoAllPage/main/script/autoallpage.user.js 
-// @include       http*://*.detik.com/*
-// @include       http*://*.kompas.com/*
-// @include       http*://*.tribunnews.com/*
-// @include       http*://*.merdeka.com/*
-// @include       http*://*.suara.com/*
-// @include       http*://*.matamata.com/*
-// @include       http*://*.sindonews.com/read/*
-// @include       http*://*.inews.id/*
-// @include       http*://*.grid.id/read/*
-// @include       http*://*.bolasport.com/read/*
-// @include       http*://*.motorplus-online.com/read/*
-// @include       http*://*.gridoto.com/read/*
-// @include       http*://*.pikiran-rakyat.com/*
-// @include       http*://*.kontan.co.id/news/*
-// @include       http*://akurat.co/*
-// @include       http*://*.kompasiana.com/*
-// @include       http*://*.republika.co.id/*
-// @include       http*://republika.co.id/*
-// @include       http*://*.viva.co.id/*
-// @include       http*://*.kompas.tv/*
-// @include       http*://*.wartaekonomi.co.id/*
-// @include       http*://herstory.co.id/*
-// @include       http*://*.sonora.id/*
-// @include       http*://*.tvonenews.com/*
-// @include       http*://*.intipseleb.com/*
-// @include       http*://*.sahijab.com/*
-// @include       http*://*.jagodangdut.com/*
-// @include       http*://*.100kpj.com/*
-// @include       http*://*.idntimes.com/*
-// @grant         GM_xmlhttpRequest
+// @updateURL     https://raw.githubusercontent.com/reforget-id/AutoAllPage/main/script/autoallpage.user.js
 // @run-at        document-start
+// @grant         GM_addStyle
+// @grant         GM_xmlhttpRequest
+// @grant         GM_registerMenuCommand
+// @noframes
+// @exclude       https://*?single=1
+// @exclude       https://*?showpage=all
+// @exclude       https://*.inews.id/*/all
+// @exclude       https://*?page=all#page*
+// @exclude       https://*?page=all#sectionall
+// @exclude       /^https:\/\/(?!.+\.idntimes\.com).+\?page=all$/
+// @exclude       https://*/amp/*
+// @exclude       https://amp.*
+// @exclude       https://*/amp-*/*
+// @exclude       https://*/?amp*
+// @exclude       https://*?amp=1*
+// @exclude       https://*/*&amp*
+// @exclude       https://*/*&amp=1*
+// @include       https://*.100kpj.com/*/*
+// @include       https://*.aboutmalang.com/*/pr-*/*
+// @include       https://akurat.co/*
+// @include       https://*.bolasport.com/read/*
+// @include       https://*.cnbcindonesia.com/*/*/*
+// @include       https://*.cnnindonesia.com/*/*/*
+// @include       https://*.detik.com/*/d-*/*
+// @include       https://*.genpi.co/*/*/*
+// @include       https://*.grid.id/read/*
+// @include       https://*.gridoto.com/read/*
+// @include       https://herstory.co.id/read*
+// @include       https://*.idntimes.com/*/*/*/*
+// @include       https://*.idxchannel.com/*/*
+// @include       https://*.inews.id/*/*
+// @include       https://*.intipseleb.com/*/*
+// @include       https://*.jpnn.com/*/*
+// @include       https://*.kompas.com/read/*
+// @include       https://*.kompas.com/*/read/*
+// @include       https://*.kompas.tv/article/*
+// @include       https://*.kompasiana.com/*/*/*
+// @include       https://*.kontan.co.id/news/*
+// @include       https://*.motorplus-online.com/read/*
+// @include       https://*.parapuan.co/read/*
+// @include       https://*.pikiran-rakyat.com/*/pr-*/*
+// @include       https://*.republika.co.id/berita/*
+// @include       https://republika.co.id/berita/*
+// @include       https://*.sahijab.com/*/*
+// @include       https://*.sindonews.com/read/*
+// @include       https://*.sonora.id/read/*
+// @include       https://*.suara.com/*/*/*/*
+// @include       https://*.tempo.co/read/*
+// @include       https://*.tribunnews.com/*/*/*/*
+// @include       https://*.tvonenews.com/*/*
+// @include       https://*.viva.co.id/*/*
+// @include       https://wartaekonomi.co.id/read*
 // ==/UserScript==
 
-// TODO
-// http*://*.cnbcindonesia.com/*
-// http*://*.jpnn.com/news/*
-// http*://creativedisc.com/*
-// http*://*.okezone.com/read/*
+// https://*.okezone.com/read/*
 
 'use strict';
 
 (() => {
+    GM_addStyle(`
+        .aap-divider {
+            font-size: 18px !important;
+            font-weight: 600 !important;
+            margin: 30px 0 30px 0 !important;
+            text-align: center !important;  
+        }
+    `)
 
-    let mainPage
-    const url = window.location.href
-    const log = '[AutoAllPage]'
+    GM_registerMenuCommand('Donate me on Trakteer', () => {
+        window.open('https://trakteer.id/reforget-id', '_blank')
+    })
 
-    const redirectRegex = {
-        detik: /(?<=^.+\.detik\.com\/.+d-\d+\/.+)((?<!\?.*|\/\d*)|\?.*(?<!\?single=1)|\/\d*|#.*)$/,
-        kompas: /(?<=^.+\.kompas\.com\/([a-z-]+\/|)read\/\d{4}\/\d{2}\/\d{2}\/\d+\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all(#page\d+|))|\/)$/,
-        tribun: /(?<=^.+.tribunnews\.com\/([a-z-]+\/|)\d{4}\/\d{2}\/\d{2}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-        merdeka: /(?<=^.+\.merdeka\.com\/[a-z-]+\/.+\.html)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-        suara: /(?<=^.+\.(suara|matamata)\.com\/[a-z-]+\/\d{4}\/\d{2}\/\d{2}\/\d{6,}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-        sindo: /(?<=^.+\.sindonews\.com\/read\/\d{6,}\/\d{2,}\/.+)((?<!\?.*|\/)|\?.*(?<!\?showpage=all)|\/\d*)$/,
-        inews: /(?<=^.+\.inews\.id\/(berita|[a-z-]+\/[a-z-]+)\/.+)((?<!\?.*|\/(all.*|\d*))|(\/all.+)|\/\d*|\?.*)$/,
-        grid: /(?<=^.+\.(grid\.id|(motorplus-online|gridoto|bolasport)\.com)\/read\/\d{8,}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-        pr: /(?<=^.+\.pikiran-rakyat\.com\/[a-z-]+\/pr-\d{7,}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-        kontan: /(?<=^.+\.kontan\.co\.id\/news\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-        akurat: /(?<=^.+akurat\.co\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-        kompasiana: /(?<=^.+\.kompasiana\.com\/.+\/[a-z0-9]{24}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all(#sectionall|))|\/)$/,
-        viva: /(?<=^.+\.viva\.co\.id\/([a-z-]+(\/[a-z-]+|))\/\d{6,}-.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-        cnbc: /(?<=^.+\.cnbcindonesia\.com\/[a-z-]+\/\d{14}-\d+-\d{4,}\/.+)(\/([2-9]|\d{2})(\?.+|))$/,
-        republika: /(?<=^.*republika\.co\.id\/berita\/[a-z0-9]+\/.+)(-part\d+.*)$/,
-        jpnn: /(?<=^.+\.jpnn\.com\/news\/.+)(\?.+=.+)$/,
-        cd: /(?<=^.+creativedisc\.com\/\d{4}\/\d{2}\/.+)(\/\d+\/.*)$/,
-        okezone: /(?<=^.+\.okezone\.com\/read\/\d{4}\/\d{2}\/\d{2}\/\d+\/\d{6,}\/.+)(\?page=([2-9]|\d{2}).*)$/,
-        kompastv: /(?<=^.+\.kompas\.tv\/article\/\d{4,}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-        warkom: /(?<=^.+\.wartaekonomi\.co\.id\/read\d{5,}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-        herstory: /(?<=^.+herstory\.co\.id\/read\d{4,}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-        sonora: /(?<=^.+\.sonora\.id\/read\/\d{8,}\/.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-        tvone: /(?<=^.+\.(tvonenews|intipseleb|sahijab|jagodangdut|100kpj)\.com\/([a-z-]+(\/[a-z-]+|))\/\d{3,}-.+)((?<!\?.*|\/)|\?.*(?<!\?page=all)|\/)$/,
-        idntimes: /(?<=^.+\.idntimes\.com\/.+\/.+\/.+\/.+)(\?page=all)$/,
-    }
+    class URLBuilder {
+        constructor() {
+            this._protocol = 'https'
+            this._hostname = ''
+            this._path = ''
+            this._param = ''
+        }
 
-    const xhrRegex = {
-        cnbc: /(^.+\.cnbcindonesia\.com\/[a-z-]+\/\d{14}-\d+-\d{4,}\/.+)/,
-        republika: /(^.*republika\.co\.id\/berita\/[a-z0-9]+\/.+)/,
-        jpnn: /(^.+\.jpnn\.com\/news\/.+)/,
-        cd: /(^.+creativedisc\.com\/\d{4}\/\d{2}\/.+)/,
-        okezone: /(^.+\.okezone\.com\/read\/\d{4}\/\d{2}\/\d{2}\/\d+\/\d{6,}\/.+)/,
-        idntimes: /(?<=^.+\.idntimes\.com\/.+\/.+\/.+\/.+)/,
-    }
+        hostname(hostname) {
+            this._hostname = hostname
+            return this
+        }
 
-    for (let i in redirectRegex) {
-        let urlMatcher = url.match(redirectRegex[i])
-        if (urlMatcher) {
-            redirector(i)
-            break
+        path(...pathname) {
+            this._path = this._path + pathname.join('/')
+            return this
+        }
+
+        param(query) {
+            this._param = '?' + query
+            return this
+        }
+
+        toString() {
+            let url = `${this._protocol}://${this._hostname}/${this._path}`
+            if (this._param !== '') url = url + this._param
+            return url
         }
     }
 
-    function redirector(patternName) {
-        let replacer, newUrl
-
-        if (patternName === 'detik') {
-            replacer = '?single=1'
-        } else if (patternName === 'sindo') {
-            replacer = '?showpage=all'
-        } else if (patternName === 'inews') {
-            replacer = '/all'
-        } else if (
-            patternName === 'cnbc' ||
-            patternName === 'republika' ||
-            patternName === 'jpnn' ||
-            patternName === 'cd' ||
-            patternName === 'okezone' ||
-            patternName === 'idntimes') {
-            replacer = ''
-        } else {
-            replacer = '?page=all'
-        }
-
-        newUrl = url.replace(redirectRegex[patternName], replacer)
-        console.log(`EXECUTE [${patternName}] REDIRECT`)
-        window.location.replace(newUrl)
+    const url = {
+        get url() {
+            return window.location
+        },
+        href: () => url.url.href,
+        hostname: () => url.url.hostname,
+        path: () => url.url.pathname,
+        param: () => url.url.search,
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
-        console.log(log, 'DOM fully loaded and parsed')
+    function splitPath(pathname) {
+        return pathname.split('/').filter(v => v)
+    }
 
-        for (let i in xhrRegex) {
-            let urlMatcher = url.match(xhrRegex[i])
-            if (urlMatcher) {
-                prepareXhr(i)
+    function redirect(url) {
+        window.location.replace(url)
+    }
+
+    function urlChecker(site) {
+        return site.hostname.test(url.hostname()) && site.path.test(url.path())
+    }
+
+    function log(message) {
+        console.log('[AutoAllPage] ' + message)
+    }
+
+    function pageDivider(currentPage, totalPages) {
+        const divider = new DOMParser().parseFromString(`
+            <div class="aap-divider">
+                === [AutoAllPage] Halaman ${currentPage} dari ${totalPages} ===
+            </div>
+        `, 'text/html')
+        return divider.body.firstElementChild
+    }
+
+    //******************************************************************************
+
+    const websites = [
+        {
+            id: 'akurat',
+            description: 'akurat.co',
+            hostname: /(^|\.)akurat\.co$/,
+            path: /^\/.+(?<!\/\w+)$/,
+            method: 'param',
+            fullpage: 'page=all',
+        },
+        {
+            id: 'cnbc',
+            description: 'cnbcindonesia.com',
+            hostname: /(^|\.)cnbcindonesia\.com$/,
+            path: /\/\d+-\d+-\d+\/.+(\/\d+|(?<!\/\w+))$/,
+            method: 'param',
+            fullpage: 'page=all',
+        },
+        {
+            id: 'grid',
+            description: 'bolasport.com, grid.id, gridoto.com, motorplus-online.com, parapuan.co, sonora.id',
+            hostname: /(^|\.)(parapuan\.co|(grid|sonora)\.id|(bolasport|gridoto|motorplus-online)\.com)$/,
+            path: /^\/read\/.+(?<!\/\w+)$/,
+            method: 'param',
+            fullpage: 'page=all',
+        },
+        {
+            id: 'idntimes',
+            description: 'idntimes.com',
+            hostname: /(^|\.)idntimes\.com$/,
+            path: /\/[\w-]+\/[\w-]+\/.+\/.+(?<!\/\w+)$/,
+            method: 'dom',
+            pagination: 'page=all',
+        },
+        {
+            id: 'idx',
+            description: 'idxchannel.com',
+            hostname: /(^|\.)idxchannel\.com$/,
+            path: /\/.+\/.+(\/\d+|(?<!\/\w+))$/,
+            method: 'path',
+            fullpage: 'all',
+        },
+        {
+            id: 'inews',
+            description: 'inews.id',
+            hostname: /(^|\.)inews\.id$/,
+            path: /\/(berita|read\/\d+|[a-z-]+\/[a-z-]+)\/.+(\/\d+|(?<!\/\w+))$/,
+            method: 'path',
+            fullpage: 'all',
+        },
+        {
+            id: 'kompascom',
+            description: 'kompas.com',
+            hostname: /(^|\.)kompas\.com$/,
+            path: /\/read\/.+(?<!\/\w+)$/,
+            method: 'param',
+            fullpage: 'page=all',
+        },
+        {
+            id: 'kompasiana',
+            description: 'kompasiana.com',
+            hostname: /(^|\.)kompasiana\.com$/,
+            path: /\/.+(?<!series)\/\w{24}\/.+(?<!\/\w+)$/,
+            method: 'param',
+            fullpage: 'page=all',
+        },
+        {
+            id: 'kompastv',
+            description: 'kompas.tv',
+            hostname: /(^|\.)kompas\.tv$/,
+            path: /^\/article\/\d+\/.+(?<!\/\w+)$/,
+            method: 'param',
+            fullpage: 'page=all',
+        },
+        {
+            id: 'kontan',
+            description: 'kontan.co.id',
+            hostname: /(^|\.)kontan\.co\.id$/,
+            path: /^\/news\/.+(?<!\/\w+)$/,
+            method: 'param',
+            fullpage: 'page=all',
+        },
+        {
+            id: 'pr',
+            description: 'pikiran-rakyat.com, aboutmalang.com',
+            hostname: /(^|\.)(pikiran-rakyat|aboutmalang)\.com$/,
+            path: /\/pr-\d+\/.+(?<!\/\w+)$/,
+            method: 'param',
+            fullpage: 'page=all',
+        },
+        {
+            id: 'sindo',
+            description: 'sindonews.com',
+            hostname: /(^|\.)sindonews\.com$/,
+            path: /^\/read\/\d+\/\d+\/.+(\/\d+0|(?<!\/\w+))$/,
+            method: 'param',
+            fullpage: 'showpage=all',
+        },
+        {
+            id: 'suara',
+            description: 'suara.com',
+            hostname: /(^|\.)suara\.com$/,
+            path: /\/\d{4}\/\d{2}\/\d{2}\/\d+\/.+(?<!\/\w+)$/,
+            method: 'param',
+            fullpage: 'page=all',
+        },
+        {
+            id: 'tribun',
+            description: 'tribunnews.com',
+            hostname: /(^|\.)tribunnews\.com$/,
+            path: /\/\d{4}\/\d{2}\/\d{2}\/.+(?<!\/\w+)$/,
+            method: 'param',
+            fullpage: 'page=all',
+        },
+        {
+            id: 'viva',
+            description: 'viva.co.id, tvonenews.com, intipseleb.com, sahijab.com, 100kpj.com',
+            hostname: /(^|\.)(viva\.co\.id|(tvonenews|intipseleb|sahijab|100kpj)\.com)$/,
+            path: /\/.+\/\d+-.+(?<!\/\w+)$/,
+            method: 'param',
+            fullpage: 'page=all',
+        },
+        {
+            id: 'wartaekonomi',
+            description: 'wartaekonomi.co.id, herstory.co.id',
+            hostname: /(^|\.)(wartaekonomi|herstory)\.co\.id$/,
+            path: /^\/read\d+\/.+(?<!\/\w+)$/,
+            method: 'param',
+            fullpage: 'page=all',
+        },
+        {
+            id: 'cnn',
+            description: 'cnnindonesia.com',
+            hostname: /(^|\.)cnnindonesia\.com$/,
+            path: /\/\d+-\d+-\d+\/.+(\/\d+|(?<!\/\w+))$/,
+            method: 'xhr',
+            nextURL: '/',
+            urlHelper: 0,
+            desktop: {
+                pagination: '.anchor_article_long',
+                totalPages: 'a:last-of-type',
+                content: '.detail_text',
+            },
+            mobile: {
+                pagination: '.anchor_article_long',
+                totalPages: 'a:last-of-type',
+                content: '.detail_text',
+            },
+        },
+        {
+            id: 'genpi',
+            description: 'genpi.co',
+            hostname: /(^|\.)genpi\.co$/,
+            path: /\/\d+\/.+(?<!\/\w+)$/,
+            method: 'xhr',
+            nextURL: '?page=',
+            urlHelper: 0,
+            desktop: {
+                pagination: '.mnmd-pagination',
+                totalPages: 'li:nth-last-of-type(3) a',
+                content: 'div.entry-content div.col-md-10',
+            },
+            mobile: {
+                pagination: '.mnmd-pagination',
+                totalPages: 'li:nth-last-of-type(3) a',
+                content: '.entry-content',
+            },
+        },
+        {
+            id: 'jpnn',
+            description: 'jpnn.com',
+            hostname: /(^|\.)jpnn\.com$/,
+            path: /\/(news|[a-z-]+\/\d+)\/.+(?<!\/\w+)$/,
+            method: 'xhr',
+            nextURL: '?page=',
+            urlHelper: 0,
+            desktop: {
+                pagination: '.pagination',
+                totalPages: 'li:nth-last-of-type(3) a',
+                content: 'div[itemprop=articleBody]',
+            },
+            mobile: {
+                pagination: '.pagination',
+                totalPages: 'li:nth-last-of-type(3) a',
+                content: '.page-content',
+            },
+        },
+        {
+            id: 'okezone',
+            description: 'okezone.com',
+            hostname: /(^|\.)okezone\.com$/,
+            path: /^\/read\/.+(?<!\/\w+)$/,
+            method: 'xhr',
+            nextURL: '?page=',
+            urlHelper: 0,
+            desktop: {
+                pagination: '.paging',
+                totalPages: '.second-paging',
+                content: '#contentx',
+            },
+            mobile: {
+                pagination: '.pagingxm',
+                totalPages: '.halnext',
+                content: '.description',
+            },
+        },
+        {
+            id: 'republika',
+            description: 'republika.co.id',
+            hostname: /(^|\.)republika\.co\.id$/,
+            path: /^\/berita\/.+(?<!\/\w+)$/,
+            method: 'xhr',
+            nextURL: '-part',
+            urlHelper: 1,
+            desktop: {
+                pagination: '.pagination',
+                totalPages: 'li:nth-last-of-type(2) a',
+                content: '.artikel',
+            },
+            mobile: {
+                pagination: '.pagination',
+                totalPages: 'li:nth-last-of-type(2) a',
+                content: 'article',
+            },
+        },
+        {
+            id: 'tempo',
+            description: 'tempo.co',
+            hostname: /(^|\.)tempo\.co$/,
+            path: /^\/read\/.+(?<!\/\w+)$/,
+            method: 'xhr',
+            nextURL: '?page_num=',
+            urlHelper: 0,
+            desktop: {
+                pagination: '.pagging',
+                totalPages: 'li:nth-last-of-type(2) a',
+                content: '#isi',
+            },
+            mobile: {
+                pagination: '.pagging',
+                totalPages: 'li:nth-last-of-type(2) a',
+                content: '#isi',
+            },
+        },
+    ]
+
+    //******************************************************************************
+
+    const isValidURL = websites.find(urlChecker)
+    if (isValidURL !== undefined) urlRedirector(isValidURL)
+
+    function urlRedirector(site) {
+        const redirectURL = new URLBuilder().hostname(url.hostname())
+
+        switch (site.method) {
+            case 'param' :
+                if (site.id === 'cnbc') {
+                    const newPath = url.path().replace(/\/\d+$/, '')
+                    redirectURL.path(...splitPath(newPath))
+                } else {
+                    redirectURL.path(...splitPath(url.path()))
+                }
+                redirectURL.param(site.fullpage)
+                redirect(redirectURL.toString())
                 break
-            }
+            case 'path' :
+                inewsRedirect(redirectURL, site.fullpage)
+                break
+            case 'dom' :
+            case 'xhr' :
+                neutralizeURL(redirectURL, site.id)
+        }
+    }
+
+    function inewsRedirect(redirectURL, fullPage) {
+        const newPath = url.path().replace(/\/\d+$/, '')
+        redirectURL.path(...splitPath(newPath), fullPage)
+        redirect(redirectURL.toString())
+    }
+
+    function neutralizeURL(redirectURL, id) {
+        switch (id) {
+            case 'genpi' :
+            case 'idntimes' :
+            case 'jpnn' :
+            case 'okezone' :
+            case 'tempo' :
+                clearParamRedirect(redirectURL)
+                break
+            case 'cnn' :
+                cnnRedirect(redirectURL)
+                break
+            case 'republika' :
+                republikaRedirect(redirectURL)
+        }
+    }
+
+    function clearParamRedirect(redirectURL) {
+        if (url.param() !== '') {
+            redirectURL.path(...splitPath(url.path()))
+            redirect(redirectURL.toString())
+        }
+    }
+
+    function cnnRedirect(redirectURL) {
+        if (/\/\d+$/.test(url.path())) {
+            const newPath = url.path().replace(/\/\d+$/, '')
+            redirectURL.path(...splitPath(newPath))
+            redirect(redirectURL.toString())
+        }
+    }
+
+    function republikaRedirect(redirectURL) {
+        if (/-part\d+$/.test(url.path())) {
+            const newPath = url.path().replace(/-part\d+$/, '')
+            redirectURL.path(...splitPath(newPath))
+            redirect(redirectURL)
+        }
+    }
+
+    //******************************************************************************
+
+    window.addEventListener('DOMContentLoaded', async () => {
+        log('DOM telah selesai dimuat')
+        if (isValidURL.id === 'idntimes') {
+            idntimesDOM()
+        } else {
+            await generalDOM(isValidURL)
         }
     })
 
-    function prepareXhr(patternName) {
-        switch (patternName) {
-            case 'republika' :
-                republikaXhr()
-                break
-            case 'idntimes' :
-                idntimes()
-            /*case 'cnbc' :
-                cnbcXhr()
-                break
-            case 'jpnn' :
-                jpnnXhr()
-                break
-            case 'cd' :
-                cdXhr()
-                break
-            case 'okezone' :
-                okezoneXhr()*/
+    const isMobile = /(^|\.)m\./.test(url.hostname()) || window.navigator.userAgent.includes('Mobi')
+    const isDesktop = !isMobile
+
+    function idntimesDOM() {
+        const readMoreButton = document.querySelector('.read-more-btn-check')
+        const splitPage = document.getElementsByClassName('split-page')
+
+        if (readMoreButton !== null) {
+            readMoreButton.remove()
+            for (let i = 1; i < splitPage.length; i++) {
+                splitPage[i].classList.add('open')
+            }
         }
     }
 
-    function findPagination(className) {
-        const paging = document.getElementsByClassName(className)[0]
-        if (!paging) console.log(log, 'Pagination is not found')
-        return paging
+    async function generalDOM(website) {
+        const selector = isMobile ? website.mobile : website.desktop
+        const totalPages = findTotalPages(selector.pagination, selector.totalPages)
+        if (totalPages === 1) return
+        const mainPageNode = document.querySelector(selector.content)
+        cleaner(website.id, mainPageNode, 1)
+
+        for (let i = 2; i <= totalPages; i++) {
+            let nextPageUrl = url.href() + website.nextURL + (i - website.urlHelper)
+            let nextPageNode = await getNextPage(nextPageUrl, i, selector.content)
+            if (nextPageNode === null) return
+            cleaner(website.id, nextPageNode, i, selector.pagination)
+            let divider = pageDivider(i, totalPages)
+            mainPageNode.append(divider, ...nextPageNode.children)
+            log('Menambahkan halaman ke ' + i)
+        }
     }
 
-    function createXhr(url, i, find) {
-        console.log(log, `Creating XHR request for page ${i + 1}`)
+    function findTotalPages(paginationSelector, totalPagesSelector) {
+        let pagination, totalPages
+        try {
+            pagination = document.querySelector(paginationSelector)
+            totalPages = pagination.querySelector(totalPagesSelector)
+                .textContent
+                .match(/\d+/)
+        } catch (e) {
+            totalPages = 1
+            log(e)
+        } finally {
+            if (totalPages > 1) {
+                pagination.style.display = 'none'
+                log('Pagination ditemukan, halaman berjumlah ' + totalPages)
+            } else {
+                totalPages = 1
+                log('Pagination tidak ditemukan')
+            }
+        }
+        return totalPages
+    }
+
+    function getNextPage(url, pageNumber, target) {
+        log('Bersiap membuat XHR')
         return new Promise((resolve, reject) => {
             GM_xmlhttpRequest({
                 method: 'GET',
@@ -174,128 +544,100 @@
                 responseType: 'document',
                 binary: false,
                 timeout: 0,
-                withCredentials: true,
-                onerror: () => {
-                    reject(console.log(log, 'Failed to create XHR request'))
+                headers: {
+                    'user-agent': window.navigator.userAgent,
                 },
-                onload: async (res) => {
-                    let text
-                    const hostname = window.location.hostname
-
-                    if (hostname.includes('jpnn.com') || hostname.includes('creativedisc.com')) {
-                        text = res.response.querySelector(find)
+                onerror: function () {
+                    alert('[AutoAllPage] Tidak bisa membuka halaman ke ' + pageNumber)
+                    log('Gagal membuat request XHR')
+                    reject(null)
+                },
+                onload: function (res) {
+                    const content = res.response.querySelector(target)
+                    if (content != null) {
+                        log('Berhasil mendapatkan halaman ke ' + pageNumber)
+                        resolve(content)
                     } else {
-                        text = res.response.getElementsByClassName(find)[0]
-                    }
-
-                    if (text) {
-                        console.log(log, `Success get text of page ${i + 1} from XHR`)
-                        if (hostname.includes('okezone.com')) {
-                            mainPage.after(text)
-                        } else {
-                            mainPage.appendChild(text)
-                        }
-                        resolve(console.log(log, `Append page ${i + 1} to main page`))
-                    } else {
-                        reject(console.log(log, 'Failed to get text XHR'))
+                        alert('[AutoAllPage] Gagal mendapatkan halaman ke ' + pageNumber)
+                        log('Gagal mendapatkan halaman ke ' + pageNumber)
+                        reject(null)
                     }
                 },
             })
         })
     }
 
-    async function cnbcXhr() {
-        const pagination = findPagination('paging-circle')
-        if (!pagination) return
+    //******************************************************************************
 
-        const pagingParent = pagination.parentNode
-        pagingParent.style.display = 'none'
-        pagingParent.previousElementSibling.style.display = 'none'
-        mainPage = document.getElementsByClassName('detail_text')[0].parentNode
-
-        for (let i = 1; i < pagination.childElementCount; i++) {
-            let href = pagination.children[i].getAttribute('href')
-            await createXhr(href, i, 'detail_text')
+    function cleaner(id, pageNode, pageNumber, pagination) {
+        switch (id) {
+            case 'cnn' :
+                cnnCleaner(pageNode, pageNumber, pagination)
+                break
+            case 'genpi' :
+                genpiCleaner(pageNode, pageNumber, pagination)
+                break
+            case 'okezone' :
+                okezoneCleaner(pageNode, pageNumber)
+                break
+            case 'republika' :
+                republikaCleaner(pageNode, pageNumber, pagination)
+                break
+            case 'tempo' :
+                tempoCleaner(pageNode, pageNumber, pagination)
         }
     }
 
-    async function republikaXhr() {
-        const pagination = findPagination('pagination')
-        if (!pagination) return
-
-        const pageChildren = pagination.getElementsByTagName('a')
-        mainPage = document.getElementsByClassName('teaser_detail')[0]
-        pagination.style.display = 'none'
-
-        for (let i = 1; i < pageChildren.length - 1; i++) {
-            let href = pageChildren[i].getAttribute('href')
-            await createXhr(href, i, 'artikel')
+    function cnnCleaner(pageNode, pageNumber, pagination) {
+        if (isDesktop) {
+            if (pageNumber === 1) {
+                document.querySelector('.styled-select')?.remove()
+                document.querySelector('.skybanner')?.remove()
+                pageNode.parentNode.style.display = 'block'
+            }
+        } else {
+            if (pageNumber === 1) {
+                pageNode.querySelector('select[name="page"]')?.parentElement.remove()
+            } else {
+                const headerArticle = pageNode.querySelector('.picdetail')
+                while (pageNode.contains(headerArticle)) {
+                    pageNode.firstElementChild.remove()
+                }
+            }
         }
-
-        const bacaJuga = document.getElementsByClassName('baca-juga')
-        for (let i = 0; i < bacaJuga.length; i++) {
-            bacaJuga[i].remove()
-            i--
-        }
+        pageNode.querySelector('.nav_article_long')?.remove()
+        pageNode.querySelector(pagination)?.remove()
+        log('Membersihkan halaman ke ' + pageNumber)
     }
 
-    async function jpnnXhr() {
-        const pagination = findPagination('pagination')
-        if (!pagination) return
-
-        const pageChildren = pagination.getElementsByTagName('a')
-        mainPage = document.querySelector('[itemprop=articleBody]')
-        pagination.style.display = 'none'
-
-        for (let i = 1; i < pageChildren.length - 1; i++) {
-            let href = pageChildren[i].getAttribute('href')
-            await createXhr(href, i, '[itemprop=articleBody]')
-        }
+    function genpiCleaner(pageNode, pageNumber, pagination) {
+        if (isDesktop && pageNumber > 1) pageNode.querySelector('.entry-thumb')?.remove()
+        const footer = pageNode.querySelector(pagination)
+        footer?.nextElementSibling.remove()
+        footer?.remove()
+        log('Membersihkan halaman ke ' + pageNumber)
     }
 
-    async function cdXhr() {
-        const pagination = findPagination('post-nav-links')
-        if (!pagination) return
-
-        const pageChildren = pagination.getElementsByTagName('a')
-        mainPage = document.querySelector('[itemprop=articleBody]').parentNode
-        pagination.style.display = 'none'
-
-        for (let i = 0; i < pageChildren.length; i++) {
-            let href = pageChildren[i].getAttribute('href')
-            await createXhr(href, i + 1, '[itemprop=articleBody]')
+    function okezoneCleaner(pageNode, pageNumber) {
+        const footerArticle = pageNode.querySelector('#rctiplus')?.previousElementSibling
+        while (pageNode.contains(footerArticle)) {
+            pageNode.lastElementChild.remove()
         }
+        log('Membersihkan halaman ke ' + pageNumber)
     }
 
-    async function okezoneXhr() {
-        const pagination = document.getElementsByClassName('paging')
-        if (!pagination.length) {
-            console.log(log, 'Pagination is not found')
-            return
+    function republikaCleaner(pageNode, pageNumber, pagination) {
+        if (isDesktop) {
+            if (pageNumber > 1) pageNode.querySelector('.taiching')?.remove()
+            pageNode.querySelector('.baca-juga')?.remove()
+        } else {
+            pageNode.querySelector(pagination)?.remove()
         }
-
-        const pageChildren = pagination[0].getElementsByTagName('a')[0]
-        const href = pageChildren.getAttribute('href')
-        mainPage = document.getElementsByClassName('read')[0]
-
-        if (href === '#') return
-
-        await createXhr(href, 1, 'read')
-
-        const detailTag = document.getElementsByClassName('detail-tag')
-        for (let i = 0; i < pagination.length; i++) {
-            pagination[i].style.display = 'none'
-            detailTag[i].style.display = 'none'
-        }
+        log('Membersihkan halaman ke ' + pageNumber)
     }
 
-    function idntimes() {
-        const readMoreButton = document.getElementsByClassName('read-more-btn-check')[0]
-        const splitPage = document.getElementsByClassName('split-page')
-
-        readMoreButton.remove()
-        for (let i = 1; i < splitPage.length; i++) {
-            splitPage[i].classList.add('open')
-        }
+    function tempoCleaner(pageNode, pageNumber, pagination) {
+        pageNode.querySelector(pagination)?.remove()
+        log('Membersihkan halaman ke ' + pageNumber)
     }
 })()
