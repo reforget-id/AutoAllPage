@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       2.0.0
+// @version       2.1.0
 // @author        reforget-id
 // @namespace     autoallpage
 // @description   Otomatis menampilkan semua halaman artikel berita dalam 1 halaman
@@ -165,6 +165,14 @@
             path: /\/\d+-\d+-\d+\/.+(\/\d+|(?<!\/\w+))$/,
             method: 'param',
             fullpage: 'page=all',
+        },
+        {
+            id: 'detik',
+            description: 'detik.com',
+            hostname: /(^|\.)detik\.com$/,
+            path: /\/d-\d+\/.+(\/\d+|(?<!\/\w+))$/,
+            method: 'param',
+            fullpage: 'single=1',
         },
         {
             id: 'grid',
@@ -404,7 +412,7 @@
 
         switch (site.method) {
             case 'param' :
-                if (site.id === 'cnbc') {
+                if (site.id === 'cnbc' || site.id === 'detik') {
                     const newPath = url.path().replace(/\/\d+$/, '')
                     redirectURL.path(...splitPath(newPath))
                 } else {
@@ -472,15 +480,23 @@
 
     window.addEventListener('DOMContentLoaded', async () => {
         log('DOM telah selesai dimuat')
-        if (isValidURL.id === 'idntimes') {
-            idntimesDOM()
-        } else {
-            await generalDOM(isValidURL)
+        switch (isValidURL.method) {
+            case 'dom' :
+                generalDOM(isValidURL)
+                break
+            case 'xhr' :
+                await generalXHR(isValidURL)
         }
     })
 
     const isMobile = /(^|\.)m\./.test(url.hostname()) || window.navigator.userAgent.includes('Mobi')
     const isDesktop = !isMobile
+
+    function generalDOM(website) {
+        if (website.id === 'idntimes') {
+            idntimesDOM()
+        }
+    }
 
     function idntimesDOM() {
         const readMoreButton = document.querySelector('.read-more-btn-check')
@@ -494,7 +510,7 @@
         }
     }
 
-    async function generalDOM(website) {
+    async function generalXHR(website) {
         const selector = isMobile ? website.mobile : website.desktop
         const totalPages = findTotalPages(selector.pagination, selector.totalPages)
         if (totalPages === 1) return

@@ -1,4 +1,4 @@
-#### Akurat.co
+### Akurat.co
 Kata kunci : `/{judul_artikel}`  
 Metode : `parameter`  
 Parameter : `page=all`  
@@ -22,15 +22,13 @@ Metode : `XHR`
 * `https://www.cnnindonesia.com/internasional/20220923001754-134-851515/7-pasukan-legendaris-di-dunia-selain-gurkha`  
 * `https://www.cnnindonesia.com/internasional/20220920185933-120-850441/5-kawasan-proyek-gila-pangeran-mbs-di-saudi-1-lokasi-dihindari-nabi`  
 
-### Detik.com  
-> _Saat ini tidak menggunakan pagination lagi._  
-
+### Detik.com
 Kata kunci : `/d-{kode_artikel}/`  
 Metode : `parameter`  
 Parameter : `single=1`  
 
-* `https://news.detik.com/berita/d-6295009/jawaban-risma-balas-sindiran-keras-ahy-soal-blt-dulu-dihina-hina`  
-* `https://sport.detik.com/sepakbola/liga-indonesia/d-6296169/timnas-indonesia-u-20-ungguli-hong-kong-3-0-di-babak-pertama`  
+* `https://news.detik.com/berita/d-5238254/cerita-di-balik-muhammad-rocky-gerung-yang-viral`  
+* `https://news.detik.com/berita/d-6497997/berakhirnya-sebuah-era-kilas-balik-wafatnya-ratu-elizabeth-ii`  
 
 ### Genpi.co
 Kata kunci : `/{kode_artikel}/`  
