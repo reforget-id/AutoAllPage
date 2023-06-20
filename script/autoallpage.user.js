@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       2.1.0
+// @version       2.1.1
 // @author        reforget-id
 // @namespace     autoallpage
 // @description   Otomatis menampilkan semua halaman artikel berita dalam 1 halaman
@@ -28,7 +28,8 @@
 // @exclude       https://*/*&amp*
 // @exclude       https://*/*&amp=1*
 // @include       https://*.100kpj.com/*/*
-// @include       https://*.aboutmalang.com/*/pr-*/*
+// @include       https://*.aboutmalang.com/*/*/*
+// @include       https://*.ayocirebon.com/*/*/*
 // @include       https://akurat.co/*
 // @include       https://*.bolasport.com/read/*
 // @include       https://*.cnbcindonesia.com/*/*/*
@@ -38,10 +39,12 @@
 // @include       https://*.grid.id/read/*
 // @include       https://*.gridoto.com/read/*
 // @include       https://herstory.co.id/read*
+// @include       https://*.hops.id/*/*/*
 // @include       https://*.idntimes.com/*/*/*/*
 // @include       https://*.idxchannel.com/*/*
 // @include       https://*.inews.id/*/*
 // @include       https://*.intipseleb.com/*/*
+// @include       https://*.jatimnetwork.com/*/*/*
 // @include       https://*.jpnn.com/*/*
 // @include       https://*.kompas.com/read/*
 // @include       https://*.kompas.com/*/read/*
@@ -60,6 +63,7 @@
 // @include       https://*.tempo.co/read/*
 // @include       https://*.tribunnews.com/*/*/*/*
 // @include       https://*.tvonenews.com/*/*
+// @include       https://*.unews.id/*/*/*
 // @include       https://*.viva.co.id/*/*
 // @include       https://wartaekonomi.co.id/read*
 // ==/UserScript==
@@ -240,9 +244,17 @@
         },
         {
             id: 'pr',
-            description: 'pikiran-rakyat.com, aboutmalang.com',
-            hostname: /(^|\.)(pikiran-rakyat|aboutmalang)\.com$/,
+            description: 'pikiran-rakyat.com',
+            hostname: /(^|\.)pikiran-rakyat\.com$/,
             path: /\/pr-\d+\/.+(?<!\/\w+)$/,
+            method: 'param',
+            fullpage: 'page=all',
+        },
+        {
+            id: 'promedia',
+            description: 'aboutmalang.com, ayocirebon.com, jatimnetwork.com, hops.id, unews.id',
+            hostname: /(^|\.)((aboutmalang|ayocirebon|jatimnetwork)\.com|(hops|unews)\.id)$/,
+            path: /\/(pr-|)\d+\/.+(?<!\/\w+)$/,
             method: 'param',
             fullpage: 'page=all',
         },
