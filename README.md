@@ -41,6 +41,7 @@ atau [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
     <ul>
         <li>100kpj.com</li>
         <li>aboutmalang.com</li>
+        <li>ayocirebon.com</li>
         <li>akurat.co</li>
         <li>bolasport.com</li>
         <li>cnbcindonesia.com</li>
@@ -50,10 +51,12 @@ atau [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
         <li>grid.id</li>
         <li>gridoto.com</li>
         <li>herstory.co.id</li>
+        <li>hops.id</li>
         <li>idntimes.com</li>
         <li>idxchannel.com</li>
         <li>inews.id</li>
         <li>intipseleb.com</li>
+        <li>jatimnetwork.com</li>
         <li>jpnn.com</li>
         <li>kompas.com</li>
         <li>kompas.tv</li>
@@ -69,6 +72,7 @@ atau [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
         <li>tempo.co</li>
         <li>tribunnews.com</li>
         <li>tvonenews.com</li>
+        <li>unews.id</li>
         <li>viva.co.id</li>
         <li>wartaekonomi.co.id</li>
     </ul>    

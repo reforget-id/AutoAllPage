@@ -3,7 +3,7 @@ Kata kunci : `/{judul_artikel}`
 Metode : `parameter`  
 Parameter : `page=all`  
 
-* https://akurat.co/4-fakta-menarik-abdulism-guru-bahasa-inggris-yang-aktif-mengajar-lewat-tiktok`  
+* https://akurat.co/4-fakta-menarik-abdulism-guru-bahasa-inggris-yang-aktif-mengajar-lewat-tiktok  
 * https://akurat.co/adb-sebut-tahun-depan-sektor-transportasi-bakal-jadi-soko-guru-pembangunan-indonesia
 
 ### Cnbcindonesia.com  
@@ -29,6 +29,14 @@ Parameter : `single=1`
 
 * https://news.detik.com/berita/d-5238254/cerita-di-balik-muhammad-rocky-gerung-yang-viral  
 * https://news.detik.com/berita/d-6497997/berakhirnya-sebuah-era-kilas-balik-wafatnya-ratu-elizabeth-ii  
+
+### Fortuneidn.com
+Kata kunci : `/{kategori}/{author}/{judul_artikel}/`  
+Metode : ``  
+Parameter : `page=all`
+
+* https://www.fortuneidn.com/news/desy/daftar-tunjangan-kinerja-pns-yang-naik-tahun-2023
+* https://www.fortuneidn.com/tech/suheriadi/bank-jago-masuk-3-besar-bank-terbaik-di-ri-ini-indikatornya  
 
 ### Genpi.co
 Kata kunci : `/{kode_artikel}/`  
