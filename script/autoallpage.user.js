@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       2.1.1
+// @version       2.2.0
 // @author        reforget-id
 // @namespace     autoallpage
 // @description   Otomatis menampilkan semua halaman artikel berita dalam 1 halaman
@@ -19,7 +19,7 @@
 // @exclude       https://*.inews.id/*/all
 // @exclude       https://*?page=all#page*
 // @exclude       https://*?page=all#sectionall
-// @exclude       /^https:\/\/(?!.+\.idntimes\.com).+\?page=all$/
+// @exclude       /^https:\/\/(?!.+\.(idntimes|fortuneidn|popbela)\.com).+\?page=all$/
 // @exclude       https://*/amp/*
 // @exclude       https://amp.*
 // @exclude       https://*/amp-*/*
@@ -35,6 +35,7 @@
 // @include       https://*.cnbcindonesia.com/*/*/*
 // @include       https://*.cnnindonesia.com/*/*/*
 // @include       https://*.detik.com/*/d-*/*
+// @include       https://*.fortuneidn.com/*
 // @include       https://*.genpi.co/*/*/*
 // @include       https://*.grid.id/read/*
 // @include       https://*.gridoto.com/read/*
@@ -54,6 +55,7 @@
 // @include       https://*.motorplus-online.com/read/*
 // @include       https://*.parapuan.co/read/*
 // @include       https://*.pikiran-rakyat.com/*/pr-*/*
+// @include       https://*.popbela.com/*
 // @include       https://*.republika.co.id/berita/*
 // @include       https://republika.co.id/berita/*
 // @include       https://*.sahijab.com/*/*
@@ -134,8 +136,12 @@
         window.location.replace(url)
     }
 
-    function urlChecker(site) {
-        return site.hostname.test(url.hostname()) && site.path.test(url.path())
+    function hostnameChecker(website) {
+        return website.hostname.test(url.hostname())
+    }
+
+    function urlChecker(website) {
+        return hostnameChecker(website) && website.path.test(url.path())
     }
 
     function log(message) {
@@ -151,15 +157,46 @@
         return divider.body.firstElementChild
     }
 
+    // https://stackoverflow.com/a/52809105
+    function watchURL(website) {
+        let oldPushState = history.pushState
+        history.pushState = function pushState() {
+            let ret = oldPushState.apply(this, arguments)
+            window.dispatchEvent(new Event('pushstate'))
+            window.dispatchEvent(new Event('locationchange'))
+            return ret
+        }
+
+        let oldReplaceState = history.replaceState
+        history.replaceState = function replaceState() {
+            let ret = oldReplaceState.apply(this, arguments)
+            window.dispatchEvent(new Event('replacestate'))
+            window.dispatchEvent(new Event('locationchange'))
+            return ret
+        }
+
+        window.addEventListener('popstate', () => {
+            window.dispatchEvent(new Event('locationchange'))
+        })
+
+        window.addEventListener('locationchange', () => {
+            if (urlChecker(website)) {
+                log(url.href())
+                redirect(url.href())
+            }
+        })
+    }
+
     //******************************************************************************
 
-    const websites = [
+    const websiteList = [
         {
             id: 'akurat',
             description: 'akurat.co',
             hostname: /(^|\.)akurat\.co$/,
             path: /^\/.+(?<!\/\w+)$/,
             method: 'param',
+            dynamic: false,
             fullpage: 'page=all',
         },
         {
@@ -168,6 +205,7 @@
             hostname: /(^|\.)cnbcindonesia\.com$/,
             path: /\/\d+-\d+-\d+\/.+(\/\d+|(?<!\/\w+))$/,
             method: 'param',
+            dynamic: false,
             fullpage: 'page=all',
         },
         {
@@ -176,7 +214,17 @@
             hostname: /(^|\.)detik\.com$/,
             path: /\/d-\d+\/.+(\/\d+|(?<!\/\w+))$/,
             method: 'param',
+            dynamic: false,
             fullpage: 'single=1',
+        },
+        {
+            id: 'fortuneidn',
+            description: 'fortuneidn.com',
+            hostname: /(^|\.)fortuneidn\.com$/,
+            path: /\/[\w-]+\/[\w-]+\/.+(?<!\/\w+)$/,
+            method: 'param',
+            dynamic: true,
+            fullpage: 'page=all',
         },
         {
             id: 'grid',
@@ -184,14 +232,16 @@
             hostname: /(^|\.)(parapuan\.co|(grid|sonora)\.id|(bolasport|gridoto|motorplus-online)\.com)$/,
             path: /^\/read\/.+(?<!\/\w+)$/,
             method: 'param',
+            dynamic: false,
             fullpage: 'page=all',
         },
         {
             id: 'idntimes',
             description: 'idntimes.com',
             hostname: /(^|\.)idntimes\.com$/,
-            path: /\/[\w-]+\/[\w-]+\/.+\/.+(?<!\/\w+)$/,
+            path: /\/[\w-]+\/[\w-]+\/[\w-]+\/.+(?<!\/\w+)$/,
             method: 'dom',
+            dynamic: false,
             pagination: 'page=all',
         },
         {
@@ -200,6 +250,7 @@
             hostname: /(^|\.)idxchannel\.com$/,
             path: /\/.+\/.+(\/\d+|(?<!\/\w+))$/,
             method: 'path',
+            dynamic: false,
             fullpage: 'all',
         },
         {
@@ -208,6 +259,7 @@
             hostname: /(^|\.)inews\.id$/,
             path: /\/(berita|read\/\d+|[a-z-]+\/[a-z-]+)\/.+(\/\d+|(?<!\/\w+))$/,
             method: 'path',
+            dynamic: false,
             fullpage: 'all',
         },
         {
@@ -216,6 +268,7 @@
             hostname: /(^|\.)kompas\.com$/,
             path: /\/read\/.+(?<!\/\w+)$/,
             method: 'param',
+            dynamic: false,
             fullpage: 'page=all',
         },
         {
@@ -224,6 +277,7 @@
             hostname: /(^|\.)kompasiana\.com$/,
             path: /\/.+(?<!series)\/\w{24}\/.+(?<!\/\w+)$/,
             method: 'param',
+            dynamic: false,
             fullpage: 'page=all',
         },
         {
@@ -232,6 +286,7 @@
             hostname: /(^|\.)kompas\.tv$/,
             path: /^\/article\/\d+\/.+(?<!\/\w+)$/,
             method: 'param',
+            dynamic: false,
             fullpage: 'page=all',
         },
         {
@@ -240,6 +295,16 @@
             hostname: /(^|\.)kontan\.co\.id$/,
             path: /^\/news\/.+(?<!\/\w+)$/,
             method: 'param',
+            dynamic: false,
+            fullpage: 'page=all',
+        },
+        {
+            id: 'popbela',
+            description: 'popbela.com',
+            hostname: /(^|\.)popbela\.com$/,
+            path: /\/[\w-]+\/[\w-]+\/[\w-]+\/.+(?<!\/\w+)$/,
+            method: 'param',
+            dynamic: true,
             fullpage: 'page=all',
         },
         {
@@ -248,6 +313,7 @@
             hostname: /(^|\.)pikiran-rakyat\.com$/,
             path: /\/pr-\d+\/.+(?<!\/\w+)$/,
             method: 'param',
+            dynamic: false,
             fullpage: 'page=all',
         },
         {
@@ -256,6 +322,7 @@
             hostname: /(^|\.)((aboutmalang|ayocirebon|jatimnetwork)\.com|(hops|unews)\.id)$/,
             path: /\/(pr-|)\d+\/.+(?<!\/\w+)$/,
             method: 'param',
+            dynamic: false,
             fullpage: 'page=all',
         },
         {
@@ -264,6 +331,7 @@
             hostname: /(^|\.)sindonews\.com$/,
             path: /^\/read\/\d+\/\d+\/.+(\/\d+0|(?<!\/\w+))$/,
             method: 'param',
+            dynamic: false,
             fullpage: 'showpage=all',
         },
         {
@@ -272,6 +340,7 @@
             hostname: /(^|\.)suara\.com$/,
             path: /\/\d{4}\/\d{2}\/\d{2}\/\d+\/.+(?<!\/\w+)$/,
             method: 'param',
+            dynamic: false,
             fullpage: 'page=all',
         },
         {
@@ -280,6 +349,7 @@
             hostname: /(^|\.)tribunnews\.com$/,
             path: /\/\d{4}\/\d{2}\/\d{2}\/.+(?<!\/\w+)$/,
             method: 'param',
+            dynamic: false,
             fullpage: 'page=all',
         },
         {
@@ -288,6 +358,7 @@
             hostname: /(^|\.)(viva\.co\.id|(tvonenews|intipseleb|sahijab|100kpj)\.com)$/,
             path: /\/.+\/\d+-.+(?<!\/\w+)$/,
             method: 'param',
+            dynamic: false,
             fullpage: 'page=all',
         },
         {
@@ -296,6 +367,7 @@
             hostname: /(^|\.)(wartaekonomi|herstory)\.co\.id$/,
             path: /^\/read\d+\/.+(?<!\/\w+)$/,
             method: 'param',
+            dynamic: false,
             fullpage: 'page=all',
         },
         {
@@ -304,6 +376,7 @@
             hostname: /(^|\.)cnnindonesia\.com$/,
             path: /\/\d+-\d+-\d+\/.+(\/\d+|(?<!\/\w+))$/,
             method: 'xhr',
+            dynamic: false,
             nextURL: '/',
             urlHelper: 0,
             desktop: {
@@ -323,6 +396,7 @@
             hostname: /(^|\.)genpi\.co$/,
             path: /\/\d+\/.+(?<!\/\w+)$/,
             method: 'xhr',
+            dynamic: false,
             nextURL: '?page=',
             urlHelper: 0,
             desktop: {
@@ -342,6 +416,7 @@
             hostname: /(^|\.)jpnn\.com$/,
             path: /\/(news|[a-z-]+\/\d+)\/.+(?<!\/\w+)$/,
             method: 'xhr',
+            dynamic: false,
             nextURL: '?page=',
             urlHelper: 0,
             desktop: {
@@ -361,6 +436,7 @@
             hostname: /(^|\.)okezone\.com$/,
             path: /^\/read\/.+(?<!\/\w+)$/,
             method: 'xhr',
+            dynamic: false,
             nextURL: '?page=',
             urlHelper: 0,
             desktop: {
@@ -380,6 +456,7 @@
             hostname: /(^|\.)republika\.co\.id$/,
             path: /^\/berita\/.+(?<!\/\w+)$/,
             method: 'xhr',
+            dynamic: false,
             nextURL: '-part',
             urlHelper: 1,
             desktop: {
@@ -399,6 +476,7 @@
             hostname: /(^|\.)tempo\.co$/,
             path: /^\/read\/.+(?<!\/\w+)$/,
             method: 'xhr',
+            dynamic: false,
             nextURL: '?page_num=',
             urlHelper: 0,
             desktop: {
@@ -416,29 +494,29 @@
 
     //******************************************************************************
 
-    const isValidURL = websites.find(urlChecker)
+    const isValidURL = websiteList.find(urlChecker)
     if (isValidURL !== undefined) urlRedirector(isValidURL)
 
-    function urlRedirector(site) {
+    function urlRedirector(website) {
         const redirectURL = new URLBuilder().hostname(url.hostname())
-
-        switch (site.method) {
+        switch (website.method) {
             case 'param' :
-                if (site.id === 'cnbc' || site.id === 'detik') {
+                if (website.id === 'cnbc' || website.id === 'detik') {
                     const newPath = url.path().replace(/\/\d+$/, '')
                     redirectURL.path(...splitPath(newPath))
                 } else {
                     redirectURL.path(...splitPath(url.path()))
                 }
-                redirectURL.param(site.fullpage)
-                redirect(redirectURL.toString())
+                redirectURL.param(website.fullpage)
+                const newURL = redirectURL.toString()
+                if (url.href() !== newURL) redirect(newURL)
                 break
             case 'path' :
-                inewsRedirect(redirectURL, site.fullpage)
+                inewsRedirect(redirectURL, website.fullpage)
                 break
             case 'dom' :
             case 'xhr' :
-                neutralizeURL(redirectURL, site.id)
+                neutralizeURL(redirectURL, website.id)
         }
     }
 
@@ -492,12 +570,17 @@
 
     window.addEventListener('DOMContentLoaded', async () => {
         log('DOM telah selesai dimuat')
-        switch (isValidURL.method) {
-            case 'dom' :
-                generalDOM(isValidURL)
-                break
-            case 'xhr' :
-                await generalXHR(isValidURL)
+        const isValidHostname = websiteList.find(hostnameChecker)
+        if (isValidHostname.dynamic === true) watchURL(isValidHostname)
+        if (isValidURL !== undefined) {
+            switch (isValidURL.method) {
+                case 'dom':
+                    generalDOM(isValidURL)
+                    break
+                case 'xhr':
+                    await generalXHR(isValidURL)
+                    break
+            }
         }
     })
 
@@ -505,8 +588,10 @@
     const isDesktop = !isMobile
 
     function generalDOM(website) {
-        if (website.id === 'idntimes') {
-            idntimesDOM()
+        switch (website.id) {
+            case 'idntimes':
+                idntimesDOM()
+                break
         }
     }
 

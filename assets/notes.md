@@ -30,9 +30,17 @@ Parameter : `single=1`
 * https://news.detik.com/berita/d-5238254/cerita-di-balik-muhammad-rocky-gerung-yang-viral  
 * https://news.detik.com/berita/d-6497997/berakhirnya-sebuah-era-kilas-balik-wafatnya-ratu-elizabeth-ii  
 
+### Disway.id
+Kata kunci : `/read/{kode_artikel}/`  
+Metode : `XHR`
+
+* https://disway.id/read/707432/7-rekomendasi-obat-herbal-untuk-diabetes-mudah-ditemui-di-dapur-sendiri
+* https://bengkuluekspress.disway.id/read/149160/puasa-arafah-ikut-siapa-pemerintah-atau-arab-saudi-simak-penjelasan-ustadz-adi-hidayat
+
 ### Fortuneidn.com
 Kata kunci : `/{kategori}/{author}/{judul_artikel}/`  
-Metode : ``  
+Metode : `param`  
+Dinamis: `ya`  
 Parameter : `page=all`
 
 * https://www.fortuneidn.com/news/desy/daftar-tunjangan-kinerja-pns-yang-naik-tahun-2023
@@ -152,13 +160,21 @@ Metode : `XHR`
 * https://health.okezone.com/read/2022/12/21/483/2731765/4-obat-alami-rumahan-hilangkan-bekas-gigitan-nyamuk-gak-pakai-ribet  
 
 ### Pikiran-rakyat.com
-
 Kata kunci : `/pr-{kode_artikel}/`  
 Metode : `parameter`  
 Parameter : `page=all`  
 
 * https://www.pikiran-rakyat.com/internasional/pr-015517110/prediksi-nostradamus-indonesia-dan-australia-akan-berperang-di-tahun-2037  
 * https://bogor.pikiran-rakyat.com/esports/pr-085099961/transfer-kejutan-king-of-marksman-branz-gabung-evos-icon-siap-hadapi-turnamen-mdl-s6
+
+### Popbela.com
+Kata kunci : `/{kategori}/{subkategori}/{author}/{judul_artikel}/`  
+Metode : `param`  
+Dinamis: `true`  
+Parameter : `page=all`
+
+* https://www.popbela.com/relationship/dating/firly-fenti/cara-meluluhkan-hati-pria-cuek
+* https://www.popbela.com/career/working-life/niken-ari/sma-swasta-terbaik-di-indonesia-berdasarkan-rerata-nilai-utbk
 
 ### Promedia
 > _Untuk website di jaringan Promedia Teknologi Indonesia._  

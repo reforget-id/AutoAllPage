@@ -47,6 +47,7 @@ atau [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
         <li>cnbcindonesia.com</li>
         <li>cnnindonesia.com</li>
         <li>detik.com</li>
+        <li>fortuneidn.com</li>
         <li>genpi.co</li>
         <li>grid.id</li>
         <li>gridoto.com</li>
@@ -63,6 +64,7 @@ atau [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
         <li>kompasiana.com</li>
         <li>kontan.co.id</li>
         <li>motorplus-online.com</li>
+        <li>popbela.com</li>
         <li>pikiran-rakyat.com</li>
         <li>republika.co.id</li>
         <li>sahijab.com</li>
@@ -79,8 +81,7 @@ atau [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
 </details>
 
 **TODO :**
-
-* fortuneidn.com
+* disway.id
 * jabarekspres.com
 * mojok.co
 * okezone.com
