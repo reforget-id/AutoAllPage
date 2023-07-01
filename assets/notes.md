@@ -36,6 +36,7 @@ Metode : `XHR`
 
 * https://disway.id/read/707432/7-rekomendasi-obat-herbal-untuk-diabetes-mudah-ditemui-di-dapur-sendiri
 * https://bengkuluekspress.disway.id/read/149160/puasa-arafah-ikut-siapa-pemerintah-atau-arab-saudi-simak-penjelasan-ustadz-adi-hidayat
+* https://jateng.disway.id/read/658095/10-olahan-daging-khas-idhul-adha-ala-chef-renata-kamu-pasti-suka
 
 ### Fortuneidn.com
 Kata kunci : `/{kategori}/{author}/{judul_artikel}/`  
@@ -196,6 +197,7 @@ Metode : `XHR`
 
 * https://www.republika.co.id/berita/ri3bd7463/10-rahasia-hidup-sehat-ratu-elizabeth-ii  
 * https://www.republika.co.id/berita/rhqodr366/kisah-penguasa-takhta-ottoman-sultan-murad-v  
+* https://khazanah.republika.co.id/berita/ompfk3394/menakar-hukum-larangan-menshalati-jenazah-orang-munafik  
 
 ### Sindonews.com  
 Kata kunci : `/read/{kode_artikel}/{kode}/`  

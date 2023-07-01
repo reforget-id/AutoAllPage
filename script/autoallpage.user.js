@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       2.2.0
+// @version       2.2.1
 // @author        reforget-id
 // @namespace     autoallpage
 // @description   Otomatis menampilkan semua halaman artikel berita dalam 1 halaman
@@ -53,6 +53,7 @@
 // @include       https://*.kompasiana.com/*/*/*
 // @include       https://*.kontan.co.id/news/*
 // @include       https://*.motorplus-online.com/read/*
+// @include       https://*.okezone.com/read/*
 // @include       https://*.parapuan.co/read/*
 // @include       https://*.pikiran-rakyat.com/*/pr-*/*
 // @include       https://*.popbela.com/*
@@ -69,8 +70,6 @@
 // @include       https://*.viva.co.id/*/*
 // @include       https://wartaekonomi.co.id/read*
 // ==/UserScript==
-
-// https://*.okezone.com/read/*
 
 'use strict';
 
@@ -442,12 +441,12 @@
             desktop: {
                 pagination: '.paging',
                 totalPages: '.second-paging',
-                content: '#contentx',
+                content: '#contentx, #article-box',
             },
             mobile: {
                 pagination: '.pagingxm',
                 totalPages: '.halnext',
-                content: '.description',
+                content: '.read, #article-box',
             },
         },
         {
@@ -461,8 +460,8 @@
             urlHelper: 1,
             desktop: {
                 pagination: '.pagination',
-                totalPages: 'li:nth-last-of-type(2) a',
-                content: '.artikel',
+                totalPages: 'a:nth-last-of-type(2)',
+                content: 'article',
             },
             mobile: {
                 pagination: '.pagination',
@@ -650,7 +649,7 @@
     function getNextPage(url, pageNumber, target) {
         log('Bersiap membuat XHR')
         return new Promise((resolve, reject) => {
-            GM_xmlhttpRequest({
+            const xhrParameter = {
                 method: 'GET',
                 url: url,
                 overrideMimeType: 'text/html; charset=UTF-8',
@@ -666,17 +665,23 @@
                     reject(null)
                 },
                 onload: function (res) {
-                    const content = res.response.querySelector(target)
-                    if (content != null) {
-                        log('Berhasil mendapatkan halaman ke ' + pageNumber)
-                        resolve(content)
+                    if (res.status === 429) {
+                        log('Retry page ' + pageNumber)
+                        setTimeout(() => GM_xmlhttpRequest(xhrParameter), 2000)
                     } else {
-                        alert('[AutoAllPage] Gagal mendapatkan halaman ke ' + pageNumber)
-                        log('Gagal mendapatkan halaman ke ' + pageNumber)
-                        reject(null)
+                        const content = res.response.querySelector(target)
+                        if (content != null) {
+                            log('Berhasil mendapatkan halaman ke ' + pageNumber)
+                            resolve(content)
+                        } else {
+                            alert('[AutoAllPage] Gagal mendapatkan halaman ke ' + pageNumber)
+                            log('Gagal mendapatkan halaman ke ' + pageNumber)
+                            reject(null)
+                        }
                     }
                 },
-            })
+            }
+            GM_xmlhttpRequest(xhrParameter)
         })
     }
 
@@ -732,20 +737,19 @@
     }
 
     function okezoneCleaner(pageNode, pageNumber) {
-        const footerArticle = pageNode.querySelector('#rctiplus')?.previousElementSibling
-        while (pageNode.contains(footerArticle)) {
-            pageNode.lastElementChild.remove()
+        let footerArticle = pageNode.querySelector('#rctiplus')
+        if (footerArticle === null) footerArticle = pageNode.querySelector('.box-gnews')
+        if (footerArticle !== null) {
+            while (pageNode.contains(footerArticle)) {
+                pageNode.lastElementChild.remove()
+            }
+            log('Membersihkan halaman ke ' + pageNumber)
         }
-        log('Membersihkan halaman ke ' + pageNumber)
     }
 
     function republikaCleaner(pageNode, pageNumber, pagination) {
-        if (isDesktop) {
-            if (pageNumber > 1) pageNode.querySelector('.taiching')?.remove()
-            pageNode.querySelector('.baca-juga')?.remove()
-        } else {
-            pageNode.querySelector(pagination)?.remove()
-        }
+        pageNode.querySelector('.baca-juga')?.remove()
+        pageNode.querySelector(pagination)?.remove()
         log('Membersihkan halaman ke ' + pageNumber)
     }
 
