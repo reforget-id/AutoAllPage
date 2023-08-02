@@ -39,6 +39,7 @@ atau [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
     <summary>Script ini dapat bekerja pada website (klik untuk melihat) :
 </summary>  
     <ul>
+        <li>20jam.com</li>
         <li>100kpj.com</li>
         <li>aboutmalang.com</li>
         <li>ayocirebon.com</li>
@@ -84,6 +85,7 @@ atau [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
 **TODO :**
 * disway.id
 * jabarekspres.com
+* merdeka.com
 * mojok.co
 
 ### Known Issues

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       2.2.1
+// @version       2.2.2
 // @author        reforget-id
 // @namespace     autoallpage
 // @description   Otomatis menampilkan semua halaman artikel berita dalam 1 halaman
@@ -27,6 +27,7 @@
 // @exclude       https://*?amp=1*
 // @exclude       https://*/*&amp*
 // @exclude       https://*/*&amp=1*
+// @include       https://*.20jam.com/*/*/*
 // @include       https://*.100kpj.com/*/*
 // @include       https://*.aboutmalang.com/*/*/*
 // @include       https://*.ayocirebon.com/*/*/*
@@ -298,6 +299,14 @@
             fullpage: 'page=all',
         },
         {
+            id: 'merdeka',
+            description: 'merdeka.com',
+            hostname: /(^|\.)merdeka\.com$/,
+            path: /^\/[\w-]+\/.+\.html(?<!\/\w+)$/,
+            method: 'dom',
+            dynamic: false,
+        },
+        {
             id: 'popbela',
             description: 'popbela.com',
             hostname: /(^|\.)popbela\.com$/,
@@ -317,8 +326,8 @@
         },
         {
             id: 'promedia',
-            description: 'aboutmalang.com, ayocirebon.com, jatimnetwork.com, hops.id, unews.id',
-            hostname: /(^|\.)((aboutmalang|ayocirebon|jatimnetwork)\.com|(hops|unews)\.id)$/,
+            description: '20jam.com, aboutmalang.com, ayocirebon.com, jatimnetwork.com, hops.id, unews.id',
+            hostname: /(^|\.)((20jam|aboutmalang|ayocirebon|jatimnetwork)\.com|(hops|unews)\.id)$/,
             path: /\/(pr-|)\d+\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
@@ -387,6 +396,26 @@
                 pagination: '.anchor_article_long',
                 totalPages: 'a:last-of-type',
                 content: '.detail_text',
+            },
+        },
+        {
+            id: 'disway',
+            description: 'disway.id',
+            hostname: /(^|\.)disway\.id$/,
+            path: /\/read\/\d+\/.+(\/\d+|(?<!\/\w+))$/,
+            method: 'xhr',
+            dynamic: false,
+            nextURL: '/',
+            urlHelper: -13,
+            desktop: {
+                pagination: '.pagination',
+                totalPages: 'li.active:nth-last-of-type(1), li:nth-last-of-type(2) a',
+                content: '.post',
+            },
+            mobile: {
+                pagination: '.pagination',
+                totalPages: 'li.active:nth-last-of-type(1), li:nth-last-of-type(2) a',
+                content: '.post',
             },
         },
         {
@@ -543,7 +572,7 @@
     }
 
     function clearParamRedirect(redirectURL) {
-        if (url.param() !== '') {
+        if (url.href().includes('?')) {
             redirectURL.path(...splitPath(url.path()))
             redirect(redirectURL.toString())
         }

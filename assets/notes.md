@@ -143,11 +143,10 @@ Parameter : `page=all`
 * https://www.matamata.com/kpop/2022/09/16/203914/sinopsis-casino-drama-korea-baru-choi-min-sik-dengan-son-suk-ku-dan-lee-dong-hwi
 
 ### Merdeka.com
-> _Saat ini tidak menggunakan pagination lagi._  
+> _Hanya artikel lama yang menggunakan pagination._  
 
 Kata kunci : `/{judul-artikel}.html`    
-Metode : `parameter`  
-Parameter : `page=all`  
+Metode : `dom`
 
 * https://www.merdeka.com/trending/7-cara-menghilangkan-kutu-kucing-yang-praktis-ampuh-dan-efektif-kln.html  
 * https://www.merdeka.com/trending/teks-narasi-adalah-peristiwa-yang-disusun-berdasar-waktu-pahami-ciri-dan-unsurnya-kln.html    
@@ -179,12 +178,13 @@ Parameter : `page=all`
 
 ### Promedia
 > _Untuk website di jaringan Promedia Teknologi Indonesia._  
-> _aboutmalang.com, ayocirebon.com, jatimnetwork.com, hops.id, unews.id_
+> _20jam.com, aboutmalang.com, ayocirebon.com, jatimnetwork.com, hops.id, unews.id_
 
 Kata kunci : `/pr-{kode_artikel}/` (old) | `/{kode_artikel}/`  
 Metode : `parameter`  
 Parameter : `page=all`
 
+* https://www.20jam.com/keuangan/4285470810/bni-mobile-error-304-penyebab-dan-cara-atasinya  
 * https://www.aboutmalang.com/nasional/1429182109/ini-dia-5-nama-desa-terunik-di-indonesia-ada-yang-namanya-desa-siluman
 * https://www.ayocirebon.com/khazanah/pr-946208593/bacaan-sholawat-fil-awwalin-mengawala-pagi-dengan-sholawat-dan-doa-pembuka-pintu-rezeki
 * https://www.jatimnetwork.com/nasional/439189062/188-km-dari-medan-kabupaten-kecil-ini-jadi-ibu-kota-provinsi-baru-usai-dilepas-sumatera-utara-namanya
