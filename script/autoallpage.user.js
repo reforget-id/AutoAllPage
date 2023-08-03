@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       2.2.2
+// @version       2.2.3
 // @author        reforget-id
 // @namespace     autoallpage
 // @description   Otomatis menampilkan semua halaman artikel berita dalam 1 halaman
@@ -53,6 +53,7 @@
 // @include       https://*.kompas.tv/article/*
 // @include       https://*.kompasiana.com/*/*/*
 // @include       https://*.kontan.co.id/news/*
+// @include       https://*.merdeka.com/*/*
 // @include       https://*.motorplus-online.com/read/*
 // @include       https://*.okezone.com/read/*
 // @include       https://*.parapuan.co/read/*
@@ -302,7 +303,7 @@
             id: 'merdeka',
             description: 'merdeka.com',
             hostname: /(^|\.)merdeka\.com$/,
-            path: /^\/[\w-]+\/.+\.html(?<!\/\w+)$/,
+            path: /\/[\w-]+\/.+\.html(?<!\/\w+)$/,
             method: 'dom',
             dynamic: false,
         },
@@ -559,6 +560,7 @@
             case 'genpi' :
             case 'idntimes' :
             case 'jpnn' :
+            case 'merdeka':
             case 'okezone' :
             case 'tempo' :
                 clearParamRedirect(redirectURL)
@@ -620,6 +622,9 @@
             case 'idntimes':
                 idntimesDOM()
                 break
+            case 'merdeka':
+                merdekaDOM()
+                break
         }
     }
 
@@ -633,6 +638,12 @@
                 splitPage[i].classList.add('open')
             }
         }
+    }
+
+    function merdekaDOM() {
+        const readMoreButton = document.querySelector('.btn--readarticle')
+        document.body.classList.remove('expand')
+        readMoreButton?.parentElement.classList.add('hidden')
     }
 
     async function generalXHR(website) {

@@ -64,6 +64,7 @@ atau [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
         <li>kompas.tv</li>
         <li>kompasiana.com</li>
         <li>kontan.co.id</li>
+        <li>merdeka.com</li>
         <li>motorplus-online.com</li>
         <li>okezone.com</li>
         <li>popbela.com</li>
@@ -85,7 +86,6 @@ atau [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
 **TODO :**
 * disway.id
 * jabarekspres.com
-* merdeka.com
 * mojok.co
 
 ### Known Issues
