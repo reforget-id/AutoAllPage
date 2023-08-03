@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       2.2.3
+// @version       2.2.4
 // @author        reforget-id
 // @namespace     autoallpage
 // @description   Otomatis menampilkan semua halaman artikel berita dalam 1 halaman
@@ -642,8 +642,18 @@
 
     function merdekaDOM() {
         const readMoreButton = document.querySelector('.btn--readarticle')
-        document.body.classList.remove('expand')
-        readMoreButton?.parentElement.classList.add('hidden')
+        if (readMoreButton != null) {
+            (function findExpand() {
+                setTimeout(() => {
+                    if (document.body.classList.contains('expand')) {
+                        document.body.classList.remove('expand')
+                        readMoreButton?.parentElement.classList.add('hidden')
+                    } else {
+                        findExpand()
+                    }
+                }, 1000)
+            })()
+        }
     }
 
     async function generalXHR(website) {
