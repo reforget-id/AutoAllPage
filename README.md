@@ -42,11 +42,14 @@ atau [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
         <li>20jam.com</li>
         <li>100kpj.com</li>
         <li>aboutmalang.com</li>
+        <li>antaranews.com</li>
         <li>ayocirebon.com</li>
+        <li>ayoindonesia.com</li>
         <li>akurat.co</li>
         <li>bolasport.com</li>
         <li>cnbcindonesia.com</li>
         <li>cnnindonesia.com</li>
+        <li>dagangberita.com</li>
         <li>detik.com</li>
         <li>fortuneidn.com</li>
         <li>genpi.co</li>
@@ -60,6 +63,7 @@ atau [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
         <li>intipseleb.com</li>
         <li>jatimnetwork.com</li>
         <li>jpnn.com</li>
+        <li>kilat.com</li>
         <li>kompas.com</li>
         <li>kompas.tv</li>
         <li>kompasiana.com</li>
@@ -67,6 +71,7 @@ atau [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
         <li>merdeka.com</li>
         <li>motorplus-online.com</li>
         <li>okezone.com</li>
+        <li>pojoksatu.id</li>
         <li>popbela.com</li>
         <li>pikiran-rakyat.com</li>
         <li>republika.co.id</li>
@@ -85,8 +90,10 @@ atau [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
 
 **TODO :**
 * disway.id
+* fajar.co.id
 * jabarekspres.com
 * mojok.co
+* theasianparent.com
 
 ### Known Issues
 

@@ -6,6 +6,14 @@ Parameter : `page=all`
 * https://akurat.co/4-fakta-menarik-abdulism-guru-bahasa-inggris-yang-aktif-mengajar-lewat-tiktok  
 * https://akurat.co/adb-sebut-tahun-depan-sektor-transportasi-bakal-jadi-soko-guru-pembangunan-indonesia
 
+### Antaranews.com
+Kata kunci : `/berita/{kode_artikel}`  
+Metode : `parameter`  
+Parameter : `page=all`
+
+* https://jabar.antaranews.com/berita/472419/pj-gubernur-berharap-jabar-bebas-rabies-pada-2024  
+* https://sumut.antaranews.com/berita/540975/kai-sumut-rebut-kembali-sembilan-aset-di-medan  
+
 ### Cnbcindonesia.com  
 Kata kunci : `/{kode_artikel}/`  
 Metode : `param`  
@@ -37,6 +45,14 @@ Metode : `XHR`
 * https://disway.id/read/707432/7-rekomendasi-obat-herbal-untuk-diabetes-mudah-ditemui-di-dapur-sendiri
 * https://bengkuluekspress.disway.id/read/149160/puasa-arafah-ikut-siapa-pemerintah-atau-arab-saudi-simak-penjelasan-ustadz-adi-hidayat
 * https://jateng.disway.id/read/658095/10-olahan-daging-khas-idhul-adha-ala-chef-renata-kamu-pasti-suka
+
+### Fajar.co.id
+Kata kunci : `/{tahun}/{bulan}/{tanggal}/`  
+Metode : `parameter`  
+Parameter : `page=all`
+
+* https://fajar.co.id/2023/08/20/dihujat-karena-tak-berani-ladeni-tantangan-adu-data-arya-sinulingga-ditawari-cukup-posting-pernyataan-saya-pejabat-tidak-becus/  
+* https://fajar.co.id/2023/10/07/ditemui-anies-jusuf-kalla-akui-bahas-pengaruh-besar-china-terhadap-ekonomi-ri/  
 
 ### Fortuneidn.com
 Kata kunci : `/{kategori}/{author}/{judul_artikel}/`  
@@ -178,7 +194,7 @@ Parameter : `page=all`
 
 ### Promedia
 > _Untuk website di jaringan Promedia Teknologi Indonesia._  
-> _20jam.com, aboutmalang.com, ayocirebon.com, jatimnetwork.com, hops.id, unews.id_
+> _20jam.com, aboutmalang.com, ayocirebon.com, dagangberita.com, jatimnetwork.com, kilat.com, hops.id, pojoksatu.id, unews.id_
 
 Kata kunci : `/pr-{kode_artikel}/` (old) | `/{kode_artikel}/`  
 Metode : `parameter`  
@@ -187,8 +203,12 @@ Parameter : `page=all`
 * https://www.20jam.com/keuangan/4285470810/bni-mobile-error-304-penyebab-dan-cara-atasinya  
 * https://www.aboutmalang.com/nasional/1429182109/ini-dia-5-nama-desa-terunik-di-indonesia-ada-yang-namanya-desa-siluman
 * https://www.ayocirebon.com/khazanah/pr-946208593/bacaan-sholawat-fil-awwalin-mengawala-pagi-dengan-sholawat-dan-doa-pembuka-pintu-rezeki
+* https://www.ayoindonesia.com/lifestyle/pr-012698918/apa-itu-shifting-reality-atau-shifting-realitas-mimpi-dan-bagaimana-caranya
+* https://www.dagangberita.com/ekbis/pr-2794953485/terungkap-apa-itu-others-landia-yang-digabung-menjadi-negara-kepulauan-otherslandia-punya-arti-lucu
+* https://tapanuli.kilat.com/hiburan/9908872751/streamer-anti-donasi-judi-online-berikut-profil-udil-surbakti-sang-kage-alter-ego  
 * https://www.jatimnetwork.com/nasional/439189062/188-km-dari-medan-kabupaten-kecil-ini-jadi-ibu-kota-provinsi-baru-usai-dilepas-sumatera-utara-namanya
 * https://www.hops.id/travel/2949209426/liburan-sekolah-mau-ke-luar-negeri-ini-4-destinasi-liburan-murah-untuk-keluarga
+* https://www.pojoksatu.id/edugov/1082446244/mekanisme-seleksi-pppk-guru-2023-berbeda-dari-tahun-sebelumnya-p2-dan-p3-wajib-cat  
 * https://www.unews.id/news/2889210930/daftar-nama-honorer-yang-lolos-verifikasi-bkn-badan-kepegawaian-negara-cek-disini  
 
 ### Republika.co.id

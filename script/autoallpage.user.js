@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       2.2.4
+// @version       2.2.5
 // @author        reforget-id
 // @namespace     autoallpage
 // @description   Otomatis menampilkan semua halaman artikel berita dalam 1 halaman
@@ -30,11 +30,14 @@
 // @include       https://*.20jam.com/*/*/*
 // @include       https://*.100kpj.com/*/*
 // @include       https://*.aboutmalang.com/*/*/*
-// @include       https://*.ayocirebon.com/*/*/*
 // @include       https://akurat.co/*
+// @include       https://*.antaranews.com/berita/*/*
+// @include       https://*.ayocirebon.com/*/*/*
+// @include       https://*.ayoindonesia.com/*/*/*
 // @include       https://*.bolasport.com/read/*
 // @include       https://*.cnbcindonesia.com/*/*/*
 // @include       https://*.cnnindonesia.com/*/*/*
+// @include       https://*.dagangberita.com/*/*/*
 // @include       https://*.detik.com/*/d-*/*
 // @include       https://*.fortuneidn.com/*
 // @include       https://*.genpi.co/*/*/*
@@ -48,6 +51,7 @@
 // @include       https://*.intipseleb.com/*/*
 // @include       https://*.jatimnetwork.com/*/*/*
 // @include       https://*.jpnn.com/*/*
+// @include       https://*.kilat.com/*/*/*
 // @include       https://*.kompas.com/read/*
 // @include       https://*.kompas.com/*/read/*
 // @include       https://*.kompas.tv/article/*
@@ -58,6 +62,7 @@
 // @include       https://*.okezone.com/read/*
 // @include       https://*.parapuan.co/read/*
 // @include       https://*.pikiran-rakyat.com/*/pr-*/*
+// @include       https://*.pojoksatu.id/*/*/*
 // @include       https://*.popbela.com/*
 // @include       https://*.republika.co.id/berita/*
 // @include       https://republika.co.id/berita/*
@@ -201,6 +206,15 @@
             fullpage: 'page=all',
         },
         {
+            id: 'antara',
+            description: 'antaranews.com',
+            hostname: /(^|\.)antaranews\.com$/,
+            path: /\/berita\/\d+\/.+(?<!\/\w+)$/,
+            method: 'param',
+            dynamic: false,
+            fullpage: 'page=all',
+        },
+        {
             id: 'cnbc',
             description: 'cnbcindonesia.com',
             hostname: /(^|\.)cnbcindonesia\.com$/,
@@ -217,6 +231,15 @@
             method: 'param',
             dynamic: false,
             fullpage: 'single=1',
+        },
+        {
+            id: 'fajar',
+            description: 'fajar.co.id',
+            hostname: /(^|\.)fajar\.co\.id$/,
+            path: /\/\d{4}\/\d{2}\/\d{2}\/.+(?<!\/\w+)$/,
+            method: 'param',
+            dynamic: false,
+            fullpage: 'page=all',
         },
         {
             id: 'fortuneidn',
@@ -328,7 +351,7 @@
         {
             id: 'promedia',
             description: '20jam.com, aboutmalang.com, ayocirebon.com, jatimnetwork.com, hops.id, unews.id',
-            hostname: /(^|\.)((20jam|aboutmalang|ayocirebon|jatimnetwork)\.com|(hops|unews)\.id)$/,
+            hostname: /(^|\.)((20jam|aboutmalang|ayocirebon|ayoindonesia|dagangberita|kilat|jatimnetwork)\.com|(hops|pojoksatu|unews)\.id)$/,
             path: /\/(pr-|)\d+\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
