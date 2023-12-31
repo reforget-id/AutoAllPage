@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       2.2.5
+// @version       2.2.6
 // @author        reforget-id
 // @namespace     autoallpage
 // @description   Otomatis menampilkan semua halaman artikel berita dalam 1 halaman
@@ -412,14 +412,14 @@
             nextURL: '/',
             urlHelper: 0,
             desktop: {
-                pagination: '.anchor_article_long',
+                pagination: '.mb-8 > .gap-2.text-base',
                 totalPages: 'a:last-of-type',
-                content: '.detail_text',
+                content: '.detail-text',
             },
             mobile: {
-                pagination: '.anchor_article_long',
+                pagination: '.mb-8 > .gap-2.text-base',
                 totalPages: 'a:last-of-type',
-                content: '.detail_text',
+                content: '.detail-text',
             },
         },
         {
@@ -684,7 +684,7 @@
         const totalPages = findTotalPages(selector.pagination, selector.totalPages)
         if (totalPages === 1) return
         const mainPageNode = document.querySelector(selector.content)
-        cleaner(website.id, mainPageNode, 1)
+        cleaner(website.id, mainPageNode, 1, selector.pagination)
 
         for (let i = 2; i <= totalPages; i++) {
             let nextPageUrl = url.href() + website.nextURL + (i - website.urlHelper)
@@ -709,7 +709,7 @@
             log(e)
         } finally {
             if (totalPages > 1) {
-                pagination.style.display = 'none'
+                //pagination.style.display = 'none'
                 log('Pagination ditemukan, halaman berjumlah ' + totalPages)
             } else {
                 totalPages = 1
@@ -780,24 +780,19 @@
     }
 
     function cnnCleaner(pageNode, pageNumber, pagination) {
-        if (isDesktop) {
-            if (pageNumber === 1) {
-                document.querySelector('.styled-select')?.remove()
-                document.querySelector('.skybanner')?.remove()
-                pageNode.parentNode.style.display = 'block'
-            }
-        } else {
-            if (pageNumber === 1) {
-                pageNode.querySelector('select[name="page"]')?.parentElement.remove()
-            } else {
-                const headerArticle = pageNode.querySelector('.picdetail')
-                while (pageNode.contains(headerArticle)) {
-                    pageNode.firstElementChild.remove()
-                }
+        if (pageNumber === 1) {
+            document.querySelector('select[name="multipage"]')?.parentElement.remove()
+            if (isDesktop) document.querySelector('.skybanner')?.remove()
+            if (isMobile) {
+                document.querySelector(pagination)?.parentElement.remove()
+                document.querySelector('.inline-block > a')?.parentElement.remove()
             }
         }
-        pageNode.querySelector('.nav_article_long')?.remove()
-        pageNode.querySelector(pagination)?.remove()
+
+        if (isDesktop) {
+            pageNode.querySelector('.inline-block > a[dtr-evt="halaman"]')?.remove()
+            pageNode.querySelector(pagination)?.parentElement.remove()
+        }
         log('Membersihkan halaman ke ' + pageNumber)
     }
 
