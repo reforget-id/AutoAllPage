@@ -71,6 +71,7 @@ atau [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
         <li>merdeka.com</li>
         <li>motorplus-online.com</li>
         <li>okezone.com</li>
+        <li>papanskor.com</li>
         <li>pojoksatu.id</li>
         <li>popbela.com</li>
         <li>pikiran-rakyat.com</li>
