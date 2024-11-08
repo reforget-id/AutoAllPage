@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       2.2.6
+// @version       2.2.7
 // @author        reforget-id
 // @namespace     autoallpage
 // @description   Otomatis menampilkan semua halaman artikel berita dalam 1 halaman
@@ -60,6 +60,7 @@
 // @include       https://*.merdeka.com/*/*
 // @include       https://*.motorplus-online.com/read/*
 // @include       https://*.okezone.com/read/*
+// @include       https://*.papanskor.com/*/*/*
 // @include       https://*.parapuan.co/read/*
 // @include       https://*.pikiran-rakyat.com/*/pr-*/*
 // @include       https://*.pojoksatu.id/*/*/*
@@ -351,7 +352,7 @@
         {
             id: 'promedia',
             description: '20jam.com, aboutmalang.com, ayocirebon.com, jatimnetwork.com, hops.id, unews.id',
-            hostname: /(^|\.)((20jam|aboutmalang|ayocirebon|ayoindonesia|dagangberita|kilat|jatimnetwork)\.com|(hops|pojoksatu|unews)\.id)$/,
+            hostname: /(^|\.)((20jam|aboutmalang|ayocirebon|ayoindonesia|dagangberita|kilat|jatimnetwork|papanskor)\.com|(hops|pojoksatu|unews)\.id)$/,
             path: /\/(pr-|)\d+\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,

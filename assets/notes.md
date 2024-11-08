@@ -206,8 +206,9 @@ Parameter : `page=all`
 * https://www.ayoindonesia.com/lifestyle/pr-012698918/apa-itu-shifting-reality-atau-shifting-realitas-mimpi-dan-bagaimana-caranya
 * https://www.dagangberita.com/ekbis/pr-2794953485/terungkap-apa-itu-others-landia-yang-digabung-menjadi-negara-kepulauan-otherslandia-punya-arti-lucu
 * https://tapanuli.kilat.com/hiburan/9908872751/streamer-anti-donasi-judi-online-berikut-profil-udil-surbakti-sang-kage-alter-ego  
-* https://www.jatimnetwork.com/nasional/439189062/188-km-dari-medan-kabupaten-kecil-ini-jadi-ibu-kota-provinsi-baru-usai-dilepas-sumatera-utara-namanya
-* https://www.hops.id/travel/2949209426/liburan-sekolah-mau-ke-luar-negeri-ini-4-destinasi-liburan-murah-untuk-keluarga
+* https://www.jatimnetwork.com/nasional/439189062/188-km-dari-medan-kabupaten-kecil-ini-jadi-ibu-kota-provinsi-baru-usai-dilepas-sumatera-utara-namanya  
+* https://www.hops.id/travel/2949209426/liburan-sekolah-mau-ke-luar-negeri-ini-4-destinasi-liburan-murah-untuk-keluarga  
+* https://www.papanskor.com/umpan-lambung/37312787546/mengapa-liga-conference-eropa-disebut-liga-melon-ternyata-begini-alasannya  
 * https://www.pojoksatu.id/edugov/1082446244/mekanisme-seleksi-pppk-guru-2023-berbeda-dari-tahun-sebelumnya-p2-dan-p3-wajib-cat  
 * https://www.unews.id/news/2889210930/daftar-nama-honorer-yang-lolos-verifikasi-bkn-badan-kepegawaian-negara-cek-disini  
 
