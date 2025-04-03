@@ -74,7 +74,7 @@ Metode : `XHR`
 
 ### Grid.id  
 > _Untuk website Grid dan jaringannya._  
-> _bolasport.com, grid.id, gridoto.com, motorplus-online.com, parapuan.co, sonora.id,_ 
+> _bolasport.com, grid.id, gridoto.com, motorplus-online.com, parapuan.co, sonora.id_ 
 
 Kata kunci : `/read/`  
 Metode : `parameter`  
@@ -88,11 +88,18 @@ Parameter : `page=all`
 * https://www.sonora.id/read/423484439/3-shio-yang-mudah-kaya-raya-dan-sulit-jatuh-miskin-memang-paling-spesial  
 
 ### Idntimes.com
+> _Untuk website idntimes dan jaringannya._  
+> _idntimes.com, popbela.com, popmama.com_
+
 Kata kunci : `/{kategori}/{subkategori}/{author}/{judul_artikel}/`  
-Metode : `DOM`  
+Metode : `param`  
+Dinamis: `false`  
+Parameter : `page=all`
 
 * https://www.idntimes.com/sport/soccer/satria-permana-2/pemilik-chelsea-kena-damprat-usai-pecat-thomas-tuchel  
-* https://www.idntimes.com/science/discovery/nena-zakiah-1/penyebab-wangi-parfum-ada-yang-tahan-lama-dan-tidak 
+* https://www.idntimes.com/science/discovery/nena-zakiah-1/penyebab-wangi-parfum-ada-yang-tahan-lama-dan-tidak  
+* https://www.popbela.com/career/working-life/niken-ari/sma-swasta-terbaik-di-indonesia-berdasarkan-rerata-nilai-utbk  
+* https://www.popmama.com/pregnancy/third-trimester/dwi-oktaviani/ide-nama-bayi-perempuan-berdasarkan-zodiak-sagitarius  
 
 ### Idxchannel.com
 Kata kunci : `/{kategori}/{judul_artikel}/`    
@@ -184,15 +191,6 @@ Parameter : `page=all`
 
 * https://www.pikiran-rakyat.com/internasional/pr-015517110/prediksi-nostradamus-indonesia-dan-australia-akan-berperang-di-tahun-2037  
 * https://bogor.pikiran-rakyat.com/esports/pr-085099961/transfer-kejutan-king-of-marksman-branz-gabung-evos-icon-siap-hadapi-turnamen-mdl-s6
-
-### Popbela.com
-Kata kunci : `/{kategori}/{subkategori}/{author}/{judul_artikel}/`  
-Metode : `param`  
-Dinamis: `false`  
-Parameter : `page=all`
-
-* https://www.popbela.com/relationship/dating/firly-fenti/cara-meluluhkan-hati-pria-cuek
-* https://www.popbela.com/career/working-life/niken-ari/sma-swasta-terbaik-di-indonesia-berdasarkan-rerata-nilai-utbk
 
 ### Promedia
 > _Untuk website di jaringan Promedia Teknologi Indonesia._  

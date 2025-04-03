@@ -61,7 +61,8 @@
 // @include       https://*.parapuan.co/read/*
 // @include       https://*.pikiran-rakyat.com/*/pr-*/*
 // @include       https://*.pojoksatu.id/*/*/*
-// @include       https://*.popbela.com/*
+// @include       https://*.popbela.com/*/*/*/*
+// @include       https://*.popmama.com/*/*/*/*
 // @include       https://*.republika.co.id/berita/*
 // @include       https://republika.co.id/berita/*
 // @include       https://*.sahijab.com/*/*
@@ -259,8 +260,8 @@
         },
         {
             id: 'idntimes',
-            description: 'idntimes.com',
-            hostname: /(^|\.)idntimes\.com$/,
+            description: 'idntimes.com, popbela.com, popmama.com',
+            hostname: /(^|\.)(idntimes|popbela|popmama)\.com$/,
             path: /\/[\w-]+\/[\w-]+\/[\w-]+\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
@@ -327,15 +328,6 @@
             path: /\/[\w-]+\/.+\.html(?<!\/\w+)$/,
             method: 'dom',
             dynamic: false
-        },
-        {
-            id: 'popbela',
-            description: 'popbela.com',
-            hostname: /(^|\.)popbela\.com$/,
-            path: /\/[\w-]+\/[\w-]+\/[\w-]+\/.+(?<!\/\w+)$/,
-            method: 'param',
-            dynamic: false,
-            fullpage: 'page=all'
         },
         {
             id: 'pr',
