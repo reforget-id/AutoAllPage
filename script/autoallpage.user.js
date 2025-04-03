@@ -19,7 +19,6 @@
 // @exclude       https://*.inews.id/*/all
 // @exclude       https://*?page=all#page*
 // @exclude       https://*?page=all#sectionall
-// @exclude       /^https:\/\/(?!.+\.(popbela)\.com).+\?page=all$/
 // @exclude       https://*/amp/*
 // @exclude       https://amp.*
 // @exclude       https://*/amp-*/*
@@ -335,7 +334,7 @@
             hostname: /(^|\.)popbela\.com$/,
             path: /\/[\w-]+\/[\w-]+\/[\w-]+\/.+(?<!\/\w+)$/,
             method: 'param',
-            dynamic: true,
+            dynamic: false,
             fullpage: 'page=all'
         },
         {

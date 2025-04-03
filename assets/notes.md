@@ -55,13 +55,15 @@ Parameter : `page=all`
 * https://fajar.co.id/2023/10/07/ditemui-anies-jusuf-kalla-akui-bahas-pengaruh-besar-china-terhadap-ekonomi-ri/  
 
 ### Fortuneidn.com
-Kata kunci : `/{kategori}/{author}/{judul_artikel}/`  
+> _Saat ini tidak menggunakan pagination._
+
+Kata kunci : `/{kategori}/{judul_artikel}/`  
 Metode : `param`  
-Dinamis: `tidak`  
+Dinamis: `false`  
 Parameter : `page=all`
 
-* https://www.fortuneidn.com/news/desy/daftar-tunjangan-kinerja-pns-yang-naik-tahun-2023
-* https://www.fortuneidn.com/tech/suheriadi/bank-jago-masuk-3-besar-bank-terbaik-di-ri-ini-indikatornya  
+* https://www.fortuneidn.com/news/daftar-tunjangan-kinerja-pns-yang-naik-tahun-2023-00-4vfn9-rlsq0h
+* https://www.fortuneidn.com/tech/bank-jago-masuk-3-besar-bank-terbaik-di-ri-ini-indikatornya-00-ccw2k-dr46y0  
 
 ### Genpi.co
 Kata kunci : `/{kode_artikel}/`  
@@ -159,7 +161,7 @@ Parameter : `page=all`
 * https://www.matamata.com/kpop/2022/09/16/203914/sinopsis-casino-drama-korea-baru-choi-min-sik-dengan-son-suk-ku-dan-lee-dong-hwi
 
 ### Merdeka.com
-> _Hanya artikel lama yang menggunakan pagination._  
+> _Saat ini tidak menggunakan pagination._  
 
 Kata kunci : `/{judul-artikel}.html`    
 Metode : `dom`
@@ -186,7 +188,7 @@ Parameter : `page=all`
 ### Popbela.com
 Kata kunci : `/{kategori}/{subkategori}/{author}/{judul_artikel}/`  
 Metode : `param`  
-Dinamis: `true`  
+Dinamis: `false`  
 Parameter : `page=all`
 
 * https://www.popbela.com/relationship/dating/firly-fenti/cara-meluluhkan-hati-pria-cuek
