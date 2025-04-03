@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       2.2.7
+// @version       2.2.8
 // @author        reforget-id
 // @namespace     autoallpage
 // @description   Otomatis menampilkan semua halaman artikel berita dalam 1 halaman
@@ -19,7 +19,7 @@
 // @exclude       https://*.inews.id/*/all
 // @exclude       https://*?page=all#page*
 // @exclude       https://*?page=all#sectionall
-// @exclude       /^https:\/\/(?!.+\.(idntimes|fortuneidn|popbela)\.com).+\?page=all$/
+// @exclude       /^https:\/\/(?!.+\.(fortuneidn|popbela)\.com).+\?page=all$/
 // @exclude       https://*/amp/*
 // @exclude       https://amp.*
 // @exclude       https://*/amp-*/*
@@ -132,7 +132,7 @@
         href: () => url.url.href,
         hostname: () => url.url.hostname,
         path: () => url.url.pathname,
-        param: () => url.url.search,
+        param: () => url.url.search
     }
 
     function splitPath(pathname) {
@@ -204,7 +204,7 @@
             path: /^\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
-            fullpage: 'page=all',
+            fullpage: 'page=all'
         },
         {
             id: 'antara',
@@ -213,7 +213,7 @@
             path: /\/berita\/\d+\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
-            fullpage: 'page=all',
+            fullpage: 'page=all'
         },
         {
             id: 'cnbc',
@@ -222,7 +222,7 @@
             path: /\/\d+-\d+-\d+\/.+(\/\d+|(?<!\/\w+))$/,
             method: 'param',
             dynamic: false,
-            fullpage: 'page=all',
+            fullpage: 'page=all'
         },
         {
             id: 'detik',
@@ -231,7 +231,7 @@
             path: /\/d-\d+\/.+(\/\d+|(?<!\/\w+))$/,
             method: 'param',
             dynamic: false,
-            fullpage: 'single=1',
+            fullpage: 'single=1'
         },
         {
             id: 'fajar',
@@ -240,7 +240,7 @@
             path: /\/\d{4}\/\d{2}\/\d{2}\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
-            fullpage: 'page=all',
+            fullpage: 'page=all'
         },
         {
             id: 'fortuneidn',
@@ -249,7 +249,7 @@
             path: /\/[\w-]+\/[\w-]+\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: true,
-            fullpage: 'page=all',
+            fullpage: 'page=all'
         },
         {
             id: 'grid',
@@ -258,16 +258,16 @@
             path: /^\/read\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
-            fullpage: 'page=all',
+            fullpage: 'page=all'
         },
         {
             id: 'idntimes',
             description: 'idntimes.com',
             hostname: /(^|\.)idntimes\.com$/,
             path: /\/[\w-]+\/[\w-]+\/[\w-]+\/.+(?<!\/\w+)$/,
-            method: 'dom',
+            method: 'param',
             dynamic: false,
-            pagination: 'page=all',
+            fullpage: 'page=all'
         },
         {
             id: 'idx',
@@ -276,7 +276,7 @@
             path: /\/.+\/.+(\/\d+|(?<!\/\w+))$/,
             method: 'path',
             dynamic: false,
-            fullpage: 'all',
+            fullpage: 'all'
         },
         {
             id: 'inews',
@@ -285,7 +285,7 @@
             path: /\/(berita|read\/\d+|[a-z-]+\/[a-z-]+)\/.+(\/\d+|(?<!\/\w+))$/,
             method: 'path',
             dynamic: false,
-            fullpage: 'all',
+            fullpage: 'all'
         },
         {
             id: 'kompascom',
@@ -294,7 +294,7 @@
             path: /\/read\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
-            fullpage: 'page=all',
+            fullpage: 'page=all'
         },
         {
             id: 'kompasiana',
@@ -303,7 +303,7 @@
             path: /\/.+(?<!series)\/\w{24}\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
-            fullpage: 'page=all',
+            fullpage: 'page=all'
         },
         {
             id: 'kompastv',
@@ -312,7 +312,7 @@
             path: /^\/article\/\d+\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
-            fullpage: 'page=all',
+            fullpage: 'page=all'
         },
         {
             id: 'kontan',
@@ -321,7 +321,7 @@
             path: /^\/news\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
-            fullpage: 'page=all',
+            fullpage: 'page=all'
         },
         {
             id: 'merdeka',
@@ -329,7 +329,7 @@
             hostname: /(^|\.)merdeka\.com$/,
             path: /\/[\w-]+\/.+\.html(?<!\/\w+)$/,
             method: 'dom',
-            dynamic: false,
+            dynamic: false
         },
         {
             id: 'popbela',
@@ -338,7 +338,7 @@
             path: /\/[\w-]+\/[\w-]+\/[\w-]+\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: true,
-            fullpage: 'page=all',
+            fullpage: 'page=all'
         },
         {
             id: 'pr',
@@ -347,7 +347,7 @@
             path: /\/pr-\d+\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
-            fullpage: 'page=all',
+            fullpage: 'page=all'
         },
         {
             id: 'promedia',
@@ -356,7 +356,7 @@
             path: /\/(pr-|)\d+\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
-            fullpage: 'page=all',
+            fullpage: 'page=all'
         },
         {
             id: 'sindo',
@@ -365,7 +365,7 @@
             path: /^\/read\/\d+\/\d+\/.+(\/\d+0|(?<!\/\w+))$/,
             method: 'param',
             dynamic: false,
-            fullpage: 'showpage=all',
+            fullpage: 'showpage=all'
         },
         {
             id: 'suara',
@@ -374,7 +374,7 @@
             path: /\/\d{4}\/\d{2}\/\d{2}\/\d+\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
-            fullpage: 'page=all',
+            fullpage: 'page=all'
         },
         {
             id: 'tribun',
@@ -383,7 +383,7 @@
             path: /\/\d{4}\/\d{2}\/\d{2}\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
-            fullpage: 'page=all',
+            fullpage: 'page=all'
         },
         {
             id: 'viva',
@@ -392,7 +392,7 @@
             path: /\/.+\/\d+-.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
-            fullpage: 'page=all',
+            fullpage: 'page=all'
         },
         {
             id: 'wartaekonomi',
@@ -401,7 +401,7 @@
             path: /^\/read\d+\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
-            fullpage: 'page=all',
+            fullpage: 'page=all'
         },
         {
             id: 'cnn',
@@ -415,13 +415,13 @@
             desktop: {
                 pagination: '.mb-8 > .gap-2.text-base',
                 totalPages: 'a:last-of-type',
-                content: '.detail-text',
+                content: '.detail-text'
             },
             mobile: {
                 pagination: '.mb-8 > .gap-2.text-base',
                 totalPages: 'a:last-of-type',
-                content: '.detail-text',
-            },
+                content: '.detail-text'
+            }
         },
         {
             id: 'disway',
@@ -435,13 +435,13 @@
             desktop: {
                 pagination: '.pagination',
                 totalPages: 'li.active:nth-last-of-type(1), li:nth-last-of-type(2) a',
-                content: '.post',
+                content: '.post'
             },
             mobile: {
                 pagination: '.pagination',
                 totalPages: 'li.active:nth-last-of-type(1), li:nth-last-of-type(2) a',
-                content: '.post',
-            },
+                content: '.post'
+            }
         },
         {
             id: 'genpi',
@@ -455,13 +455,13 @@
             desktop: {
                 pagination: '.mnmd-pagination',
                 totalPages: 'li:nth-last-of-type(3) a',
-                content: 'div.entry-content div.col-md-10',
+                content: 'div.entry-content div.col-md-10'
             },
             mobile: {
                 pagination: '.mnmd-pagination',
                 totalPages: 'li:nth-last-of-type(3) a',
-                content: '.entry-content',
-            },
+                content: '.entry-content'
+            }
         },
         {
             id: 'jpnn',
@@ -475,13 +475,13 @@
             desktop: {
                 pagination: '.pagination',
                 totalPages: 'li:nth-last-of-type(3) a',
-                content: 'div[itemprop=articleBody]',
+                content: 'div[itemprop=articleBody]'
             },
             mobile: {
                 pagination: '.pagination',
                 totalPages: 'li:nth-last-of-type(3) a',
-                content: '.page-content',
-            },
+                content: '.page-content'
+            }
         },
         {
             id: 'okezone',
@@ -495,13 +495,13 @@
             desktop: {
                 pagination: '.paging',
                 totalPages: '.second-paging',
-                content: '#contentx, #article-box',
+                content: '#contentx, #article-box'
             },
             mobile: {
                 pagination: '.pagingxm',
                 totalPages: '.halnext',
-                content: '.read, #article-box',
-            },
+                content: '.read, #article-box'
+            }
         },
         {
             id: 'republika',
@@ -515,13 +515,13 @@
             desktop: {
                 pagination: '.pagination',
                 totalPages: 'a:nth-last-of-type(2)',
-                content: 'article',
+                content: 'article'
             },
             mobile: {
                 pagination: '.pagination',
                 totalPages: 'li:nth-last-of-type(2) a',
-                content: 'article',
-            },
+                content: 'article'
+            }
         },
         {
             id: 'tempo',
@@ -535,14 +535,14 @@
             desktop: {
                 pagination: '.pagging',
                 totalPages: 'li:nth-last-of-type(2) a',
-                content: '#isi',
+                content: '#isi'
             },
             mobile: {
                 pagination: '.pagging',
                 totalPages: 'li:nth-last-of-type(2) a',
-                content: '#isi',
-            },
-        },
+                content: '#isi'
+            }
+        }
     ]
 
     //******************************************************************************
@@ -582,7 +582,6 @@
     function neutralizeURL(redirectURL, id) {
         switch (id) {
             case 'genpi' :
-            case 'idntimes' :
             case 'jpnn' :
             case 'merdeka':
             case 'okezone' :
@@ -731,7 +730,7 @@
                 binary: false,
                 timeout: 0,
                 headers: {
-                    'user-agent': window.navigator.userAgent,
+                    'user-agent': window.navigator.userAgent
                 },
                 onerror: function () {
                     alert('[AutoAllPage] Tidak bisa membuka halaman ke ' + pageNumber)
@@ -753,7 +752,7 @@
                             reject(null)
                         }
                     }
-                },
+                }
             }
             GM_xmlhttpRequest(xhrParameter)
         })
