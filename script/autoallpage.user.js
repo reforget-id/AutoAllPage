@@ -19,7 +19,7 @@
 // @exclude       https://*.inews.id/*/all
 // @exclude       https://*?page=all#page*
 // @exclude       https://*?page=all#sectionall
-// @exclude       /^https:\/\/(?!.+\.(fortuneidn|popbela)\.com).+\?page=all$/
+// @exclude       /^https:\/\/(?!.+\.(popbela)\.com).+\?page=all$/
 // @exclude       https://*/amp/*
 // @exclude       https://amp.*
 // @exclude       https://*/amp-*/*
@@ -39,7 +39,6 @@
 // @include       https://*.cnnindonesia.com/*/*/*
 // @include       https://*.dagangberita.com/*/*/*
 // @include       https://*.detik.com/*/d-*/*
-// @include       https://*.fortuneidn.com/*
 // @include       https://*.genpi.co/*/*/*
 // @include       https://*.grid.id/read/*
 // @include       https://*.gridoto.com/read/*
@@ -247,7 +246,7 @@
             hostname: /(^|\.)fortuneidn\.com$/,
             path: /\/[\w-]+\/[\w-]+\/.+(?<!\/\w+)$/,
             method: 'param',
-            dynamic: true,
+            dynamic: false,
             fullpage: 'page=all'
         },
         {

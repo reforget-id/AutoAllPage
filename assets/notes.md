@@ -57,7 +57,7 @@ Parameter : `page=all`
 ### Fortuneidn.com
 Kata kunci : `/{kategori}/{author}/{judul_artikel}/`  
 Metode : `param`  
-Dinamis: `ya`  
+Dinamis: `tidak`  
 Parameter : `page=all`
 
 * https://www.fortuneidn.com/news/desy/daftar-tunjangan-kinerja-pns-yang-naik-tahun-2023
