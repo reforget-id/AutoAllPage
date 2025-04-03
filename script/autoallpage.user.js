@@ -57,7 +57,6 @@
 // @include       https://*.kompas.tv/article/*
 // @include       https://*.kompasiana.com/*/*/*
 // @include       https://*.kontan.co.id/news/*
-// @include       https://*.merdeka.com/*/*
 // @include       https://*.motorplus-online.com/read/*
 // @include       https://*.okezone.com/read/*
 // @include       https://*.papanskor.com/*/*/*
@@ -583,7 +582,6 @@
         switch (id) {
             case 'genpi' :
             case 'jpnn' :
-            case 'merdeka':
             case 'okezone' :
             case 'tempo' :
                 clearParamRedirect(redirectURL)
@@ -641,16 +639,10 @@
     const isDesktop = !isMobile
 
     function generalDOM(website) {
-        switch (website.id) {
-            case 'idntimes':
-                idntimesDOM()
-                break
-            case 'merdeka':
-                merdekaDOM()
-                break
-        }
+        if (website.id === 'idntimes') {}
     }
 
+    // Deprecated for now
     function idntimesDOM() {
         const readMoreButton = document.querySelector('.read-more-btn-check')
         const splitPage = document.getElementsByClassName('split-page')
@@ -663,21 +655,6 @@
         }
     }
 
-    function merdekaDOM() {
-        const readMoreButton = document.querySelector('.btn--readarticle')
-        if (readMoreButton != null) {
-            (function findExpand() {
-                setTimeout(() => {
-                    if (document.body.classList.contains('expand')) {
-                        document.body.classList.remove('expand')
-                        readMoreButton?.parentElement.classList.add('hidden')
-                    } else {
-                        findExpand()
-                    }
-                }, 1000)
-            })()
-        }
-    }
 
     async function generalXHR(website) {
         const selector = isMobile ? website.mobile : website.desktop
