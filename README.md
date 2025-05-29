@@ -56,6 +56,7 @@ atau [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
         <li>gridoto.com</li>
         <li>herstory.co.id</li>
         <li>hops.id</li>
+        <li>hukumonline.com</li>
         <li>idntimes.com</li>
         <li>idxchannel.com</li>
         <li>inews.id</li>

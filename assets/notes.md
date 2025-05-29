@@ -87,6 +87,14 @@ Parameter : `page=all`
 * https://www.parapuan.co/read/533482827/dijamin-tak-cepat-busuk-ini-3-tips-menyimpan-bawang-merah-yang-tepat  
 * https://www.sonora.id/read/423484439/3-shio-yang-mudah-kaya-raya-dan-sulit-jatuh-miskin-memang-paling-spesial  
 
+### Hukumonline.com
+Kata kunci : `/berita/a/`  
+Metode : `parameter`  
+Parameter : `page=all`  
+
+* https://www.hukumonline.com/berita/a/kpk-usul-ruu-kuhap-atur-batasan-pendampingan-advokat-terhadap-saksi-lt6836f0013c713/  
+* https://www.hukumonline.com/berita/a/menyoal-aturan-kewajiban-magang-di-kantor-advokat-ke-mk-lt6826ee00b6e92  
+
 ### Idntimes.com
 > _Untuk website idntimes dan jaringannya._  
 > _idntimes.com, popbela.com, popmama.com_

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       2.2.11
+// @version       2.2.12
 // @author        reforget-id
 // @namespace     autoallpage
 // @description   Otomatis menampilkan semua halaman artikel berita dalam 1 halaman
@@ -43,6 +43,7 @@
 // @include       https://*.gridoto.com/read/*
 // @include       https://herstory.co.id/read*
 // @include       https://*.hops.id/*/*/*
+// @include       https://*.hukumonline.com/berita/a/*
 // @include       https://*.idntimes.com/*/*/*/*
 // @include       https://*.idxchannel.com/*/*
 // @include       https://*.inews.id/*/*
@@ -254,6 +255,15 @@
             description: 'bolasport.com, grid.id, gridoto.com, motorplus-online.com, parapuan.co, sonora.id',
             hostname: /(^|\.)(parapuan\.co|(grid|sonora)\.id|(bolasport|gridoto|motorplus-online)\.com)$/,
             path: /^\/read\/.+(?<!\/\w+)$/,
+            method: 'param',
+            dynamic: false,
+            fullpage: 'page=all'
+        },
+        {
+            id: 'hukumonline',
+            description: 'hukumonline.com',
+            hostname: /(^|\.)hukumonline\.com$/,
+            path: /^\/berita\/a\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
             fullpage: 'page=all'
