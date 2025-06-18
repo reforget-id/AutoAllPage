@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       2.2.12
+// @version       2.2.13
 // @author        reforget-id
 // @namespace     autoallpage
 // @description   Otomatis menampilkan semua halaman artikel berita dalam 1 halaman
@@ -44,7 +44,6 @@
 // @include       https://herstory.co.id/read*
 // @include       https://*.hops.id/*/*/*
 // @include       https://*.hukumonline.com/berita/a/*
-// @include       https://*.idntimes.com/*/*/*/*
 // @include       https://*.idxchannel.com/*/*
 // @include       https://*.inews.id/*/*
 // @include       https://*.intipseleb.com/*/*
@@ -53,7 +52,7 @@
 // @include       https://*.kilat.com/*/*/*
 // @include       https://*.kompas.com/read/*
 // @include       https://*.kompas.com/*/read/*
-// @include       https://*.kompas.tv/article/*
+// @include       https://*.kompas.tv/*/*
 // @include       https://*.kompasiana.com/*/*/*
 // @include       https://*.kontan.co.id/news/*
 // @include       https://*.motorplus-online.com/read/*
@@ -62,8 +61,6 @@
 // @include       https://*.parapuan.co/read/*
 // @include       https://*.pikiran-rakyat.com/*/pr-*/*
 // @include       https://*.pojoksatu.id/*/*/*
-// @include       https://*.popbela.com/*/*/*/*
-// @include       https://*.popmama.com/*/*/*/*
 // @include       https://*.republika.co.id/berita/*
 // @include       https://republika.co.id/berita/*
 // @include       https://*.sahijab.com/*/*
@@ -245,7 +242,7 @@
             id: 'fortuneidn',
             description: 'fortuneidn.com',
             hostname: /(^|\.)fortuneidn\.com$/,
-            path: /\/[\w-]+\/[\w-]+\/.+(?<!\/\w+)$/,
+            path: /\/[a-z-]+\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
             fullpage: 'page=all'
@@ -272,7 +269,7 @@
             id: 'idntimes',
             description: 'idntimes.com, popbela.com, popmama.com',
             hostname: /(^|\.)(idntimes|popbela|popmama)\.com$/,
-            path: /\/[\w-]+\/[\w-]+\/[\w-]+\/.+(?<!\/\w+)$/,
+            path: /\/[a-z-]+\/[a-z-]+\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
             fullpage: 'page=all'
@@ -281,7 +278,7 @@
             id: 'idx',
             description: 'idxchannel.com',
             hostname: /(^|\.)idxchannel\.com$/,
-            path: /\/.+\/.+(\/\d+|(?<!\/\w+))$/,
+            path: /\/[a-z-]+\/.+(\/\d+|(?<!\/\w+))$/,
             method: 'path',
             dynamic: false,
             fullpage: 'all'
@@ -317,7 +314,7 @@
             id: 'kompastv',
             description: 'kompas.tv',
             hostname: /(^|\.)kompas\.tv$/,
-            path: /^\/article\/\d+\/.+(?<!\/\w+)$/,
+            path: /^\/[a-z]+\/\d+\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
             fullpage: 'page=all'

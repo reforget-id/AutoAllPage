@@ -99,15 +99,17 @@ Parameter : `page=all`
 > _Untuk website idntimes dan jaringannya._  
 > _idntimes.com, popbela.com, popmama.com_
 
-Kata kunci : `/{kategori}/{subkategori}/{author}/{judul_artikel}/`  
+> _Saat ini tidak menggunakan pagination lagi._  
+
+Kata kunci : `/{kategori}/{subkategori}/{judul_artikel}/`  
 Metode : `param`  
 Dinamis: `false`  
 Parameter : `page=all`
 
-* https://www.idntimes.com/sport/soccer/satria-permana-2/pemilik-chelsea-kena-damprat-usai-pecat-thomas-tuchel  
-* https://www.idntimes.com/science/discovery/nena-zakiah-1/penyebab-wangi-parfum-ada-yang-tahan-lama-dan-tidak  
-* https://www.popbela.com/career/working-life/niken-ari/sma-swasta-terbaik-di-indonesia-berdasarkan-rerata-nilai-utbk  
-* https://www.popmama.com/pregnancy/third-trimester/dwi-oktaviani/ide-nama-bayi-perempuan-berdasarkan-zodiak-sagitarius  
+* https://www.idntimes.com/sport/soccer/pemilik-chelsea-kena-damprat-usai-pecat-thomas-tuchel  
+* https://www.idntimes.com/science/discovery/penyebab-wangi-parfum-ada-yang-tahan-lama-dan-tidak  
+* https://www.popbela.com/career/working-life/sma-swasta-terbaik-di-indonesia-berdasarkan-rerata-nilai-utbk  
+* https://www.popmama.com/pregnancy/third-trimester/ide-nama-bayi-perempuan-berdasarkan-zodiak-sagitarius  
 
 ### Idxchannel.com
 Kata kunci : `/{kategori}/{judul_artikel}/`    
@@ -142,12 +144,12 @@ Parameter : `page=all`
 * https://pemilu.kompas.com/rumahpilkada/read/2022/03/01/16034801/kpu-tidak-ada-perkara-salah-hitung-suara-dalam-permohonan-sengketa-pilkada  
 
 ### Kompas.tv 
-Kata kunci : `/article/{kode_artikel}/`  
+Kata kunci : `/{kategori}/{kode_artikel}/`  
 Metode : `parameter`  
 Parameter : `page=all`  
 
-* https://www.kompas.tv/article/328869/7-film-indonesia-yang-pernah-wakili-indonesia-di-piala-oscar-terbaru-ngeri-ngeri-sedap  
-* https://www.kompas.tv/article/181403/diklaim-disusupi-geng-kriminal-qantas-bantah-dan-nyatakan-terganggu  
+* https://www.kompas.tv/entertainment/328869/7-film-indonesia-yang-pernah-wakili-indonesia-di-piala-oscar-terbaru-ngeri-ngeri-sedap  
+* https://www.kompas.tv/internasional/181403/diklaim-disusupi-geng-kriminal-qantas-bantah-dan-nyatakan-terganggu  
 
 ### Kompasiana.com
 Kata kunci : `/{author}/{kode_artikel}/`  

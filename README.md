@@ -57,7 +57,6 @@ atau [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
         <li>herstory.co.id</li>
         <li>hops.id</li>
         <li>hukumonline.com</li>
-        <li>idntimes.com</li>
         <li>idxchannel.com</li>
         <li>inews.id</li>
         <li>intipseleb.com</li>
@@ -72,8 +71,6 @@ atau [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
         <li>okezone.com</li>
         <li>papanskor.com</li>
         <li>pojoksatu.id</li>
-        <li>popbela.com</li>
-        <li>popmama.com</li>
         <li>pikiran-rakyat.com</li>
         <li>republika.co.id</li>
         <li>sahijab.com</li>
