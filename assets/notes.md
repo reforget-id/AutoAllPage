@@ -1,10 +1,10 @@
 ### Akurat.co
-Kata kunci : `/{judul_artikel}`  
+Kata kunci : `/{kategori}/{kode_artikel}/`  
 Metode : `parameter`  
 Parameter : `page=all`  
 
-* https://akurat.co/4-fakta-menarik-abdulism-guru-bahasa-inggris-yang-aktif-mengajar-lewat-tiktok  
-* https://akurat.co/adb-sebut-tahun-depan-sektor-transportasi-bakal-jadi-soko-guru-pembangunan-indonesia
+* https://www.akurat.co/trend/1306155383/50-tebak-tebakan-lucu-dan-absurd-yang-dijamin-bikin-ngakak    
+* https://www.akurat.co/nasional/1306151303/cara-cek-bantuan-validasi-bsu-bpjs-ketenagakerjaan-2025-pantau-status-penerima-sekarang    
 
 ### Antaranews.com
 Kata kunci : `/berita/{kode_artikel}`  

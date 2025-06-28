@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       2.2.13
+// @version       2.2.14
 // @author        reforget-id
 // @namespace     autoallpage
 // @description   Otomatis menampilkan semua halaman artikel berita dalam 1 halaman
@@ -16,7 +16,9 @@
 // @noframes
 // @exclude       https://*?single=1
 // @exclude       https://*?showpage=all
+// @exclude       https://*.idxchannel.com/*/all
 // @exclude       https://*.inews.id/*/all
+// @exclude       https://*?page=all
 // @exclude       https://*?page=all#page*
 // @exclude       https://*?page=all#sectionall
 // @exclude       https://*/amp/*
@@ -29,7 +31,7 @@
 // @include       https://*.20jam.com/*/*/*
 // @include       https://*.100kpj.com/*/*
 // @include       https://*.aboutmalang.com/*/*/*
-// @include       https://akurat.co/*
+// @include       https://*.akurat.co/*/*/*
 // @include       https://*.antaranews.com/berita/*/*
 // @include       https://*.ayocirebon.com/*/*/*
 // @include       https://*.ayoindonesia.com/*/*/*
@@ -197,7 +199,7 @@
             id: 'akurat',
             description: 'akurat.co',
             hostname: /(^|\.)akurat\.co$/,
-            path: /^\/.+(?<!\/\w+)$/,
+            path: /^\/[a-z-]+\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
             fullpage: 'page=all'
@@ -233,16 +235,7 @@
             id: 'fajar',
             description: 'fajar.co.id',
             hostname: /(^|\.)fajar\.co\.id$/,
-            path: /\/\d{4}\/\d{2}\/\d{2}\/.+(?<!\/\w+)$/,
-            method: 'param',
-            dynamic: false,
-            fullpage: 'page=all'
-        },
-        {
-            id: 'fortuneidn',
-            description: 'fortuneidn.com',
-            hostname: /(^|\.)fortuneidn\.com$/,
-            path: /\/[a-z-]+\/.+(?<!\/\w+)$/,
+            path: /\/\d{4}\/\d{2}\/\d{2}\/.+(\/\d+|(?<!\/\w+))$/,
             method: 'param',
             dynamic: false,
             fullpage: 'page=all'
@@ -261,15 +254,6 @@
             description: 'hukumonline.com',
             hostname: /(^|\.)hukumonline\.com$/,
             path: /^\/berita\/a\/.+(?<!\/\w+)$/,
-            method: 'param',
-            dynamic: false,
-            fullpage: 'page=all'
-        },
-        {
-            id: 'idntimes',
-            description: 'idntimes.com, popbela.com, popmama.com',
-            hostname: /(^|\.)(idntimes|popbela|popmama)\.com$/,
-            path: /\/[a-z-]+\/[a-z-]+\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
             fullpage: 'page=all'
@@ -550,10 +534,11 @@
         const redirectURL = new URLBuilder().hostname(url.hostname())
         switch (website.method) {
             case 'param' :
-                if (website.id === 'cnbc' || website.id === 'detik') {
-                    const newPath = url.path().replace(/\/\d+$/, '')
+                if (website.id === 'cnbc' || website.id === 'detik' || website.id === 'fajar') {
+                    const newPath = url.path().replace(/\/\d+(|\/)$/, '')
                     redirectURL.path(...splitPath(newPath))
-                } else {
+                }
+                else {
                     redirectURL.path(...splitPath(url.path()))
                 }
                 redirectURL.param(website.fullpage)
