@@ -128,6 +128,14 @@ Path : `/all`
 * https://lutra.inews.id/read/228629/jembatan-bailey-trans-sulawesi-macet-parah-warga-mengaku-kecewa-dengan-oknum-polisi  
 * https://regional.inews.id/berita/gempa-terkini-magnitudo-40-guncang-nagekeo-ntt  
 
+### Jagodangdut.com
+Kata kunci : `/artikel/`  
+Metode : `parameter`  
+Parameter : `page=all`
+
+* https://www.jagodangdut.com/artikel/49562-ponds-ultra-light-biome-gel-inovasi-pertama-di-indonesia  
+* https://www.jagodangdut.com/artikel/49555-puncak-gerakan-masjid-bersih-2025-200-ibu-marbot-dan-relawan-siapkan-masjin-lebih-bersih?page=all  
+
 ### Jpnn.com
 Kata kunci : `/news/` | `/{kategori}/{kode_artikel}/`  
 Metode : `XHR`  

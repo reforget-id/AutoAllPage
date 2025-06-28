@@ -60,6 +60,7 @@ atau [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
         <li>idxchannel.com</li>
         <li>inews.id</li>
         <li>intipseleb.com</li>
+        <li>jagodangdut.com</li>
         <li>jatimnetwork.com</li>
         <li>jpnn.com</li>
         <li>kilat.com</li>

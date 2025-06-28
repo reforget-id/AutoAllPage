@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       2.2.14
+// @version       2.3.0
 // @author        reforget-id
 // @namespace     autoallpage
 // @description   Otomatis menampilkan semua halaman artikel berita dalam 1 halaman
@@ -49,6 +49,7 @@
 // @include       https://*.idxchannel.com/*/*
 // @include       https://*.inews.id/*/*
 // @include       https://*.intipseleb.com/*/*
+// @include       https://*.jagodangdut.com/*/*
 // @include       https://*.jatimnetwork.com/*/*/*
 // @include       https://*.jpnn.com/*/*
 // @include       https://*.kilat.com/*/*/*
@@ -275,6 +276,15 @@
             method: 'path',
             dynamic: false,
             fullpage: 'all'
+        },
+        {
+            id: 'jagodangdut',
+            description: 'jagodangdut.com',
+            hostname: /(^|\.)jagodangdut\.com$/,
+            path: /\/artikel\/.+(?<!\/\w+)$/,
+            method: 'param',
+            dynamic: false,
+            fullpage: 'page=all'
         },
         {
             id: 'kompascom',
