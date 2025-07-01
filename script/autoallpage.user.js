@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       2.4.0
+// @version       2.5.0
 // @author        reforget-id
 // @namespace     autoallpage
 // @description   Otomatis menampilkan semua halaman artikel berita dalam 1 halaman
@@ -48,6 +48,7 @@
 // @include       https://*.hops.id/*/*/*
 // @include       https://*.hukumonline.com/berita/a/*
 // @include       https://*.idxchannel.com/*/*
+// @include       https://*.indozone.id/*/*/*
 // @include       https://*.inews.id/*/*
 // @include       https://*.intipseleb.com/*/*
 // @include       https://*.jagodangdut.com/*/*
@@ -271,6 +272,15 @@
             fullpage: 'all'
         },
         {
+            id: 'indozone',
+            description: 'indozone.id',
+            hostname: /(^|\.)indozone\.id$/,
+            path: /^\/[a-z-]+\/\d+\/.+(?<!\/\w+)$/,
+            method: 'param',
+            dynamic: false,
+            fullpage: 'page=all'
+        },
+        {
             id: 'inews',
             description: 'inews.id',
             hostname: /(^|\.)inews\.id$/,
@@ -310,7 +320,7 @@
             id: 'kompastv',
             description: 'kompas.tv',
             hostname: /(^|\.)kompas\.tv$/,
-            path: /^\/[a-z]+\/\d+\/.+(?<!\/\w+)$/,
+            path: /^\/[a-z-]+\/\d+\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
             fullpage: 'page=all'

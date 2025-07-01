@@ -46,6 +46,7 @@ atau [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
         <li>ayocirebon.com</li>
         <li>ayoindonesia.com</li>
         <li>akurat.co</li>
+        <li>bolanas.com</li>
         <li>bolasport.com</li>
         <li>cnbcindonesia.com</li>
         <li>cnnindonesia.com</li>
@@ -58,11 +59,13 @@ atau [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
         <li>hops.id</li>
         <li>hukumonline.com</li>
         <li>idxchannel.com</li>
+        <li>indozone.id</li>
         <li>inews.id</li>
         <li>intipseleb.com</li>
         <li>jagodangdut.com</li>
         <li>jatimnetwork.com</li>
         <li>jpnn.com</li>
+        <li>juara.net</li>
         <li>kilat.com</li>
         <li>kompas.com</li>
         <li>kompas.tv</li>

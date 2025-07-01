@@ -74,15 +74,17 @@ Metode : `XHR`
 
 ### Grid.id  
 > _Untuk website Grid dan jaringannya._  
-> _bolasport.com, grid.id, gridoto.com, motorplus-online.com, parapuan.co, sonora.id_ 
+> _bolanas.com, bolasport.com, grid.id, gridoto.com, juara.net motorplus-online.com, parapuan.co, sonora.id_ 
 
-Kata kunci : `/read/`  
+Kata kunci : `/read/{kode_artikel}/`  
 Metode : `parameter`  
 Parameter : `page=all`  
   
-* https://www.bolasport.com/read/313484024/sudah-jadi-pemain-hebat-pedri-harus-dirawat-baik-baik-barcelona
-* https://www.grid.id/read/043484414/we-the-fest-sajikan-full-experience-untuk-pengunjung    
+* https://www.bolanas.com/read/494259075/bawa-hoki-presiden-prabowo-diminta-tonton-langsung-timnas-indonesia-vs-china  
+* https://www.bolasport.com/read/313484024/sudah-jadi-pemain-hebat-pedri-harus-dirawat-baik-baik-barcelona  
+* https://www.grid.id/read/043484414/we-the-fest-sajikan-full-experience-untuk-pengunjung  
 * https://www.gridoto.com/read/223483311/hasil-kualifikasi-motogp-aragon-2022-pecco-bagnaia-kunci-pole-position-marc-marquez-bikin-ulah-pakai-jasa-towing-lagi
+* https://www.juara.net/read/324268115/jorge-lorenzo-soroti-langkah-yang-membuat-marc-marquez-jalani-motogp-2025-lebih-mudah  
 * https://www.motorplus-online.com/read/253482363/perbandingan-harga-pertalite-dengan-bp-90-yang-belum-lama-turun-selisihnya-bikin-kaget  
 * https://www.parapuan.co/read/533482827/dijamin-tak-cepat-busuk-ini-3-tips-menyimpan-bawang-merah-yang-tepat  
 * https://www.sonora.id/read/423484439/3-shio-yang-mudah-kaya-raya-dan-sulit-jatuh-miskin-memang-paling-spesial  
@@ -118,6 +120,14 @@ Path : `/all`
 
 * https://www.idxchannel.com/milenomic/intip-syarat-dan-cara-daftar-franchise-teh-poci-lengkap-dengan-biayanya-1  
 * https://www.idxchannel.com/ecotainment/canggih-bandara-singapura-punya-aplikasi-pelacak-bagasi-koper-tak-akan-hilang  
+
+### Indozone.id
+Kata kunci : `/kategori/{kode_artikel}/`  
+Metode : `parameter`  
+Parameter : `page=all`  
+
+* https://life.indozone.id/trendz/2486140331/115-caption-bahasa-inggris-bulan-juli  
+* https://arena.indozone.id/here-we-go/2486140598/manchester-united-diberi-waktu-dua-minggu-jika-ingin-datangkan-moise-kean  
 
 ### Inews.id  
 Kata kunci : `/{kategori}/{subkategori}/` | `/read/{kode_artikel}/` | `/berita/`  
@@ -182,8 +192,8 @@ Kata kunci : `/{tahun}/{bulan}/{tanggal}/{kode_artikel}/`
 Metode : `parameter`    
 Parameter : `page=all`  
 
-* https://www.matamata.com/life/2022/09/18/134903/8-film-denny-sumargo-aktingnya-di-miracle-in-cell-no7-banjir-pujian  
-* https://www.matamata.com/kpop/2022/09/16/203914/sinopsis-casino-drama-korea-baru-choi-min-sik-dengan-son-suk-ku-dan-lee-dong-hwi
+*   
+*   
 
 ### Merdeka.com
 > _Saat ini tidak menggunakan pagination._  
