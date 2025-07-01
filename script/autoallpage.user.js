@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       2.3.0
+// @version       2.4.0
 // @author        reforget-id
 // @namespace     autoallpage
 // @description   Otomatis menampilkan semua halaman artikel berita dalam 1 halaman
@@ -35,6 +35,7 @@
 // @include       https://*.antaranews.com/berita/*/*
 // @include       https://*.ayocirebon.com/*/*/*
 // @include       https://*.ayoindonesia.com/*/*/*
+// @include       https://*.bolanas.com/read/*
 // @include       https://*.bolasport.com/read/*
 // @include       https://*.cnbcindonesia.com/*/*/*
 // @include       https://*.cnnindonesia.com/*/*/*
@@ -51,6 +52,7 @@
 // @include       https://*.intipseleb.com/*/*
 // @include       https://*.jagodangdut.com/*/*
 // @include       https://*.jatimnetwork.com/*/*/*
+// @include       https://*.juara.net/read/*
 // @include       https://*.jpnn.com/*/*
 // @include       https://*.kilat.com/*/*/*
 // @include       https://*.kompas.com/read/*
@@ -243,9 +245,9 @@
         },
         {
             id: 'grid',
-            description: 'bolasport.com, grid.id, gridoto.com, motorplus-online.com, parapuan.co, sonora.id',
-            hostname: /(^|\.)(parapuan\.co|(grid|sonora)\.id|(bolasport|gridoto|motorplus-online)\.com)$/,
-            path: /^\/read\/.+(?<!\/\w+)$/,
+            description: 'bolanas.com, bolasport.com, grid.id, gridoto.com, juara.net, motorplus-online.com, parapuan.co, sonora.id',
+            hostname: /(^|\.)(juara\.net|parapuan\.co|(grid|sonora)\.id|(bolanas|bolasport|gridoto|motorplus-online)\.com)$/,
+            path: /^\/read\/\d+\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
             fullpage: 'page=all'
@@ -299,7 +301,7 @@
             id: 'kompasiana',
             description: 'kompasiana.com',
             hostname: /(^|\.)kompasiana\.com$/,
-            path: /\/.+(?<!series)\/\w{24}\/.+(?<!\/\w+)$/,
+            path: /\/[a-z0-9_]+(?<!series)\/\w{24}\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
             fullpage: 'page=all'
@@ -556,18 +558,14 @@
                 if (url.href() !== newURL) redirect(newURL)
                 break
             case 'path' :
-                inewsRedirect(redirectURL, website.fullpage)
+                const newPath = url.path().replace(/\/\d+$/, '')
+                redirectURL.path(...splitPath(newPath), website.fullpage)
+                redirect(redirectURL.toString())
                 break
             case 'dom' :
             case 'xhr' :
                 neutralizeURL(redirectURL, website.id)
         }
-    }
-
-    function inewsRedirect(redirectURL, fullPage) {
-        const newPath = url.path().replace(/\/\d+$/, '')
-        redirectURL.path(...splitPath(newPath), fullPage)
-        redirect(redirectURL.toString())
     }
 
     function neutralizeURL(redirectURL, id) {
