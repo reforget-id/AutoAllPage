@@ -686,7 +686,7 @@
                 overrideMimeType: 'text/html; charset=UTF-8',
                 responseType: 'document',
                 binary: false,
-                timeout: 0,
+                timeout: 5000, // quick fix untuk error NS_BINDING_ABORTED pada tampermonkey firefox private tab
                 headers: {
                     'user-agent': window.navigator.userAgent
                 },
