@@ -31,6 +31,9 @@ Metode : `XHR`
 * https://www.cnnindonesia.com/internasional/20220920185933-120-850441/5-kawasan-proyek-gila-pangeran-mbs-di-saudi-1-lokasi-dihindari-nabi  
 
 ### Detik.com
+> _Saat ini pagination loading secara otomatis._  
+> _Masih dalam pemantauan._
+
 Kata kunci : `/d-{kode_artikel}/`  
 Metode : `parameter`  
 Parameter : `single=1`  
@@ -206,7 +209,8 @@ Metode : `dom`
 
 ### Okezone.com
 Kata kunci : `/read/`  
-Metode : `XHR`  
+Metode : `parameter`  
+Parameter : `page=all`  
 
 * https://economy.okezone.com/read/2022/09/22/320/2672715/cara-mudah-cek-penerima-blt-subsidi-gaji-lewat-hp-ikuti-langkah-ini-bsu-rp600-000-masuk-rekening  
 * https://sports.okezone.com/read/2022/09/19/38/2670730/motogp-aragon-2022-enea-bastianini-beberkan-momen-dirinya-menyalip-francesco-bagnaia  
@@ -297,7 +301,7 @@ Parameter : `page=all`
 
 ### Wartaekonomi.co.id
 > _Untuk Wartaekonomi dan jaringannya._  
-> _wartaekonomi.co.id, herstory.co.id_
+> _wartaekonomi.co.id, herstory.co.id, populis.id_
 
 Kata kunci : `/read{kode_artikel}/`  
 Metode : `parameter`  
@@ -305,3 +309,4 @@ Parameter : `page=all`
 
 * https://wartaekonomi.co.id/read444907/3-musketeers-go-public-perusahaan-yang-antre-mau-ipo-mulai-ditolak  
 * https://herstory.co.id/read88507/mulutnya-gak-bisa-dijaga-ini-golongan-darah-yang-omongannya-pedas  
+* https://populis.id/read66486/kemenpar-terlibat-dua-agenda-penting-dalam-kunjungan-presiden-prancis  

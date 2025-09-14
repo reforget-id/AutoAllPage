@@ -17,4 +17,12 @@ const archivedSiteList = [
         dynamic: false,
         fullpage: 'page=all'
     },
+    {
+        id: 'merdeka',
+        desc: 'merdeka.com',
+        hostname: /(^|\.)merdeka\.com$/,
+        path: /\/[a-z-]+\/.+\.html(?<!\/\w+)$/,
+        method: 'dom',
+        dynamic: false
+    },
 ]

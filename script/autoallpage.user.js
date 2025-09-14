@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       2.5.0
+// @version       2.5.2
 // @author        reforget-id
 // @namespace     autoallpage
 // @description   Otomatis menampilkan semua halaman artikel berita dalam 1 halaman
@@ -67,6 +67,7 @@
 // @include       https://*.parapuan.co/read/*
 // @include       https://*.pikiran-rakyat.com/*/pr-*/*
 // @include       https://*.pojoksatu.id/*/*/*
+// @include       https://populis.id/read*
 // @include       https://*.republika.co.id/berita/*
 // @include       https://republika.co.id/berita/*
 // @include       https://*.sahijab.com/*/*
@@ -160,7 +161,7 @@
     function pageDivider(currentPage, totalPages) {
         const divider = new DOMParser().parseFromString(`
             <div class="aap-divider">
-                === [AutoAllPage] Halaman ${currentPage} dari ${totalPages} ===
+                === [AutoAllPage] Page ${currentPage}/${totalPages} ===
             </div>
         `, 'text/html')
         return divider.body.firstElementChild
@@ -335,12 +336,13 @@
             fullpage: 'page=all'
         },
         {
-            id: 'merdeka',
-            description: 'merdeka.com',
-            hostname: /(^|\.)merdeka\.com$/,
-            path: /\/[\w-]+\/.+\.html(?<!\/\w+)$/,
-            method: 'dom',
-            dynamic: false
+            id: 'okezone',
+            description: 'okezone.com',
+            hostname: /(^|\.)okezone\.com$/,
+            path: /^\/read\/.+(?<!\/\w+)$/,
+            method: 'param',
+            dynamic: false,
+            fullpage: 'page=all'
         },
         {
             id: 'pr',
@@ -399,7 +401,7 @@
         {
             id: 'wartaekonomi',
             description: 'wartaekonomi.co.id, herstory.co.id',
-            hostname: /(^|\.)(wartaekonomi|herstory)\.co\.id$/,
+            hostname: /(^|\.)((wartaekonomi|herstory)\.co|populis)\.id$/,
             path: /^\/read\d+\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
@@ -486,26 +488,6 @@
             }
         },
         {
-            id: 'okezone',
-            description: 'okezone.com',
-            hostname: /(^|\.)okezone\.com$/,
-            path: /^\/read\/.+(?<!\/\w+)$/,
-            method: 'xhr',
-            dynamic: false,
-            nextURL: '?page=',
-            urlHelper: 0,
-            desktop: {
-                pagination: '.paging',
-                totalPages: '.second-paging',
-                content: '#contentx, #article-box'
-            },
-            mobile: {
-                pagination: '.pagingxm',
-                totalPages: '.halnext',
-                content: '.read, #article-box'
-            }
-        },
-        {
             id: 'republika',
             description: 'republika.co.id',
             hostname: /(^|\.)republika\.co\.id$/,
@@ -582,7 +564,6 @@
         switch (id) {
             case 'genpi' :
             case 'jpnn' :
-            case 'okezone' :
             case 'tempo' :
                 clearParamRedirect(redirectURL)
                 break
@@ -745,9 +726,6 @@
             case 'genpi' :
                 genpiCleaner(pageNode, pageNumber, pagination)
                 break
-            case 'okezone' :
-                okezoneCleaner(pageNode, pageNumber)
-                break
             case 'republika' :
                 republikaCleaner(pageNode, pageNumber, pagination)
                 break
@@ -779,17 +757,6 @@
         footer?.nextElementSibling.remove()
         footer?.remove()
         log('Membersihkan halaman ke ' + pageNumber)
-    }
-
-    function okezoneCleaner(pageNode, pageNumber) {
-        let footerArticle = pageNode.querySelector('#rctiplus')
-        if (footerArticle === null) footerArticle = pageNode.querySelector('.box-gnews')
-        if (footerArticle !== null) {
-            while (pageNode.contains(footerArticle)) {
-                pageNode.lastElementChild.remove()
-            }
-            log('Membersihkan halaman ke ' + pageNumber)
-        }
     }
 
     function republikaCleaner(pageNode, pageNumber, pagination) {

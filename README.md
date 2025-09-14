@@ -75,6 +75,7 @@ atau [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
         <li>okezone.com</li>
         <li>papanskor.com</li>
         <li>pojoksatu.id</li>
+        <li>populis.id</li>
         <li>pikiran-rakyat.com</li>
         <li>republika.co.id</li>
         <li>sahijab.com</li>
