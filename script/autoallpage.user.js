@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       2.5.4
+// @version       2.5.5
 // @author        reforget-id
 // @namespace     autoallpage
 // @description   Otomatis menampilkan semua halaman artikel berita dalam 1 halaman
@@ -249,7 +249,7 @@
         },
         {
             id: 'grid',
-            description: 'bolanas.com, bolasport.com, grid.id, gridoto.com, juara.net, motorplus-online.com, parapuan.co, sonora.id',
+            description: 'bolanas.com, bolasport.com, grid.id, gridpop.id, gridhype, gridoto.com, juara.net, motorplus-online.com, parapuan.co, sonora.id',
             hostname: /(^|\.)(juara\.net|parapuan\.co|(grid|sonora|gridpop|gridhype)\.id|(bolanas|bolasport|gridoto|motorplus-online)\.com)$/,
             path: /^\/read\/\d+\/.+(?<!\/\w+)$/,
             method: 'param',

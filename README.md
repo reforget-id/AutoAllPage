@@ -54,6 +54,8 @@ atau [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
         <li>detik.com</li>
         <li>genpi.co</li>
         <li>grid.id</li>
+        <li>gridhype.id</li>
+        <li>gridpo.id</li>
         <li>gridoto.com</li>
         <li>herstory.co.id</li>
         <li>hops.id</li>
