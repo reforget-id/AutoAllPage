@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name          Auto All Page
-// @version       2.5.5
+// @version       2.5.6
 // @author        reforget-id
 // @namespace     autoallpage
 // @description   Otomatis menampilkan semua halaman artikel berita dalam 1 halaman
@@ -77,7 +77,7 @@
 // @include       https://*.sonora.id/read/*
 // @include       https://*.suara.com/*/*/*/*
 // @include       https://*.tempo.co/read/*
-// @include       https://*.tribunnews.com/*/*/*/*
+// @include       https://*.tribunnews.com/*/*/*
 // @include       https://*.tvonenews.com/*/*
 // @include       https://*.unews.id/*/*/*
 // @include       https://*.viva.co.id/*/*
@@ -386,7 +386,7 @@
             id: 'tribun',
             description: 'tribunnews.com',
             hostname: /(^|\.)tribunnews\.com$/,
-            path: /\/\d{4}\/\d{2}\/\d{2}\/.+(?<!\/\w+)$/,
+            path: /\/([a-z-]+\/\d{5,}|\d{4}\/\d{2}\/\d{2})\/.+(?<!\/\w+)$/,
             method: 'param',
             dynamic: false,
             fullpage: 'page=all'

@@ -278,12 +278,14 @@ Metode : `XHR`
 * https://bisnis.tempo.co/read/1670484/dirut-tempo-digitalisasi-media-upaya-ekonomi-sirkular-sekaligus-untuk-demokratisasi  
 
 ### Tribunnews.com
-Kata kunci : `/{tahun}/{bulan}/{tanggal}/`  
+Kata kunci : `/{tahun}/{bulan}/{tanggal}/` | `/{kategori}/{kode_artikel}` (format baru sejak September 2025)   
 Metode : `parameter`  
 Parameter : `page=all` 
 
 * https://www.tribunnews.com/nasional/2022/12/21/kuasa-hukum-bharada-e-sebut-banyak-rekaman-cctv-yang-hilang-dan-tercecer-ini-kata-saksi-ahli
 * https://surabaya.tribunnews.com/2022/09/14/berita-persebaya-hari-ini-populer-tekad-alta-ballah-cara-aji-santoso-dongkrak-performa-bajul-ijo
+* https://www.tribunnews.com/internasional/7827148/cia-iran-mampu-bertahan-hadapi-blokade-trump-selama-3-4-bulan-dan-masih-memiliki-70-persen-rudal  
+* https://video.tribunnews.com/news/933949/sosok-kiai-cabul-ashari-yang-ditangkap-di-wonogiri-ngaku-wali-nabi-hingga-diduga-suap-pengacara  
 
 ### Viva.com
 > _Untuk Viva dan jaringannya._  
