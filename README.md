@@ -6,13 +6,13 @@ Banyak situs berita online yang menampilkan artikelnya dalam bentuk pagination p
 dalam beberapa halaman), sehingga pembaca akan terus menerus menekan tombol halaman selanjutnya, yang mana ini akan
 merepotkan pembaca. Auto All Page membantu menampilkan artikel dalam halaman penuh.
 
-### How It Works
+## How It Works
 
 Cara kerjanya sederhana, hanya melakukan redirect pada url yang sesuai dengan pattern regex.
 Misalnya pada url : `https://detik.com/read/judul-berita?page=1` akan dialihkan ke
 halaman `https://detik.com/read/judul-berita?page=all`.
 
-### Installation
+## Installation
 
 Auto All Page merupakan sebuah userscript yang diinstal melalui userscript manager. Sebelum mengintal script ini, instal
 dulu ekstensi yang dibutuhkan.
@@ -21,7 +21,7 @@ Extension  : [Violentmonkey](https://violentmonkey.github.io/) atau [Tampermonke
 Userscript : [GitHub](https://raw.githubusercontent.com/reforget-id/AutoAllPage/main/script/autoallpage.user.js)
 atau [GreasyFork](https://greasyfork.org/id/scripts/415479-auto-all-page)
 
-### Browser Support
+## Browser Support
 
 Script ini menggunakan regex lookbehind yang mana tidak semua browser mendukungnya.
 
@@ -33,7 +33,7 @@ Script ini menggunakan regex lookbehind yang mana tidak semua browser mendukungn
 Browser lainnya lihat di : [Caniuse](https://caniuse.com/js-regexp-lookbehind)
 atau [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp)
 
-### Supported Sites
+## Supported Sites
 
 <details>
     <summary>Script ini dapat bekerja pada website (klik untuk melihat) :
@@ -100,19 +100,23 @@ atau [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Glo
 * mojok.co
 * theasianparent.com
 
-### Known Issues
+## Known Issues
 
-* URL yang mengandung AMP tidak akan diredirect untuk menghindari konflik dengan script atau ekstensi yang mengatasi
-  AMP. Beberapa script dan ekstensi yang bisa digunakan untuk mengatasi
-  AMP : [Redirect AMP to HTML](https://www.daniel.priv.no/web-extensions/amp2html.html)
-  , [Disable AMP by AdGuard](https://github.com/AdguardTeam/DisableAMP)
-  , [RemoveAMP](https://github.com/bentasker/RemoveAMP).
+#### Masalah dengan [Accelerated Mobile Pages](https://developers.google.com/amp) (AMP) 
 
-### Contributing
+URL/Website yang menggunakan AMP (seringkali terjadi di webiste yang dibuka di device mobile) tidak akan diredirect untuk menghindari konflik dengan script atau ekstensi yang me-redirect AMP. Beberapa script dan ekstensi yang bisa digunakan untuk me-redirect AMP ke URL aslinya:
+
+- [Disable AMP by AdGuard](https://github.com/AdguardTeam/DisableAMP) | [Userscript](https://userscripts.adtidy.org/release/disable-amp/1.0/disable-amp.user.js)
+
+- [Redirect AMP to HTML](https://www.daniel.priv.no/web-extensions/amp2html.html) | [Firefox](https://addons.mozilla.org/firefox/addon/amp2html/?src=external-addonsbadge-daniel.priv.no) | [Chrome](https://chrome.google.com/webstore/detail/redirect-amp-to-html/kifkmmpiicbcnkjaliilaoeaojlldonl) | [Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/abjhjmfkmdfggjomfpojjfcehhkambcc)
+
+- [RemoveAMP](https://github.com/bentasker/RemoveAMP) | [Userscript](https://github.com/bentasker/RemoveAMP/raw/master/greasemonkey_hook.user.js) | [hook_googlesearch](https://github.com/bentasker/RemoveAMP/raw/master/greasemonkey_hook_googlesearch.user.js) | [redirect_to_non_amp_sites](https://github.com/bentasker/RemoveAMP/raw/master/redirect_to_non_amp_sites.user.js)
+
+## Contributing
 
 Silahkan membuat issue disini untuk melaporkan adanya bug pada script atau merequest website yang belum didukung script.
 
-### Support Me
+## Support Me
 
 Jika kalian merasa script ini sangat membantu, pertimbangkanlah untuk memberi sedikit donasi. Bantu programmer ini
 mengupgrade laptop bututnya dan membelikan paracetamol untuk meringankan beban di kepalanya.
